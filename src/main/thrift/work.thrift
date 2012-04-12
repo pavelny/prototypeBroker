@@ -7,11 +7,26 @@ namespace java com.copyright.thrift.gen
 
 struct WorkDto {
 1: string id,
-2: string language,
-3: string publicationType,
-4: string publicationCountry,
-5: string subject,
-6: string titles
+2: list<Author> author,
+3:
+}
+
+struct Author {
+1: string birthYear,
+2: string deathYear
+}
+
+struct WorkCollection {
+1: string collectionName,
+2: string collectionType,
+3: string dataProvider,
+4: string submittedByUser,
+5: string submittedDatetime,
+6: string submittedProcessedDatetime,
+7: string createByFileSubmittedPath,
+8: string createByfileOsFilePath,
+9: string importFileType,
+10: string importFileType
 }
 
 service WorkData {
