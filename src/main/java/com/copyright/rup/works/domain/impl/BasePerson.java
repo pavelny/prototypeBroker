@@ -1,10 +1,15 @@
 package com.copyright.rup.works.domain.impl;
 
-import com.copyright.rup.works.domain.api.IAffiliation;
-import com.copyright.rup.works.domain.api.IBasePerson;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.copyright.rup.works.domain.api.IAffiliation;
+import com.copyright.rup.works.domain.api.IBasePerson;
 
 /**
  * Implementation of IBasePerson interface.
@@ -15,9 +20,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author Nikita Levyankov
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class BasePerson implements IBasePerson {
     private String name;
     private String role;
+    @XmlElement(type = Affiliation.class)
     private IAffiliation affiliation;
 
     /**

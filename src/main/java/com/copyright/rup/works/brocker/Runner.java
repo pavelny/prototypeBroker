@@ -8,7 +8,9 @@ import java.util.List;
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
 import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.brocker.marshaler.WorkWrapper;
+import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 import com.copyright.rup.works.domain.api.IAffiliation;
 import com.copyright.rup.works.domain.api.IAuthor;
 import com.copyright.rup.works.domain.api.IContributor;
@@ -40,10 +42,9 @@ public class Runner {
         works.add(work);
 
         printResult(new GsonMarshaler(), work, works);
-
         printResult(new JacksonMarshaler(), work, works);
-//        printResult(new XStreamJsonConverter(), work, works);
-//        printResult(new JaxbJsonConverter(), work, works);
+        printResult(new JaxbMarshaler(), work, works);
+        printResult(new XStreamMarshaler(), work, works);
     }
 
     private static void printResult(IMarshaler converter, IWork work, List<IWork> works) throws Exception {
@@ -60,6 +61,7 @@ public class Runner {
         System.out.println(jsonRepresentationOfList);
         List<IWork> deserializedWorks = converter.toEntities(jsonRepresentationOfList);
         System.out.println("Compare serialized and deserialized lists: " + works.equals(deserializedWorks));
+        System.out.println();
     }
 
     public static IWork generateWork() {
