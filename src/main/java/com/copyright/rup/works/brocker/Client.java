@@ -35,55 +35,6 @@ public final class Client {
         ClientConsumer clientConsumer = new ClientConsumer(context.createConsumerTemplate());
         new Thread(clientConsumer).start();
 
-//
-//
-//        List<Work> works = createWorksCollection(WORKS_COLLECTION_SIZE);
-//
-//        ProducerTemplate producerTemplate = context.createProducerTemplate();
-//        IProducer producer = new JsonProducer(producerTemplate);
-//
-//        StopWatch stopWatchXStream = new Log4JStopWatch("produce.xstream");
-//
-//        producer.sendWorks(PRODUCER_QUEUE, works, new XStreamJsonMarshaler());
-//        ConsumerTemplate consumerTemplate = context.createConsumerTemplate();
-//        IConsumer consumer = new JsonConsumer(consumerTemplate);
-//        consumer.receiveWorks(CONSUMER_QUEUE, WORKS_COLLECTION_SIZE);
-//
-//        stopWatchXStream.stop();
-//
-//        StopWatch stopWatchJaxb = new Log4JStopWatch("produce.jaxb");
-//
-//        producer.sendWorks(PRODUCER_QUEUE, works, new JaxbJsonMarshaler());
-//        consumer.receiveWorks(CONSUMER_QUEUE, WORKS_COLLECTION_SIZE);
-//
-//        stopWatchJaxb.stop();
-//
-//        StopWatch stopWatchJackson = new Log4JStopWatch("produce.jackson");
-//
-//        producer.sendWorks(PRODUCER_QUEUE, works, new JacksonJsonMarshaler());
-//        consumer.receiveWorks(CONSUMER_QUEUE, WORKS_COLLECTION_SIZE);
-//
-//        stopWatchJackson.stop();
-//
-//        StopWatch stopWatchGson = new Log4JStopWatch("produce.gson");
-//
-//        producer.sendWorks(PRODUCER_QUEUE, works, new GsonMarshaler());
-//        consumer.receiveWorks(CONSUMER_QUEUE, WORKS_COLLECTION_SIZE);
-//
-//        stopWatchGson.stop();
-//
-//        StopWatch stopWatchThrift = new Log4JStopWatch("produce.thrift");
-//
-//        producer = new ThriftProducer(producerTemplate);
-//        producer.sendWorks(PRODUCER_QUEUE, works, null);
-//        consumer = new ThriftConsumer(consumerTemplate);
-//        consumer.receiveWorks(CONSUMER_QUEUE, WORKS_COLLECTION_SIZE);
-//
-//        stopWatchThrift.stop();
-//
-//        producerTemplate.stop();
-//        consumerTemplate.stop();
-//        context.stop();
     }
 
     static private void initContext() throws Exception{
@@ -112,28 +63,6 @@ public final class Client {
         });
         context.start();
 
-    }
-
-    static private List<Work> createWorksCollection(int sizeOfCollection) {
-        List<Work> works = new LinkedList<Work>();
-        for (int i = 0; i < sizeOfCollection; i++) {
-            long time = (new Date()).getTime();
-            Work work = createWork(time + i);
-            works.add(work);
-        }
-        return works;
-    }
-
-    static private Work createWork(long time) {
-        Work work = new Work();
-        work.setId(String.valueOf(time));
-        work.setLanguage("English");
-        List<String> titles = new ArrayList<String>();
-        for (int i = 1; i < 11; i++) {
-            titles.add("TestTitle" + i);
-        }
-        work.setTitles(titles);
-        return work;
     }
 
 }
