@@ -6,6 +6,7 @@ import java.util.List;
 import com.copyright.rup.works.brocker.api.IConverter;
 import com.copyright.rup.works.domain.api.IAffiliation;
 import com.copyright.rup.works.domain.api.IAuthor;
+import com.copyright.rup.works.domain.api.IContributor;
 import com.copyright.rup.works.domain.api.IEditor;
 import com.copyright.rup.works.domain.api.IPublisher;
 import com.copyright.rup.works.domain.api.ISubject;
@@ -15,6 +16,7 @@ import com.copyright.rup.works.domain.api.IWorkCollection;
 import com.copyright.rup.works.domain.api.IWorkLanguage;
 import com.copyright.rup.works.domain.impl.Affiliation;
 import com.copyright.rup.works.domain.impl.Author;
+import com.copyright.rup.works.domain.impl.Contributor;
 import com.copyright.rup.works.domain.impl.Editor;
 import com.copyright.rup.works.domain.impl.Publisher;
 import com.copyright.rup.works.domain.impl.Subject;
@@ -53,6 +55,7 @@ public class JacksonJsonConverter implements IConverter {
         simpleModule.addAbstractTypeMapping(IAffiliation.class, Affiliation.class);
         simpleModule.addAbstractTypeMapping(IWorkLanguage.class, WorkLanguage.class);
         simpleModule.addAbstractTypeMapping(IPublisher.class, Publisher.class);
+        simpleModule.addAbstractTypeMapping(IContributor.class, Contributor.class);
         simpleModule.addAbstractTypeMapping(ISubject.class, Subject.class);
         simpleModule.addAbstractTypeMapping(ITitle.class, Title.class);
 
@@ -73,6 +76,7 @@ public class JacksonJsonConverter implements IConverter {
         simpleModule.addAbstractTypeMapping(IAffiliation.class, Affiliation.class);
         simpleModule.addAbstractTypeMapping(IWorkLanguage.class, WorkLanguage.class);
         simpleModule.addAbstractTypeMapping(IPublisher.class, Publisher.class);
+        simpleModule.addAbstractTypeMapping(IContributor.class, Contributor.class);
         simpleModule.addAbstractTypeMapping(ISubject.class, Subject.class);
         simpleModule.addAbstractTypeMapping(ITitle.class, Title.class);
 

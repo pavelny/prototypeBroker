@@ -11,6 +11,7 @@ import com.copyright.rup.works.brocker.impl.JacksonJsonConverter;
 import com.copyright.rup.works.brocker.impl.WorkWrapper;
 import com.copyright.rup.works.domain.api.IAffiliation;
 import com.copyright.rup.works.domain.api.IAuthor;
+import com.copyright.rup.works.domain.api.IContributor;
 import com.copyright.rup.works.domain.api.IEditor;
 import com.copyright.rup.works.domain.api.IPublisher;
 import com.copyright.rup.works.domain.api.ITitle;
@@ -19,6 +20,7 @@ import com.copyright.rup.works.domain.api.IWorkCollection;
 import com.copyright.rup.works.domain.api.IWorkLanguage;
 import com.copyright.rup.works.domain.impl.Affiliation;
 import com.copyright.rup.works.domain.impl.Author;
+import com.copyright.rup.works.domain.impl.Contributor;
 import com.copyright.rup.works.domain.impl.Editor;
 import com.copyright.rup.works.domain.impl.Publisher;
 import com.copyright.rup.works.domain.impl.Subject;
@@ -67,6 +69,8 @@ public class Runner {
         work.setAuthors(generateAuthorList());
         work.setCollection(generateWorkCollection());
 
+        work.setContributors(generateContributers());
+
         work.setEditors(generateEditorList());
         work.setId("TestID");
 
@@ -89,7 +93,7 @@ public class Runner {
         Subject subject = new Subject();
         subject.setSubject("TestSubject");
         subject.setSubjectType("TestSubjectType");
-        work.setSubject(null);
+        work.setSubject(subject);
 
         work.setTitles(generateTitleList());
 
@@ -172,5 +176,20 @@ public class Runner {
         editors.add(editor);
 
         return editors;//Arrays.asList((IEditor)null)
+    }
+
+    private static final List<IContributor> generateContributers() {
+        IAffiliation affiliation = new Affiliation();
+        affiliation.setAddress("TestAffiliationAddress");
+        affiliation.setCountry("TestAffilisationCountry");
+
+        Contributor contributor = new Contributor();
+        contributor.setAffiliation(affiliation);
+        contributor.setName("TestNameContributer");
+        contributor.setRole("TestContributeRole");
+
+        List<IContributor> contributors = new ArrayList<>();
+        contributors.add(contributor);
+        return contributors;
     }
 }
