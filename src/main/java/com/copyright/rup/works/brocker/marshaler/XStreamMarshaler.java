@@ -10,7 +10,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
 import com.thoughtworks.xstream.io.json.JsonWriter;
 
-public class XStreamJsonMarshaler implements IMarshaler {
+public class XStreamMarshaler implements IMarshaler {
 
     /**
      * {@inheritDoc}

@@ -15,10 +15,9 @@ import org.codehaus.jettison.mapped.MappedNamespaceConvention;
 import org.codehaus.jettison.mapped.MappedXMLStreamWriter;
 
 import com.copyright.rup.works.brocker.api.IMarshaler;
-import com.copyright.rup.works.brocker.impl.WorkWrapper;
 import com.copyright.rup.works.domain.api.IWork;
 
-public class JaxbJsonMarshaler implements IMarshaler {
+public class JaxbMarshaler implements IMarshaler {
 
     public String toJson(Object object) throws IOException, JAXBException {
         Object obj = object;

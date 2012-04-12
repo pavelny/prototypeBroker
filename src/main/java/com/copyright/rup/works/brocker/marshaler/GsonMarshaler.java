@@ -4,7 +4,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import com.copyright.rup.works.brocker.api.IMarshaler;
-import com.copyright.rup.works.brocker.impl.WorkWrapper;
+import com.copyright.rup.works.domain.api.IAffiliation;
 import com.copyright.rup.works.domain.api.IAuthor;
 import com.copyright.rup.works.domain.api.IContributor;
 import com.copyright.rup.works.domain.api.IEditor;
@@ -14,6 +14,7 @@ import com.copyright.rup.works.domain.api.ITitle;
 import com.copyright.rup.works.domain.api.IWork;
 import com.copyright.rup.works.domain.api.IWorkCollection;
 import com.copyright.rup.works.domain.api.IWorkLanguage;
+import com.copyright.rup.works.domain.impl.Affiliation;
 import com.copyright.rup.works.domain.impl.Author;
 import com.copyright.rup.works.domain.impl.Contributor;
 import com.copyright.rup.works.domain.impl.Editor;
@@ -28,7 +29,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 public class GsonMarshaler implements IMarshaler {
@@ -45,15 +45,8 @@ public class GsonMarshaler implements IMarshaler {
      * {@inheritDoc}
      */
     public <T> T toEntity(String json, Class<T> clazz) throws Exception {
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(IAuthor.class, new AuthorAdapter())
-        .registerTypeAdapter(IWorkCollection.class, new WorkCollectionAdapter())
-        .registerTypeAdapter(IEditor.class, new EditorAdapter())
-        .registerTypeAdapter(IWorkLanguage.class, new WorkLanguageAdapter())
-        .registerTypeAdapter(IPublisher.class, new PublisherAdapter())
-        .registerTypeAdapter(ISubject.class, new SubjectAdapter())
-        .registerTypeAdapter(ITitle.class, new TitleAdapter());
-        Gson gson = builder.create();
+        Gson gson = generateGsonBuilder().create();
+
         // TODO Problem with deserialisation of list, when it was created by way Arrays.asList()
         return gson.fromJson(json, clazz);
     }
@@ -62,28 +55,37 @@ public class GsonMarshaler implements IMarshaler {
      * {@inheritDoc}
      */
     public List<IWork> toEntities(String json) throws Exception {
+
+        Gson gson = generateGsonBuilder().create();
+
+        // TODO Problem with deserialisation of list, when it was created by way Arrays.asList()
+        return gson.fromJson(json, WorkWrapper.class).getWorks();
+    }
+
+    private GsonBuilder generateGsonBuilder() {
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(IWork.class, new WorkAdapter()).registerTypeAdapter(IAuthor.class, new AuthorAdapter())
+        builder.registerTypeAdapter(IWork.class, new WorkAdapter())
+        .registerTypeAdapter(IAuthor.class, new AuthorAdapter())
+        .registerTypeAdapter(IAffiliation.class, new AffiliationAdapter())
         .registerTypeAdapter(IWorkCollection.class, new WorkCollectionAdapter())
         .registerTypeAdapter(IEditor.class, new EditorAdapter())
         .registerTypeAdapter(IWorkLanguage.class, new WorkLanguageAdapter())
         .registerTypeAdapter(IPublisher.class, new PublisherAdapter())
         .registerTypeAdapter(ISubject.class, new SubjectAdapter())
+        .registerTypeAdapter(IContributor.class, new ContributorAdapter())
         .registerTypeAdapter(ITitle.class, new TitleAdapter());
-        Gson gson = builder.create();
-        // TODO Problem with deserialisation of list, when it was created by way Arrays.asList()
-
-        return gson.fromJson(json, WorkWrapper.class).getWorks();
+        return builder;
     }
 
+    // TODO Add javadoc
     private class WorkAdapter implements JsonDeserializer<IWork> {
 
-        @Override
+        /**
+         * {@inheritDoc}
+         */
         public IWork deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            Work work = new Work();
-
-            return work;
+            return context.deserialize(json, Work.class);
         }
 
     }
@@ -93,14 +95,20 @@ public class GsonMarshaler implements IMarshaler {
 
         public IAuthor deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            Author author = new Author();
+            return context.deserialize(json, Author.class);
+        }
 
-            JsonObject jsonObject = json.getAsJsonObject();
+    }
 
-            author.setName(jsonObject.get(NAME).getAsString());
-            author.setRole(jsonObject.get(ROLE).getAsString());
+    // TODO Add javadoc
+    private class AffiliationAdapter implements JsonDeserializer<IAffiliation> {
 
-            return author;
+        /**
+         * {@inheritDoc}
+         */
+        public IAffiliation deserialize(JsonElement json, Type typeOfT,
+                JsonDeserializationContext context) throws JsonParseException {
+            return context.deserialize(json, Affiliation.class);
         }
 
     }
@@ -110,8 +118,7 @@ public class GsonMarshaler implements IMarshaler {
 
         public IWorkCollection deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            WorkCollection workCollection = new WorkCollection();
-            return workCollection;
+            return context.deserialize(json, WorkCollection.class);
         }
 
     }
@@ -125,8 +132,7 @@ public class GsonMarshaler implements IMarshaler {
          */
         public IContributor deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            Contributor contributor = new Contributor();
-            return contributor;
+            return context.deserialize(json, Contributor.class);
         }
 
     }
@@ -139,8 +145,7 @@ public class GsonMarshaler implements IMarshaler {
          */
         public IEditor deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            Editor editor = new Editor();
-            return editor;
+            return context.deserialize(json, Editor.class);
         }
 
     }
@@ -153,8 +158,7 @@ public class GsonMarshaler implements IMarshaler {
          */
         public IWorkLanguage deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            WorkLanguage workLanguage= new WorkLanguage();
-            return workLanguage;
+            return context.deserialize(json, WorkLanguage.class);
         }
 
     }
@@ -167,8 +171,7 @@ public class GsonMarshaler implements IMarshaler {
          */
         public IPublisher deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            Publisher publisher = new Publisher();
-            return publisher;
+            return context.deserialize(json, Publisher.class);
         }
 
     }
@@ -181,8 +184,7 @@ public class GsonMarshaler implements IMarshaler {
          */
         public ISubject deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            Subject subject = new Subject();
-            return subject;
+            return context.deserialize(json, Subject.class);
         }
 
     }
@@ -195,12 +197,8 @@ public class GsonMarshaler implements IMarshaler {
          */
         public ITitle deserialize(JsonElement json, Type typeOfT,
                 JsonDeserializationContext context) throws JsonParseException {
-            Title title = new Title();
-            return title;
+            return context.deserialize(json, Title.class);
         }
 
     }
-
-    private static final String NAME = "name";
-    private static final String ROLE = "role";
 }

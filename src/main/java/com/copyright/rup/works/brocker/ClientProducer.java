@@ -11,9 +11,9 @@ import com.copyright.rup.works.brocker.api.IProducer;
 import com.copyright.rup.works.brocker.impl.JsonProducer;
 import com.copyright.rup.works.brocker.impl.ThriftProducer;
 import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JacksonJsonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JaxbJsonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.XStreamJsonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
+import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
 public final class ClientProducer implements Runnable {
@@ -39,15 +39,15 @@ public final class ClientProducer implements Runnable {
         IProducer producer = new JsonProducer(producerTemplate);
 
         StopWatch stopWatchXStream = new Log4JStopWatch("produce.xstream");
-        producer.sendWorks(PRODUCER_QUEUE_XSTREM, works, new XStreamJsonMarshaler());
+        producer.sendWorks(PRODUCER_QUEUE_XSTREM, works, new XStreamMarshaler());
         stopWatchXStream.stop();
 
         StopWatch stopWatchJaxb = new Log4JStopWatch("produce.jaxb");
-        producer.sendWorks(PRODUCER_QUEUE_JAXB, works, new JaxbJsonMarshaler());
+        producer.sendWorks(PRODUCER_QUEUE_JAXB, works, new JaxbMarshaler());
         stopWatchJaxb.stop();
 
         StopWatch stopWatchJackson = new Log4JStopWatch("produce.jackson");
-        producer.sendWorks(PRODUCER_QUEUE_JACKSON, works, new JacksonJsonMarshaler());
+        producer.sendWorks(PRODUCER_QUEUE_JACKSON, works, new JacksonMarshaler());
         stopWatchJackson.stop();
 
         StopWatch stopWatchGson = new Log4JStopWatch("produce.gson");

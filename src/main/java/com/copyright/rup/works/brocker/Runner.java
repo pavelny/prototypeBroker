@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import com.copyright.rup.works.brocker.api.IConverter;
-import com.copyright.rup.works.brocker.impl.GsonConverter;
-import com.copyright.rup.works.brocker.impl.JacksonJsonConverter;
-import com.copyright.rup.works.brocker.impl.WorkWrapper;
+import com.copyright.rup.works.brocker.api.IMarshaler;
+import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.WorkWrapper;
 import com.copyright.rup.works.domain.api.IAffiliation;
 import com.copyright.rup.works.domain.api.IAuthor;
 import com.copyright.rup.works.domain.api.IContributor;
@@ -39,14 +39,14 @@ public class Runner {
         List<IWork> works = new ArrayList<>();
         works.add(work);
 
-        printResult(new GsonConverter(), work, works);
+        printResult(new GsonMarshaler(), work, works);
 
-        printResult(new JacksonJsonConverter(), work, works);
+        printResult(new JacksonMarshaler(), work, works);
 //        printResult(new XStreamJsonConverter(), work, works);
 //        printResult(new JaxbJsonConverter(), work, works);
     }
 
-    private static void printResult(IConverter converter, IWork work, List<IWork> works) throws Exception {
+    private static void printResult(IMarshaler converter, IWork work, List<IWork> works) throws Exception {
         System.out.println(converter.getClass().getName() + ":");
 
         String jsonRepresentationOfInstance = converter.toJson(work);

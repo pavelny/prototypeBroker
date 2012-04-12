@@ -12,11 +12,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.copyright.rup.works.brocker.api.IConverter;
-import com.copyright.rup.works.brocker.impl.GsonConverter;
-import com.copyright.rup.works.brocker.impl.JacksonJsonConverter;
-import com.copyright.rup.works.brocker.impl.JaxbJsonConverter;
-import com.copyright.rup.works.brocker.impl.XStreamJsonConverter;
+import com.copyright.rup.works.brocker.api.IMarshaler;
+import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
+import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
 /**
@@ -27,14 +27,14 @@ import com.copyright.rup.works.domain.api.IWork;
 @RunWith(Parameterized.class)
 public class ConverterTest {
 
-    private IConverter converter = new GsonConverter();
+    private IMarshaler converter;
 
     @Parameters
     public static List<Object[]> paramitrize() {
-        return Arrays.asList(new Object[][] {{new GsonConverter()}, {new JaxbJsonConverter()}, {new XStreamJsonConverter()}, {new JacksonJsonConverter()}});
+        return Arrays.asList(new Object[][] {{new GsonMarshaler()}, {new JaxbMarshaler()}, {new XStreamMarshaler()}, {new JacksonMarshaler()}});
     }
 
-    public ConverterTest(IConverter converter) {
+    public ConverterTest(IMarshaler converter) {
         this.converter = converter;
     }
 

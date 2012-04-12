@@ -114,18 +114,18 @@ public final class Client {
 
     }
 
-    static private List<Work> createWorksCollection(int sizeOfCollection) {
-        List<Work> works = new LinkedList<Work>();
+    static private List<Work2> createWorksCollection(int sizeOfCollection) {
+        List<Work2> works = new LinkedList<Work2>();
         for (int i = 0; i < sizeOfCollection; i++) {
             long time = (new Date()).getTime();
-            Work work = createWork(time + i);
+            Work2 work = createWork(time + i);
             works.add(work);
         }
         return works;
     }
 
-    static private Work createWork(long time) {
-        Work work = new Work();
+    static private Work2 createWork(long time) {
+        Work2 work = new Work2();
         work.setId(String.valueOf(time));
         work.setLanguage("English");
         List<String> titles = new ArrayList<String>();
