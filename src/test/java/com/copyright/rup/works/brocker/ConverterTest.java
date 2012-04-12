@@ -6,6 +6,7 @@ package com.copyright.rup.works.brocker;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -22,6 +23,7 @@ import com.copyright.rup.works.domain.api.IWork;
  * @author Andrei_Khadziukou
  *
  */
+@Ignore
 @RunWith(Parameterized.class)
 public class ConverterTest {
 
