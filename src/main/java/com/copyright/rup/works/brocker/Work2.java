@@ -19,7 +19,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author Pavel_Yakovlev
  */
 @XmlRootElement
-public class Work implements Serializable {
+public class Work2 implements Serializable {
         private String id;
         private String language;
         private String publicationType;
@@ -89,11 +89,11 @@ public class Work implements Serializable {
             if (this == o) {
                 return true;
             }
-            if (!(o instanceof Work)) {
+            if (!(o instanceof Work2)) {
                 return false;
             }
 
-            Work that = (Work) o;
+            Work2 that = (Work2) o;
             return new EqualsBuilder()
                     .append(id, that.id)
                     .append(getTitles(), that.titles)

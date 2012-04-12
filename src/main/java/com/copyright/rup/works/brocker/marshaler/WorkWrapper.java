@@ -1,4 +1,4 @@
-package com.copyright.rup.works.brocker.impl;
+package com.copyright.rup.works.brocker.marshaler;
 
 import java.util.List;
 

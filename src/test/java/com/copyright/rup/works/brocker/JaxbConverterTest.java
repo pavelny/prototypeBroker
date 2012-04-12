@@ -3,14 +3,14 @@ package com.copyright.rup.works.brocker;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.copyright.rup.works.brocker.api.IConverter;
-import com.copyright.rup.works.brocker.impl.JaxbJsonConverter;
+import com.copyright.rup.works.brocker.api.IMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
 @Ignore("Was deleted, this test was moved into ConverterTest class")
 public class JaxbConverterTest {
 
-    public IConverter converter = new JaxbJsonConverter();
+    public IMarshaler converter = new JaxbMarshaler();
 
     @Test
     public void testConverter() throws Exception {

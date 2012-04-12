@@ -1,23 +1,20 @@
 package com.copyright.rup.works.brocker;
 
-import java.util.List;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.copyright.rup.works.brocker.api.IConverter;
-import com.copyright.rup.works.brocker.impl.XStreamJsonConverter;
+import com.copyright.rup.works.brocker.api.IMarshaler;
+import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
 @Ignore("Was deleted, this test was moved into ConverterTest class")
 public class XStreamJsonConverterTest {
 
-    private List<IWork> works = TestUtil.works;
-    private IConverter converter = new XStreamJsonConverter();
+    private IMarshaler converter = new XStreamMarshaler();
 
     @Test
     public void testConverter() throws Exception {
-        for (IWork work: works) {
+        for (IWork work: TestUtil.works) {
             converter.toJson(work);
         }
     }

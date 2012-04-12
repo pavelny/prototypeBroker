@@ -8,9 +8,9 @@ import com.copyright.rup.works.brocker.api.IConsumer;
 import com.copyright.rup.works.brocker.impl.JsonConsumer;
 import com.copyright.rup.works.brocker.impl.ThriftConsumer;
 import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JacksonJsonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JaxbJsonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.XStreamJsonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
+import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 
 public final class ClientConsumer implements Runnable{
 
@@ -33,15 +33,15 @@ public final class ClientConsumer implements Runnable{
         IConsumer consumer = new JsonConsumer(consumerTemplate);
 
         StopWatch stopWatchXStream = new Log4JStopWatch("consume.xstream");
-        consumer.receiveWorks(CONSUMER_QUEUE_XSTREM, WORKS_COLLECTION_SIZE, new XStreamJsonMarshaler());
+        consumer.receiveWorks(CONSUMER_QUEUE_XSTREM, WORKS_COLLECTION_SIZE, new XStreamMarshaler());
         stopWatchXStream.stop();
 
         StopWatch stopWatchJaxb = new Log4JStopWatch("consume.jaxb");
-        consumer.receiveWorks(CONSUMER_QUEUE_JAXB, WORKS_COLLECTION_SIZE, new JaxbJsonMarshaler());
+        consumer.receiveWorks(CONSUMER_QUEUE_JAXB, WORKS_COLLECTION_SIZE, new JaxbMarshaler());
         stopWatchJaxb.stop();
 
         StopWatch stopWatchJackson = new Log4JStopWatch("consume.jackson");
-        consumer.receiveWorks(CONSUMER_QUEUE_JACKSON, WORKS_COLLECTION_SIZE, new JacksonJsonMarshaler());
+        consumer.receiveWorks(CONSUMER_QUEUE_JACKSON, WORKS_COLLECTION_SIZE, new JacksonMarshaler());
         stopWatchJackson.stop();
 
         StopWatch stopWatchGson = new Log4JStopWatch("consume.gson");
