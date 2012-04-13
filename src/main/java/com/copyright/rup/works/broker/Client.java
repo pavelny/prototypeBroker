@@ -1,58 +1,59 @@
 package com.copyright.rup.works.broker;
 
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_GSON;
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_JACKSON;
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_JAXB;
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_THRIFT;
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_XSTREM;
-import static com.copyright.rup.works.broker.UtilVarialble.CONTEXT_COMPANENT_NAME;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_GSON;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_JACKSON;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_JAXB;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_THRIFT;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_XSTREM;
+import com.copyright.rup.works.broker.clients.BaseClient;
+import com.copyright.rup.works.broker.clients.GsonClient;
+import com.copyright.rup.works.broker.clients.JacksonClient;
+import com.copyright.rup.works.broker.clients.JaxbClient;
+import com.copyright.rup.works.broker.clients.ThriftClient;
+import com.copyright.rup.works.broker.clients.XstreamClient;
 
-import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.impl.DefaultCamelContext;
 
 // TODO Add javadoc
 public final class Client {
 
+    private static final String JACKSON = "jackson";
+    private static final String GSON = "gson";
+    private static final String XSTREAM = "xstream";
+    private static final String THRIFT = "thrift";
+
     private static CamelContext context;
 
     public static void main(String args[]) throws Exception {
-        initContext();
-
-        // ClientProducer clientProducer = new ClientProducer(context.createProducerTemplate());
-        // new Thread(clientProducer).start();
-        // clientProducer.start();
-
-        // ClientConsumer clientConsumer = new ClientConsumer(context.createConsumerTemplate());
-        // new Thread(clientConsumer).start();
-
-    }
-
-    static private void initContext() throws Exception {
-        context = new DefaultCamelContext();
-        context.addComponent(CONTEXT_COMPANENT_NAME,
-                ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
-        context.addRoutes(new RouteBuilder() {
-            @Override
-            public void configure() throws Exception {
-                from(PRODUCER_QUEUE_XSTREM).to(CONSUMER_QUEUE_XSTREM).end();
-                from(PRODUCER_QUEUE_JAXB).to(CONSUMER_QUEUE_JAXB).end();
-                from(PRODUCER_QUEUE_JACKSON).to(CONSUMER_QUEUE_JACKSON).end();
-                from(PRODUCER_QUEUE_GSON).to(CONSUMER_QUEUE_GSON).end();
-                from(PRODUCER_QUEUE_THRIFT).to(CONSUMER_QUEUE_THRIFT).end();
+        BaseClient client = null;
+        String producerQueue = null;
+        String consumerQueue = null;
+        if (args.length != 0) {
+            switch (args[0].toLowerCase()) {
+                case JACKSON :
+                    client = new JacksonClient();
+                    producerQueue = UtilVarialble.PRODUCER_QUEUE_JACKSON;
+                    consumerQueue = UtilVarialble.CONSUMER_QUEUE_JACKSON;
+                    break;
+                case GSON:
+                    client = new GsonClient();
+                    producerQueue = UtilVarialble.PRODUCER_QUEUE_GSON;
+                    consumerQueue = UtilVarialble.CONSUMER_QUEUE_GSON;
+                    break;
+                case XSTREAM:
+                    client = new XstreamClient();
+                    producerQueue = UtilVarialble.PRODUCER_QUEUE_XSTREM;
+                    consumerQueue = UtilVarialble.CONSUMER_QUEUE_XSTREM;
+                    break;
+                case THRIFT:
+                    client = new ThriftClient();
+                    producerQueue = UtilVarialble.PRODUCER_QUEUE_THRIFT;
+                    consumerQueue = UtilVarialble.CONSUMER_QUEUE_THRIFT;
+                    break;
+                default:
+                    producerQueue = UtilVarialble.PRODUCER_QUEUE_JAXB;
+                    consumerQueue = UtilVarialble.CONSUMER_QUEUE_JAXB;
+                    client = new JaxbClient();
+                    break;
             }
-        });
-        context.start();
-
-    }
-
-    private Client() {
+        }
+        client.start(producerQueue, consumerQueue);
+        client.stop();
     }
 
 }

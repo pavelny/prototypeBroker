@@ -13,8 +13,10 @@ import org.apache.camel.ProducerTemplate;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 
+import java.util.LinkedList;
 import java.util.List;
 
+// TODO Specify javadoc
 public final class ClientProducer implements Runnable {
 
     private Thread currentThread;
@@ -26,7 +28,7 @@ public final class ClientProducer implements Runnable {
     }
 
     public void run() {
-        List<IWork> works = null;// createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
+        List<IWork> works = createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
 
         IProducer producer = new JsonProducer(producerTemplate);
         BrokerService service = new BrokerService();
@@ -82,4 +84,15 @@ public final class ClientProducer implements Runnable {
         currentThread = null;
     }
 
+    private List<IWork> createWorksCollection(int size) {
+        List<IWork> works = new LinkedList<>();
+
+        if (works == null || works.size() != size) {
+            works = new LinkedList<IWork>();
+            for (int i = 0; i < size; i++) {
+                works.add(Runner.generateWork());
+            }
+        }
+        return works;
+    }
 }
