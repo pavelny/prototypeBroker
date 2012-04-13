@@ -42,7 +42,7 @@ public class JsonConsumer implements IConsumer {
                 works.addAll(chunkWorks);
             }
         } catch (Exception e) {
-            // TODO log exception
+            e.printStackTrace();
         }
     }
 }
