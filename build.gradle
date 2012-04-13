@@ -67,35 +67,35 @@ dependencies {
 
 task runXStream(type: JavaExec, dependsOn: classes) {
     description = 'Runs xstream client'
-    main = 'com.copyright.prototype.Server'
+    main = 'com.copyright.rup.works.broker.clients.XstreamClient'
     classpath sourceSets.main.classesDir 
     classpath configurations.runtime
 }
 
 task runGson(type: JavaExec, dependsOn: classes) {
     description = 'Runs gson client'
-    main = 'com.copyright.prototype.Server'
+    main = 'com.copyright.rup.works.broker.clients.GsonClient'
     classpath sourceSets.main.classesDir 
     classpath configurations.runtime
 }
 
 task runJackson(type: JavaExec, dependsOn: classes) {
     description = 'Runs jackson client'
-    main = 'com.copyright.rup.works.broker.Server'
+    main = 'com.copyright.rup.works.broker.clients.JacksonClient'
     classpath sourceSets.main.classesDir 
     classpath configurations.runtime
 }
 
 task runJaxb(type: JavaExec, dependsOn: classes) {
     description = 'Runs Jaxb clien'
-    main = 'com.copyright.prototype.Server'
+    main = 'com.copyright.rup.works.broker.clients.JaxbClient'
     classpath sourceSets.main.classesDir 
     classpath configurations.runtime
 }
 
 task runThrift(type: JavaExec, dependsOn: classes) {
     description = 'Runs trift client'
-    main = 'com.copyright.prototype.Server'
+    main = 'com.copyright.rup.works.broker.clients.ThriftClient'
     classpath sourceSets.main.classesDir 
     classpath configurations.runtime
 }

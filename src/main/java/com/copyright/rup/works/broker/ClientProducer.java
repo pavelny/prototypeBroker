@@ -3,7 +3,6 @@ package com.copyright.rup.works.broker;
 import com.copyright.rup.works.broker.api.IProducer;
 import com.copyright.rup.works.broker.impl.BrokerService;
 import com.copyright.rup.works.broker.impl.JsonProducer;
-import com.copyright.rup.works.broker.impl.ThriftProducer;
 import com.copyright.rup.works.broker.marshaler.GsonMarshaler;
 import com.copyright.rup.works.broker.marshaler.JacksonMarshaler;
 import com.copyright.rup.works.broker.marshaler.JaxbMarshaler;
@@ -14,7 +13,6 @@ import org.apache.camel.ProducerTemplate;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public final class ClientProducer implements Runnable {
@@ -37,7 +35,7 @@ public final class ClientProducer implements Runnable {
     }
 
     public void run() {
-        List<IWork> works = createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
+        List<IWork> works = null;//createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
 
         IProducer producer = new JsonProducer(producerTemplate);
         BrokerService service = new BrokerService();
@@ -84,12 +82,6 @@ public final class ClientProducer implements Runnable {
         }
     }
 
-    private List<IWork> createWorksCollection(int size) {
-        List<IWork> works = new LinkedList<IWork>();
-        for (int i = 0; i < size; i++) {
-            works.add(Runner.generateWork());
-        }
-        return works;
-    }
+
 
 }

@@ -5,32 +5,29 @@ import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_JACKSO
 import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_JAXB;
 import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_THRIFT;
 import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_XSTREM;
+import static com.copyright.rup.works.broker.UtilVarialble.CONTEXT_COMPANENT_NAME;
 import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_GSON;
 import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_JACKSON;
 import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_JAXB;
 import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_THRIFT;
 import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_XSTREM;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
-
-import javax.jms.ConnectionFactory;
 
 // TODO Add javadoc
 public final class Client {
 
     private static CamelContext context;
-    private static final String CONTEXT_COMPANENT_NAME = "jms";
+
 
     public static void main(String args[]) throws Exception {
         initContext();
 
-        ClientProducer clientProducer = new ClientProducer(context.createProducerTemplate());
-        new Thread(clientProducer).start();
+//        ClientProducer clientProducer = new ClientProducer(context.createProducerTemplate());
+//        new Thread(clientProducer).start();
 //        clientProducer.start();
 
 //        ClientConsumer clientConsumer = new ClientConsumer(context.createConsumerTemplate());
@@ -40,7 +37,8 @@ public final class Client {
 
     static private void initContext() throws Exception {
         context = new DefaultCamelContext();
-        context.addComponent(CONTEXT_COMPANENT_NAME, ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
+        context.addComponent(CONTEXT_COMPANENT_NAME,
+                ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {

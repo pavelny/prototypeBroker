@@ -103,5 +103,10 @@ public abstract class UtilVarialble {
     /**
      *
      */
-    public static final int WORKS_COLLECTION_SIZE = 1000000;
+    public static final int WORKS_COLLECTION_SIZE = 100;
+
+    /**
+     *
+     */
+    public static final String CONTEXT_COMPANENT_NAME = "jms";
 }
