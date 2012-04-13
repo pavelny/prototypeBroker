@@ -13,7 +13,7 @@
 
     <!-- Buffer events and log them asynchronously. Steve Mays, 3/5/2010, smays@edmunds.com -->
     <appender name="ProducerLog" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="file"   value="build/perf4j.log" />
+        <param name="file" value="./perf4j.log" />
         <param name="datePattern" value="'.'yyyy-MM-dd"/>
         <param name="append" value="true"/>
         <param name="maxBackupIndex" value="14"/>

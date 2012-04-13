@@ -1,5 +1,5 @@
 
-namespace java com.copyright.rup.works.brocker.thrift.gen
+namespace java com.copyright.rup.works.broker.thrift.gen
 
 /**
  * Work
