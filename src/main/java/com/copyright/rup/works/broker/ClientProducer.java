@@ -25,17 +25,8 @@ public final class ClientProducer implements Runnable {
         this.producerTemplate = producerTemplate;
     }
 
-    public void start() {
-        currentThread = new Thread(this);
-        currentThread.start();
-    }
-
-    public void stop() {
-        currentThread = null;
-    }
-
     public void run() {
-        List<IWork> works = null;//createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
+        List<IWork> works = null;// createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
 
         IProducer producer = new JsonProducer(producerTemplate);
         BrokerService service = new BrokerService();
@@ -61,11 +52,11 @@ public final class ClientProducer implements Runnable {
         service.send(works, UtilVarialble.PRODUCER_QUEUE_GSON);
         stopWatchGson.stop();
 
-//        StopWatch stopWatchThrift = new Log4JStopWatch("produce.thrift");
-//        service.setProducer(new ThriftProducer(producerTemplate));
-//        service.setMarshaler(null);
-//        service.send(works, UtilVarialble.PRODUCER_QUEUE_THRIFT);
-//        stopWatchThrift.stop();
+        // StopWatch stopWatchThrift = new Log4JStopWatch("produce.thrift");
+        // service.setProducer(new ThriftProducer(producerTemplate));
+        // service.setMarshaler(null);
+        // service.send(works, UtilVarialble.PRODUCER_QUEUE_THRIFT);
+        // stopWatchThrift.stop();
 
         try {
             producerTemplate.stop();
@@ -78,10 +69,17 @@ public final class ClientProducer implements Runnable {
         try {
             thread.sleep(100);
             thread.interrupt();
-        } catch (InterruptedException e){
+        } catch (InterruptedException e) {
         }
     }
 
+    public void start() {
+        currentThread = new Thread(this);
+        currentThread.start();
+    }
 
+    public void stop() {
+        currentThread = null;
+    }
 
 }

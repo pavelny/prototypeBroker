@@ -22,16 +22,15 @@ public final class Client {
 
     private static CamelContext context;
 
-
     public static void main(String args[]) throws Exception {
         initContext();
 
-//        ClientProducer clientProducer = new ClientProducer(context.createProducerTemplate());
-//        new Thread(clientProducer).start();
-//        clientProducer.start();
+        // ClientProducer clientProducer = new ClientProducer(context.createProducerTemplate());
+        // new Thread(clientProducer).start();
+        // clientProducer.start();
 
-//        ClientConsumer clientConsumer = new ClientConsumer(context.createConsumerTemplate());
-//        new Thread(clientConsumer).start();
+        // ClientConsumer clientConsumer = new ClientConsumer(context.createConsumerTemplate());
+        // new Thread(clientConsumer).start();
 
     }
 

@@ -2,7 +2,6 @@ package com.copyright.rup.works.broker.impl;
 
 import com.copyright.rup.works.broker.api.IConsumer;
 import com.copyright.rup.works.broker.api.IMarshaler;
-import com.copyright.rup.works.broker.marshaler.WorkWrapper;
 import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ConsumerTemplate;
@@ -36,8 +35,8 @@ public class JsonConsumer implements IConsumer {
         List<IWork> chunkWorks = new LinkedList<IWork>();
 
         try {
-            while(chunkWorks != null) {
-                chunkWorks = marshaler.toEntities((String) consumer.receiveBodyNoWait(nameOfQueue));
+            while (chunkWorks != null) {
+                chunkWorks = marshaler.toEntities((String) consumer.receiveBody(nameOfQueue));
                 works.addAll(chunkWorks);
             }
         } catch (Exception e) {

@@ -32,6 +32,10 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+/**
+ * @author Andrei_Khadziukou
+ *
+ */
 public class GsonMarshaler implements IMarshaler {
 
     /**

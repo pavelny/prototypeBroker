@@ -16,10 +16,6 @@ import com.copyright.rup.works.broker.marshaler.GsonMarshaler;
  */
 public class GsonClient extends BaseClient {
 
-    public GsonClient() throws Exception {
-        super();
-    }
-
     /**
      * @param args
      */
@@ -33,6 +29,10 @@ public class GsonClient extends BaseClient {
             exc.printStackTrace();
         }
 
+    }
+
+    public GsonClient() throws Exception {
+        super();
     }
 
     /**
