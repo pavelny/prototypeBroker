@@ -1,22 +1,16 @@
 
-namespace java com.copyright.thrift.gen
+namespace java com.copyright.rup.works.brocker.thrift.gen
 
 /**
  * Work
  */
 
-struct WorkDto {
-1: string id,
-2: list<Author> author,
-3:
-}
-
-struct Author {
+struct ThriftAuthor {
 1: string birthYear,
 2: string deathYear
 }
 
-struct WorkCollection {
+struct ThriftWorkCollection {
 1: string collectionName,
 2: string collectionType,
 3: string dataProvider,
@@ -26,13 +20,25 @@ struct WorkCollection {
 7: string createByFileSubmittedPath,
 8: string createByfileOsFilePath,
 9: string importFileType,
-10: string importFileType
+10: string importFileContentType
 }
 
-service WorkData {
+struct ThriftWorkLanguage {
+1: string language,
+2: string languageRole
+}
 
-     oneway void send(1: WorkDto w)
+struct ThriftWork {
+1: string id,
+2: list<ThriftAuthor> authors,
+3: ThriftWorkCollection collection
+4: ThriftWorkLanguage workLanguage
+}
 
-     WorkDto getWorkDto()
+service ThriftWorkData {
+
+     oneway void send(1: ThriftWork w)
+
+     ThriftWork getThriftWork()
 
 }

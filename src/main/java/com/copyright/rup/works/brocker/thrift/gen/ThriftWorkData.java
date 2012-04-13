@@ -6,37 +6,43 @@
  */
 package com.copyright.rup.works.brocker.thrift.gen;
 
-import java.util.BitSet;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.thrift.protocol.TTupleProtocol;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
+
 import org.apache.thrift.scheme.TupleScheme;
+import org.apache.thrift.protocol.TTupleProtocol;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.EnumSet;
+import java.util.Collections;
+import java.util.BitSet;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WorkData {
+public class ThriftWorkData {
 
   public interface Iface {
 
-    public void send(WorkDto w) throws org.apache.thrift.TException;
+    public void send(ThriftWork w) throws org.apache.thrift.TException;
 
-    public WorkDto getWorkDto() throws org.apache.thrift.TException;
+    public ThriftWork getThriftWork() throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void send(WorkDto w, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.send_call> resultHandler) throws org.apache.thrift.TException;
+    public void send(ThriftWork w, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.send_call> resultHandler) throws org.apache.thrift.TException;
 
-    public void getWorkDto(org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getWorkDto_call> resultHandler) throws org.apache.thrift.TException;
+    public void getThriftWork(org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getThriftWork_call> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -60,38 +66,38 @@ public class WorkData {
       super(iprot, oprot);
     }
 
-    public void send(WorkDto w) throws org.apache.thrift.TException
+    public void send(ThriftWork w) throws org.apache.thrift.TException
     {
       send_send(w);
     }
 
-    public void send_send(WorkDto w) throws org.apache.thrift.TException
+    public void send_send(ThriftWork w) throws org.apache.thrift.TException
     {
       send_args args = new send_args();
       args.setW(w);
       sendBase("send", args);
     }
 
-    public WorkDto getWorkDto() throws org.apache.thrift.TException
+    public ThriftWork getThriftWork() throws org.apache.thrift.TException
     {
-      send_getWorkDto();
-      return recv_getWorkDto();
+      send_getThriftWork();
+      return recv_getThriftWork();
     }
 
-    public void send_getWorkDto() throws org.apache.thrift.TException
+    public void send_getThriftWork() throws org.apache.thrift.TException
     {
-      getWorkDto_args args = new getWorkDto_args();
-      sendBase("getWorkDto", args);
+      getThriftWork_args args = new getThriftWork_args();
+      sendBase("getThriftWork", args);
     }
 
-    public WorkDto recv_getWorkDto() throws org.apache.thrift.TException
+    public ThriftWork recv_getThriftWork() throws org.apache.thrift.TException
     {
-      getWorkDto_result result = new getWorkDto_result();
-      receiveBase(result, "getWorkDto");
+      getThriftWork_result result = new getThriftWork_result();
+      receiveBase(result, "getThriftWork");
       if (result.isSetSuccess()) {
         return result.success;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getWorkDto failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getThriftWork failed: unknown result");
     }
 
   }
@@ -112,7 +118,7 @@ public class WorkData {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void send(WorkDto w, org.apache.thrift.async.AsyncMethodCallback<send_call> resultHandler) throws org.apache.thrift.TException {
+    public void send(ThriftWork w, org.apache.thrift.async.AsyncMethodCallback<send_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       send_call method_call = new send_call(w, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -120,8 +126,8 @@ public class WorkData {
     }
 
     public static class send_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private WorkDto w;
-      public send_call(WorkDto w, org.apache.thrift.async.AsyncMethodCallback<send_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private ThriftWork w;
+      public send_call(ThriftWork w, org.apache.thrift.async.AsyncMethodCallback<send_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, true);
         this.w = w;
       }
@@ -143,32 +149,32 @@ public class WorkData {
       }
     }
 
-    public void getWorkDto(org.apache.thrift.async.AsyncMethodCallback<getWorkDto_call> resultHandler) throws org.apache.thrift.TException {
+    public void getThriftWork(org.apache.thrift.async.AsyncMethodCallback<getThriftWork_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getWorkDto_call method_call = new getWorkDto_call(resultHandler, this, ___protocolFactory, ___transport);
+      getThriftWork_call method_call = new getThriftWork_call(resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getWorkDto_call extends org.apache.thrift.async.TAsyncMethodCall {
-      public getWorkDto_call(org.apache.thrift.async.AsyncMethodCallback<getWorkDto_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class getThriftWork_call extends org.apache.thrift.async.TAsyncMethodCall {
+      public getThriftWork_call(org.apache.thrift.async.AsyncMethodCallback<getThriftWork_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getWorkDto", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        getWorkDto_args args = new getWorkDto_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getThriftWork", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getThriftWork_args args = new getThriftWork_args();
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public WorkDto getResult() throws org.apache.thrift.TException {
+      public ThriftWork getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_getWorkDto();
+        return (new Client(prot)).recv_getThriftWork();
       }
     }
 
@@ -186,7 +192,7 @@ public class WorkData {
 
     private static <I extends Iface> Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> getProcessMap(Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
       processMap.put("send", new send());
-      processMap.put("getWorkDto", new getWorkDto());
+      processMap.put("getThriftWork", new getThriftWork());
       return processMap;
     }
 
@@ -205,18 +211,18 @@ public class WorkData {
       }
     }
 
-    private static class getWorkDto<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getWorkDto_args> {
-      public getWorkDto() {
-        super("getWorkDto");
+    private static class getThriftWork<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getThriftWork_args> {
+      public getThriftWork() {
+        super("getThriftWork");
       }
 
-      protected getWorkDto_args getEmptyArgsInstance() {
-        return new getWorkDto_args();
+      protected getThriftWork_args getEmptyArgsInstance() {
+        return new getThriftWork_args();
       }
 
-      protected getWorkDto_result getResult(I iface, getWorkDto_args args) throws org.apache.thrift.TException {
-        getWorkDto_result result = new getWorkDto_result();
-        result.success = iface.getWorkDto();
+      protected getThriftWork_result getResult(I iface, getThriftWork_args args) throws org.apache.thrift.TException {
+        getThriftWork_result result = new getThriftWork_result();
+        result.success = iface.getThriftWork();
         return result;
       }
     }
@@ -234,7 +240,7 @@ public class WorkData {
       schemes.put(TupleScheme.class, new send_argsTupleSchemeFactory());
     }
 
-    public WorkDto w; // required
+    public ThriftWork w; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -298,8 +304,8 @@ public class WorkData {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.W, new org.apache.thrift.meta_data.FieldMetaData("w", org.apache.thrift.TFieldRequirementType.DEFAULT,
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, WorkDto.class)));
+      tmpMap.put(_Fields.W, new org.apache.thrift.meta_data.FieldMetaData("w", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftWork.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(send_args.class, metaDataMap);
     }
@@ -308,7 +314,7 @@ public class WorkData {
     }
 
     public send_args(
-      WorkDto w)
+      ThriftWork w)
     {
       this();
       this.w = w;
@@ -319,7 +325,7 @@ public class WorkData {
      */
     public send_args(send_args other) {
       if (other.isSetW()) {
-        this.w = new WorkDto(other.w);
+        this.w = new ThriftWork(other.w);
       }
     }
 
@@ -332,11 +338,11 @@ public class WorkData {
       this.w = null;
     }
 
-    public WorkDto getW() {
+    public ThriftWork getW() {
       return this.w;
     }
 
-    public send_args setW(WorkDto w) {
+    public send_args setW(ThriftWork w) {
       this.w = w;
       return this;
     }
@@ -362,7 +368,7 @@ public class WorkData {
         if (value == null) {
           unsetW();
         } else {
-          setW((WorkDto)value);
+          setW((ThriftWork)value);
         }
         break;
 
@@ -434,7 +440,7 @@ public class WorkData {
       }
 
       int lastComparison = 0;
-      send_args typedOther = other;
+      send_args typedOther = (send_args)other;
 
       lastComparison = Boolean.valueOf(isSetW()).compareTo(typedOther.isSetW());
       if (lastComparison != 0) {
@@ -511,16 +517,16 @@ public class WorkData {
         while (true)
         {
           schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
             break;
           }
           switch (schemeField.id) {
             case 1: // W
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.w = new WorkDto();
+                struct.w = new ThriftWork();
                 struct.w.read(iprot);
                 struct.setWIsSet(true);
-              } else {
+              } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
@@ -576,7 +582,7 @@ public class WorkData {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.w = new WorkDto();
+          struct.w = new ThriftWork();
           struct.w.read(iprot);
           struct.setWIsSet(true);
         }
@@ -585,14 +591,14 @@ public class WorkData {
 
   }
 
-  public static class getWorkDto_args implements org.apache.thrift.TBase<getWorkDto_args, getWorkDto_args._Fields>, java.io.Serializable, Cloneable   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getWorkDto_args");
+  public static class getThriftWork_args implements org.apache.thrift.TBase<getThriftWork_args, getThriftWork_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getThriftWork_args");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new getWorkDto_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new getWorkDto_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getThriftWork_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getThriftWork_argsTupleSchemeFactory());
     }
 
 
@@ -655,20 +661,20 @@ public class WorkData {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getWorkDto_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getThriftWork_args.class, metaDataMap);
     }
 
-    public getWorkDto_args() {
+    public getThriftWork_args() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public getWorkDto_args(getWorkDto_args other) {
+    public getThriftWork_args(getThriftWork_args other) {
     }
 
-    public getWorkDto_args deepCopy() {
-      return new getWorkDto_args(this);
+    public getThriftWork_args deepCopy() {
+      return new getThriftWork_args(this);
     }
 
     @Override
@@ -701,12 +707,12 @@ public class WorkData {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof getWorkDto_args)
-        return this.equals((getWorkDto_args)that);
+      if (that instanceof getThriftWork_args)
+        return this.equals((getThriftWork_args)that);
       return false;
     }
 
-    public boolean equals(getWorkDto_args that) {
+    public boolean equals(getThriftWork_args that) {
       if (that == null)
         return false;
 
@@ -720,13 +726,13 @@ public class WorkData {
       return builder.toHashCode();
     }
 
-    public int compareTo(getWorkDto_args other) {
+    public int compareTo(getThriftWork_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
-      getWorkDto_args typedOther = other;
+      getThriftWork_args typedOther = (getThriftWork_args)other;
 
       return 0;
     }
@@ -745,7 +751,7 @@ public class WorkData {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("getWorkDto_args(");
+      StringBuilder sb = new StringBuilder("getThriftWork_args(");
       boolean first = true;
 
       sb.append(")");
@@ -772,21 +778,21 @@ public class WorkData {
       }
     }
 
-    private static class getWorkDto_argsStandardSchemeFactory implements SchemeFactory {
-      public getWorkDto_argsStandardScheme getScheme() {
-        return new getWorkDto_argsStandardScheme();
+    private static class getThriftWork_argsStandardSchemeFactory implements SchemeFactory {
+      public getThriftWork_argsStandardScheme getScheme() {
+        return new getThriftWork_argsStandardScheme();
       }
     }
 
-    private static class getWorkDto_argsStandardScheme extends StandardScheme<getWorkDto_args> {
+    private static class getThriftWork_argsStandardScheme extends StandardScheme<getThriftWork_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, getWorkDto_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getThriftWork_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
         {
           schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
             break;
           }
           switch (schemeField.id) {
@@ -801,7 +807,7 @@ public class WorkData {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, getWorkDto_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getThriftWork_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -811,39 +817,39 @@ public class WorkData {
 
     }
 
-    private static class getWorkDto_argsTupleSchemeFactory implements SchemeFactory {
-      public getWorkDto_argsTupleScheme getScheme() {
-        return new getWorkDto_argsTupleScheme();
+    private static class getThriftWork_argsTupleSchemeFactory implements SchemeFactory {
+      public getThriftWork_argsTupleScheme getScheme() {
+        return new getThriftWork_argsTupleScheme();
       }
     }
 
-    private static class getWorkDto_argsTupleScheme extends TupleScheme<getWorkDto_args> {
+    private static class getThriftWork_argsTupleScheme extends TupleScheme<getThriftWork_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, getWorkDto_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getThriftWork_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, getWorkDto_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getThriftWork_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class getWorkDto_result implements org.apache.thrift.TBase<getWorkDto_result, getWorkDto_result._Fields>, java.io.Serializable, Cloneable   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getWorkDto_result");
+  public static class getThriftWork_result implements org.apache.thrift.TBase<getThriftWork_result, getThriftWork_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getThriftWork_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new getWorkDto_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new getWorkDto_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getThriftWork_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getThriftWork_resultTupleSchemeFactory());
     }
 
-    public WorkDto success; // required
+    public ThriftWork success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -907,17 +913,17 @@ public class WorkData {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT,
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, WorkDto.class)));
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftWork.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getWorkDto_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getThriftWork_result.class, metaDataMap);
     }
 
-    public getWorkDto_result() {
+    public getThriftWork_result() {
     }
 
-    public getWorkDto_result(
-      WorkDto success)
+    public getThriftWork_result(
+      ThriftWork success)
     {
       this();
       this.success = success;
@@ -926,14 +932,14 @@ public class WorkData {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public getWorkDto_result(getWorkDto_result other) {
+    public getThriftWork_result(getThriftWork_result other) {
       if (other.isSetSuccess()) {
-        this.success = new WorkDto(other.success);
+        this.success = new ThriftWork(other.success);
       }
     }
 
-    public getWorkDto_result deepCopy() {
-      return new getWorkDto_result(this);
+    public getThriftWork_result deepCopy() {
+      return new getThriftWork_result(this);
     }
 
     @Override
@@ -941,11 +947,11 @@ public class WorkData {
       this.success = null;
     }
 
-    public WorkDto getSuccess() {
+    public ThriftWork getSuccess() {
       return this.success;
     }
 
-    public getWorkDto_result setSuccess(WorkDto success) {
+    public getThriftWork_result setSuccess(ThriftWork success) {
       this.success = success;
       return this;
     }
@@ -971,7 +977,7 @@ public class WorkData {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((WorkDto)value);
+          setSuccess((ThriftWork)value);
         }
         break;
 
@@ -1004,12 +1010,12 @@ public class WorkData {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof getWorkDto_result)
-        return this.equals((getWorkDto_result)that);
+      if (that instanceof getThriftWork_result)
+        return this.equals((getThriftWork_result)that);
       return false;
     }
 
-    public boolean equals(getWorkDto_result that) {
+    public boolean equals(getThriftWork_result that) {
       if (that == null)
         return false;
 
@@ -1037,13 +1043,13 @@ public class WorkData {
       return builder.toHashCode();
     }
 
-    public int compareTo(getWorkDto_result other) {
+    public int compareTo(getThriftWork_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
-      getWorkDto_result typedOther = other;
+      getThriftWork_result typedOther = (getThriftWork_result)other;
 
       lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
       if (lastComparison != 0) {
@@ -1072,7 +1078,7 @@ public class WorkData {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("getWorkDto_result(");
+      StringBuilder sb = new StringBuilder("getThriftWork_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -1106,30 +1112,30 @@ public class WorkData {
       }
     }
 
-    private static class getWorkDto_resultStandardSchemeFactory implements SchemeFactory {
-      public getWorkDto_resultStandardScheme getScheme() {
-        return new getWorkDto_resultStandardScheme();
+    private static class getThriftWork_resultStandardSchemeFactory implements SchemeFactory {
+      public getThriftWork_resultStandardScheme getScheme() {
+        return new getThriftWork_resultStandardScheme();
       }
     }
 
-    private static class getWorkDto_resultStandardScheme extends StandardScheme<getWorkDto_result> {
+    private static class getThriftWork_resultStandardScheme extends StandardScheme<getThriftWork_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, getWorkDto_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getThriftWork_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
         {
           schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
             break;
           }
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new WorkDto();
+                struct.success = new ThriftWork();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
-              } else {
+              } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
@@ -1144,7 +1150,7 @@ public class WorkData {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, getWorkDto_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getThriftWork_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1159,16 +1165,16 @@ public class WorkData {
 
     }
 
-    private static class getWorkDto_resultTupleSchemeFactory implements SchemeFactory {
-      public getWorkDto_resultTupleScheme getScheme() {
-        return new getWorkDto_resultTupleScheme();
+    private static class getThriftWork_resultTupleSchemeFactory implements SchemeFactory {
+      public getThriftWork_resultTupleScheme getScheme() {
+        return new getThriftWork_resultTupleScheme();
       }
     }
 
-    private static class getWorkDto_resultTupleScheme extends TupleScheme<getWorkDto_result> {
+    private static class getThriftWork_resultTupleScheme extends TupleScheme<getThriftWork_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, getWorkDto_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getThriftWork_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -1181,11 +1187,11 @@ public class WorkData {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, getWorkDto_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getThriftWork_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new WorkDto();
+          struct.success = new ThriftWork();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
