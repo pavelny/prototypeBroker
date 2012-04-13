@@ -6,6 +6,8 @@ import com.copyright.rup.works.broker.api.IMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ConsumerTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.List;
  */
 // TODO Add javadoc
 public class JsonConsumer implements IConsumer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonConsumer.class);
 
     private ConsumerTemplate consumer;
 
@@ -38,11 +41,11 @@ public class JsonConsumer implements IConsumer {
         try {
             ///TODO realize another method of retrieving messages
             for (int i = 0; i < UtilVarialble.WORKS_COLLECTION_SIZE/expectedSizeOfCollection; i++) {
-                chunkWorks = marshaler.toEntities((String) consumer.receiveBodyNoWait(nameOfQueue));
+                chunkWorks = marshaler.toEntities((String) consumer.receiveBody(nameOfQueue));
                 works.addAll(chunkWorks);
             }
         } catch (Exception e) {
-            // TODO log exception
+            LOGGER.info("Exception in JsonConsumer: " + e.getMessage());
         }
     }
 }
