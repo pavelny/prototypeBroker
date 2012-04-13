@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class ThriftBuilder {
 
-    public ThriftWork buildFrom(IWork work) {
+    static public ThriftWork buildFrom(IWork work) {
 
         ThriftWork thriftWork = new ThriftWork();
         thriftWork.setId(work.getId());
@@ -67,7 +67,7 @@ public class ThriftBuilder {
         return thriftWork;
     }
 
-    public IWork buildTo(ThriftWork thriftWork) {
+    static public IWork buildTo(ThriftWork thriftWork) {
 
         IWork work = new Work();
         work.setId(thriftWork.getId());

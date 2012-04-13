@@ -40,7 +40,7 @@ public final class ClientConsumer implements Runnable {
         BrokerService service = new BrokerService();
         service.setConsumer(consumer);
 
-        // TODO move string literal into constant (remove from code)
+//        // TODO move string literal into constant (remove from code)
         StopWatch stopWatchXStream = new Log4JStopWatch("consume.xstream");
         service.setMarshaler(new XStreamMarshaler());
         service.receive(UtilVarialble.CONSUMER_QUEUE_XSTREM);
@@ -60,7 +60,7 @@ public final class ClientConsumer implements Runnable {
         service.setMarshaler(new GsonMarshaler());
         service.receive(UtilVarialble.CONSUMER_QUEUE_GSON);
         stopWatchGson.stop();
-
+//
         StopWatch stopWatchThrift = new Log4JStopWatch("consume.thrift");
         service.setConsumer(new ThriftConsumer(consumerTemplate));
         service.setMarshaler(null);

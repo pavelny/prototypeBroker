@@ -10,6 +10,7 @@ import org.apache.thrift.TDeserializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Json implementation of consumer.
@@ -32,12 +33,15 @@ public class ThriftConsumer implements IConsumer {
         LinkedList<IWork> works = new LinkedList<IWork>();
 
         TDeserializer deserializer = new TDeserializer(new TBinaryProtocol.Factory());
-        for (int i = 0; i < expectedSizeOfCollection; i++) {
-            ThriftWork thriftWork = new ThriftWork();
+        List<byte[]> bytes = new LinkedList<byte[]>();
+        while (bytes != null) {
             try {
-                deserializer.deserialize(thriftWork, (byte[]) consumer.receiveBody(nameOfQueue));
-                IWork work = new ThriftBuilder().buildTo(thriftWork);
-                works.add(work);
+                bytes = (List<byte[]>) consumer.receiveBodyNoWait(nameOfQueue);
+                for (byte[] byteWork: bytes) {
+                    ThriftWork thriftWork = new ThriftWork();
+                    deserializer.deserialize(thriftWork, byteWork);
+                    works.add(ThriftBuilder.buildTo(thriftWork));
+                }
             } catch (Exception e) {
                 // /TODO log exception
             }

@@ -23,8 +23,7 @@ public class XStreamMarshaler implements IMarshaler {
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         xStream.alias(WorkWrapper.class.getName(), WorkWrapper.class);
         WorkWrapper result = (WorkWrapper) xStream.fromXML(json);
-        return (List<T>) result.getWorks(); // To change body of implemented methods use File |
-                                            // Settings | File Templates.
+        return (List<T>) result.getWorks();
     }
 
     /**

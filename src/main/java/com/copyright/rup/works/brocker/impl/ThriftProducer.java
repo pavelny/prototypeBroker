@@ -11,6 +11,7 @@ import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,17 +33,20 @@ public class ThriftProducer implements IProducer {
 
     @Override
     public void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler) {
+
         TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());
-        for (IWork work : works) {
-            ThriftWork thriftWork = new ThriftBuilder().buildFrom(work);
+            List<byte[]> results = new LinkedList<byte[]>();
             try {
-                byte[] result = serializer.serialize(thriftWork);
-                producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, result,
+                for (IWork work : works) {
+                    ThriftWork thriftWork = ThriftBuilder.buildFrom(work);
+                    byte[] result = serializer.serialize(thriftWork);
+                    results.add(result);
+                }
+                producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, results,
                         "work_message", "inJson");
             } catch (TException e) {
                 e.printStackTrace();
             }
-        }
     }
 
 }
