@@ -1,6 +1,7 @@
 
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.7
 
@@ -75,7 +76,7 @@ task runServer(type: JavaExec, dependsOn: classes) {
 
 task runClient(type: JavaExec, dependsOn: classes) {
     description = 'Run client (if server is not running, task will be failed)'
-    main = 'com.copyright.prototype.Client'
+    main = 'com.copyright.rup.works.brocker.Client'
     classpath sourceSets.main.classesDir
     classpath sourceSets.main.resources.srcDirs
     classpath configurations.runtime
