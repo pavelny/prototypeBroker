@@ -38,7 +38,7 @@ public class JsonConsumer implements IConsumer {
         try {
             ///TODO realize another method of retrieving messages
             for (int i = 0; i < UtilVarialble.WORKS_COLLECTION_SIZE/expectedSizeOfCollection; i++) {
-                chunkWorks = marshaler.toEntities((String) consumer.receiveBodyNoWait(nameOfQueue));
+                chunkWorks = marshaler.toEntities(consumer.receiveBody(nameOfQueue).toString());
                 works.addAll(chunkWorks);
             }
         } catch (Exception e) {
