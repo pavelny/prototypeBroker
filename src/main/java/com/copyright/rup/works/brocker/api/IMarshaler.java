@@ -11,13 +11,12 @@ import java.util.List;
 public interface IMarshaler {
 
     /**
-     * The method converts POJO to JSON
+     * The method converts JSON to POJO
      *
-     * @param obj The POJO object.
-     * @return The string representation of JSON.
-     * @throws IOException
+     * @param json
+     * @return
      */
-    String toJson(Object obj) throws Exception;
+    <T> List<T> toEntities(String json) throws Exception;
 
     /**
      * The method converts JSON to POJO
@@ -29,10 +28,12 @@ public interface IMarshaler {
     <T> T toEntity(String json, Class<T> clazz) throws Exception;
 
     /**
-     * The method converts JSON to POJO
+     * The method converts POJO to JSON
      *
-     * @param json
-     * @return
+     * @param obj
+     *            The POJO object.
+     * @return The string representation of JSON.
+     * @throws IOException
      */
-    <T> List<T> toEntities(String json) throws Exception;
+    String toJson(Object obj) throws Exception;
 }

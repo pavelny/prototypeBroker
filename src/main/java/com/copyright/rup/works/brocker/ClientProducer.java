@@ -1,12 +1,5 @@
 package com.copyright.rup.works.brocker;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import org.apache.camel.ProducerTemplate;
-import org.perf4j.StopWatch;
-import org.perf4j.log4j.Log4JStopWatch;
-
 import com.copyright.rup.works.brocker.api.IProducer;
 import com.copyright.rup.works.brocker.impl.BrokerService;
 import com.copyright.rup.works.brocker.impl.JsonProducer;
@@ -17,12 +10,30 @@ import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
+import org.apache.camel.ProducerTemplate;
+import org.perf4j.StopWatch;
+import org.perf4j.log4j.Log4JStopWatch;
+
+import java.util.LinkedList;
+import java.util.List;
+
 public final class ClientProducer implements Runnable {
+
+    private Thread currentThread;
 
     private ProducerTemplate producerTemplate;
 
     public ClientProducer(ProducerTemplate producerTemplate) {
-        this.producerTemplate =  producerTemplate;
+        this.producerTemplate = producerTemplate;
+    }
+
+    public void start() {
+        currentThread = new Thread(this);
+        currentThread.start();
+    }
+
+    public void stop() {
+        currentThread = null;
     }
 
     public void run() {
@@ -52,17 +63,24 @@ public final class ClientProducer implements Runnable {
         service.send(works, UtilVarialble.PRODUCER_QUEUE_GSON);
         stopWatchGson.stop();
 
-        StopWatch stopWatchThrift = new Log4JStopWatch("produce.thrift");
-        service.setProducer(new ThriftProducer(producerTemplate));
-        service.setMarshaler(null);
-        service.send(works, UtilVarialble.PRODUCER_QUEUE_THRIFT);
-        stopWatchThrift.stop();
+//        StopWatch stopWatchThrift = new Log4JStopWatch("produce.thrift");
+//        service.setProducer(new ThriftProducer(producerTemplate));
+//        service.setMarshaler(null);
+//        service.send(works, UtilVarialble.PRODUCER_QUEUE_THRIFT);
+//        stopWatchThrift.stop();
 
         try {
             producerTemplate.stop();
         } catch (Exception e) {
-           ///TODO use logger here
+            // /TODO use logger here
             e.printStackTrace();
+        }
+        stop();
+        Thread thread = Thread.currentThread();
+        try {
+            thread.sleep(100);
+            thread.interrupt();
+        } catch (InterruptedException e){
         }
     }
 

@@ -1,9 +1,5 @@
 package com.copyright.rup.works.brocker;
 
-import org.apache.camel.ConsumerTemplate;
-import org.perf4j.StopWatch;
-import org.perf4j.log4j.Log4JStopWatch;
-
 import com.copyright.rup.works.brocker.api.IConsumer;
 import com.copyright.rup.works.brocker.impl.BrokerService;
 import com.copyright.rup.works.brocker.impl.JsonConsumer;
@@ -13,8 +9,14 @@ import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
 import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 
+import org.apache.camel.ConsumerTemplate;
+import org.perf4j.StopWatch;
+import org.perf4j.log4j.Log4JStopWatch;
+
 // TODO Add javadoc everywhere
-public final class ClientConsumer implements Runnable{
+public final class ClientConsumer implements Runnable {
+
+    private Thread currentThread;
 
     private ConsumerTemplate consumerTemplate;
 
@@ -22,7 +24,17 @@ public final class ClientConsumer implements Runnable{
         this.consumerTemplate = consumerTemplate;
     }
 
+    public void start() {
+        currentThread = new Thread(this);
+    }
+
+    public void stop() {
+        currentThread = null;
+    }
+
     public void run() {
+
+        currentThread = new Thread(this);
 
         IConsumer consumer = new JsonConsumer(consumerTemplate);
         BrokerService service = new BrokerService();
@@ -58,8 +70,9 @@ public final class ClientConsumer implements Runnable{
         try {
             consumerTemplate.stop();
         } catch (Exception e) {
-           ///TODO use logger here
+            // /TODO use logger here
             e.printStackTrace();
         }
+        stop();
     }
 }

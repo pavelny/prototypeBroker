@@ -4,6 +4,7 @@ import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.brocker.api.IProducer;
 import com.copyright.rup.works.brocker.thrift.gen.ThriftWork;
 import com.copyright.rup.works.domain.api.IWork;
+
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 import org.apache.thrift.TException;
@@ -32,11 +33,12 @@ public class ThriftProducer implements IProducer {
     @Override
     public void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler) {
         TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());
-        for (IWork work: works) {
+        for (IWork work : works) {
             ThriftWork thriftWork = new ThriftBuilder().buildFrom(work);
             try {
                 byte[] result = serializer.serialize(thriftWork);
-                producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, result, "work_message", "inJson");
+                producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, result,
+                        "work_message", "inJson");
             } catch (TException e) {
                 e.printStackTrace();
             }

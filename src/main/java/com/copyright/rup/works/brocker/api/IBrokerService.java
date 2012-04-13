@@ -3,9 +3,9 @@
  */
 package com.copyright.rup.works.brocker.api;
 
-import java.util.List;
-
 import com.copyright.rup.works.domain.api.IWork;
+
+import java.util.List;
 
 /**
  *
@@ -17,13 +17,6 @@ import com.copyright.rup.works.domain.api.IWork;
 public interface IBrokerService {
 
     /**
-     * @param works
-     * @param queueName
-     */
-    // TODO Add javadoc
-    void send(List<IWork> works, String queueName);
-
-    /**
      *
      * @param queueName
      *
@@ -31,5 +24,12 @@ public interface IBrokerService {
      */
     // TODO Add javadoc
     List<IWork> receive(String queueName);
+
+    /**
+     * @param works
+     * @param queueName
+     */
+    // TODO Add javadoc
+    void send(List<IWork> works, String queueName);
 
 }

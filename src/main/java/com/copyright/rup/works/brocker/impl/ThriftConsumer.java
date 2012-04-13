@@ -4,6 +4,7 @@ import com.copyright.rup.works.brocker.api.IConsumer;
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.brocker.thrift.gen.ThriftWork;
 import com.copyright.rup.works.domain.api.IWork;
+
 import org.apache.camel.ConsumerTemplate;
 import org.apache.thrift.TDeserializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -38,7 +39,7 @@ public class ThriftConsumer implements IConsumer {
                 IWork work = new ThriftBuilder().buildTo(thriftWork);
                 works.add(work);
             } catch (Exception e) {
-                ///TODO log exception
+                // /TODO log exception
             }
 
         }

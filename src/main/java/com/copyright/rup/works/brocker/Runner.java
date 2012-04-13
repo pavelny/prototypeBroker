@@ -1,10 +1,5 @@
 package com.copyright.rup.works.brocker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
 import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
@@ -31,43 +26,18 @@ import com.copyright.rup.works.domain.impl.Work;
 import com.copyright.rup.works.domain.impl.WorkCollection;
 import com.copyright.rup.works.domain.impl.WorkLanguage;
 
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class Runner {
-
-    public static void main(String[] args) throws Exception {
-
-        IWork work = generateWork();
-        List<IWork> works = new ArrayList<>();
-        works.add(work);
-
-        printResult(new GsonMarshaler(), work, works);
-        printResult(new JacksonMarshaler(), work, works);
-        printResult(new JaxbMarshaler(), work, works);
-        printResult(new XStreamMarshaler(), work, works);
-    }
-
-    private static void printResult(IMarshaler converter, IWork work, List<IWork> works) throws Exception {
-        System.out.println(converter.getClass().getName() + ":");
-
-        String jsonRepresentationOfInstance = converter.toJson(work);
-        System.out.println(jsonRepresentationOfInstance);
-        IWork deserializedInstance = converter.toEntity(jsonRepresentationOfInstance, work.getClass());
-        System.out.println("Compare serialized and deserialized objects: " + work.equals(deserializedInstance));
-
-        WorkWrapper wrapper = new WorkWrapper();
-        wrapper.setWorks(works);
-        String jsonRepresentationOfList = converter.toJson(wrapper);
-        System.out.println(jsonRepresentationOfList);
-        List<IWork> deserializedWorks = converter.toEntities(jsonRepresentationOfList);
-        System.out.println("Compare serialized and deserialized lists: " + works.equals(deserializedWorks));
-        System.out.println();
-    }
 
     public static IWork generateWork() {
         IWork work = new Work();
 
-        work.setAudience(Arrays.asList("TestFirstAudience", "TestSecondAudience", "TestThirdAudience"));
+        work.setAudience(Arrays.asList("TestFirstAudience", "TestSecondAudience",
+                "TestThirdAudience"));
         work.setAuthors(generateAuthorList());
         work.setCollection(generateWorkCollection());
 
@@ -102,24 +72,16 @@ public class Runner {
         return work;
     }
 
-    static List<ITitle> generateTitleList() {
-        List<ITitle> titles = new ArrayList<>();
+    public static void main(String[] args) throws Exception {
 
-        ITitle title = new Title();
-        title.setEdition("TestFirstTitleEdition");
-        title.setTitle("TestFirstTitle");
-        title.setType("TestFirstTitleType");
-        title.setVolume("TestFirstTitleVolume");
-        titles.add(title);
+        IWork work = generateWork();
+        List<IWork> works = new ArrayList<>();
+        works.add(work);
 
-        title = new Title();
-        title.setEdition("TestSecondTitleEdition");
-        title.setTitle("TestSecondtTitle");
-        title.setType("TestSecondTitleType");
-        title.setVolume("TestSecondTitleVolume");
-        titles.add(title);
-
-        return titles;
+        printResult(new GsonMarshaler(), work, works);
+        printResult(new JacksonMarshaler(), work, works);
+        printResult(new JaxbMarshaler(), work, works);
+        printResult(new XStreamMarshaler(), work, works);
     }
 
     static List<IAuthor> generateAuthorList() {
@@ -148,6 +110,41 @@ public class Runner {
         return authors;
     }
 
+    static final List<IEditor> generateEditorList() {
+        List<IEditor> editors = new ArrayList<>();
+
+        IAffiliation affiliation = new Affiliation();
+        affiliation.setAddress("TestEditorAffiliationAddress");
+        affiliation.setCountry("TestEditorAffiliationCountry");
+        IEditor editor = new Editor();
+        editor.setAffiliation(affiliation);
+        editor.setName("TestEditorName");
+        editor.setRole("TestEditorRole");
+        editors.add(editor);
+
+        return editors;// Arrays.asList((IEditor)null)
+    }
+
+    static List<ITitle> generateTitleList() {
+        List<ITitle> titles = new ArrayList<>();
+
+        ITitle title = new Title();
+        title.setEdition("TestFirstTitleEdition");
+        title.setTitle("TestFirstTitle");
+        title.setType("TestFirstTitleType");
+        title.setVolume("TestFirstTitleVolume");
+        titles.add(title);
+
+        title = new Title();
+        title.setEdition("TestSecondTitleEdition");
+        title.setTitle("TestSecondtTitle");
+        title.setType("TestSecondTitleType");
+        title.setVolume("TestSecondTitleVolume");
+        titles.add(title);
+
+        return titles;
+    }
+
     static IWorkCollection generateWorkCollection() {
         IWorkCollection workCollection = new WorkCollection();
 
@@ -165,21 +162,6 @@ public class Runner {
         return workCollection;
     }
 
-    static final List<IEditor> generateEditorList() {
-        List<IEditor> editors = new ArrayList<>();
-
-        IAffiliation affiliation = new Affiliation();
-        affiliation.setAddress("TestEditorAffiliationAddress");
-        affiliation.setCountry("TestEditorAffiliationCountry");
-        IEditor editor = new Editor();
-        editor.setAffiliation(affiliation);
-        editor.setName("TestEditorName");
-        editor.setRole("TestEditorRole");
-        editors.add(editor);
-
-        return editors;//Arrays.asList((IEditor)null)
-    }
-
     private static final List<IContributor> generateContributers() {
         IAffiliation affiliation = new Affiliation();
         affiliation.setAddress("TestAffiliationAddress");
@@ -193,5 +175,26 @@ public class Runner {
         List<IContributor> contributors = new ArrayList<>();
         contributors.add(contributor);
         return contributors;
+    }
+
+    private static void printResult(IMarshaler converter, IWork work, List<IWork> works)
+            throws Exception {
+        System.out.println(converter.getClass().getName() + ":");
+
+        String jsonRepresentationOfInstance = converter.toJson(work);
+        System.out.println(jsonRepresentationOfInstance);
+        IWork deserializedInstance = converter.toEntity(jsonRepresentationOfInstance,
+                work.getClass());
+        System.out.println("Compare serialized and deserialized objects: "
+                + work.equals(deserializedInstance));
+
+        WorkWrapper wrapper = new WorkWrapper();
+        wrapper.setWorks(works);
+        String jsonRepresentationOfList = converter.toJson(wrapper);
+        System.out.println(jsonRepresentationOfList);
+        List<IWork> deserializedWorks = converter.toEntities(jsonRepresentationOfList);
+        System.out.println("Compare serialized and deserialized lists: "
+                + works.equals(deserializedWorks));
+        System.out.println();
     }
 }
