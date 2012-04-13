@@ -1,9 +1,9 @@
 package com.copyright.rup.works.brocker;
 
-import java.io.File;
-
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.store.memory.MemoryPersistenceAdapter;
+
+import java.io.File;
 
 /**
  * Simple embeddable broker.
@@ -16,26 +16,12 @@ import org.apache.activemq.store.memory.MemoryPersistenceAdapter;
  */
 public class EmbeddableBroker extends Thread {
 
-    boolean shutdown;
     final String brokerUrl;
     Exception exception;
+    boolean shutdown;
 
     public EmbeddableBroker(String url) {
         brokerUrl = url;
-    }
-
-    public void startBroker() throws Exception {
-        synchronized (this) {
-            super.start();
-            try {
-                wait();
-                if (exception != null) {
-                    throw exception;
-                }
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        }
     }
 
     public void run() {
@@ -58,6 +44,20 @@ public class EmbeddableBroker extends Thread {
         } catch (Exception e) {
             exception = e;
             e.printStackTrace();
+        }
+    }
+
+    public void startBroker() throws Exception {
+        synchronized (this) {
+            super.start();
+            try {
+                wait();
+                if (exception != null) {
+                    throw exception;
+                }
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

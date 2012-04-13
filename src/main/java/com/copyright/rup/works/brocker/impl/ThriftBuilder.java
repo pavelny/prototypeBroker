@@ -12,10 +12,8 @@ import com.copyright.rup.works.domain.impl.Work;
 import com.copyright.rup.works.domain.impl.WorkCollection;
 import com.copyright.rup.works.domain.impl.WorkLanguage;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,12 +46,17 @@ public class ThriftBuilder {
         thriftWorkCollection.setCollectionType(work.getCollection().getCollectionType());
         thriftWorkCollection.setDataProvider(work.getCollection().getDataProvider());
         thriftWorkCollection.setSubmittedByUser(work.getCollection().getSubmittedByUser());
-        thriftWorkCollection.setSubmittedDatetime(work.getCollection().getSubmittedDatetime().toString());
-        thriftWorkCollection.setSubmittedProcessedDatetime(work.getCollection().getSubmitProcessedDatetime().toString());
-        thriftWorkCollection.setCreateByFileSubmittedPath(work.getCollection().getCreateByFileSubmittedPath());
-        thriftWorkCollection.setCreateByfileOsFilePath(work.getCollection().getCreateByFileOSFilePath());
+        thriftWorkCollection.setSubmittedDatetime(work.getCollection().getSubmittedDatetime()
+                .toString());
+        thriftWorkCollection.setSubmittedProcessedDatetime(work.getCollection()
+                .getSubmitProcessedDatetime().toString());
+        thriftWorkCollection.setCreateByFileSubmittedPath(work.getCollection()
+                .getCreateByFileSubmittedPath());
+        thriftWorkCollection.setCreateByfileOsFilePath(work.getCollection()
+                .getCreateByFileOSFilePath());
         thriftWorkCollection.setImportFileType(work.getCollection().getImportFileType());
-        thriftWorkCollection.setImportFileContentType(work.getCollection().getImportFileContentType());
+        thriftWorkCollection.setImportFileContentType(work.getCollection()
+                .getImportFileContentType());
         thriftWork.setCollection(thriftWorkCollection);
 
         ThriftWorkLanguage thriftWorkLanguage = new ThriftWorkLanguage();
@@ -77,24 +80,26 @@ public class ThriftBuilder {
         }
         work.setAuthors(authors);
 
-
         WorkCollection workCollection = new WorkCollection();
         workCollection.setCollectionName(thriftWork.getCollection().getCollectionName());
         workCollection.setCollectionType(thriftWork.getCollection().getCollectionType());
         workCollection.setDataProvider(thriftWork.getCollection().getDataProvider());
         workCollection.setSubmittedByUser(thriftWork.getCollection().getSubmittedByUser());
         try {
-            workCollection.setSubmittedDatetime((new SimpleDateFormat()).parse(
-                thriftWork.getCollection().getSubmittedDatetime()));
-            workCollection.setSubmitProcessedDatetime((new SimpleDateFormat()).parse(
-                    thriftWork.getCollection().getSubmittedProcessedDatetime().toString()));
-        } catch(ParseException e) {
-            ///TODO log exception here
+            workCollection.setSubmittedDatetime((new SimpleDateFormat()).parse(thriftWork
+                    .getCollection().getSubmittedDatetime()));
+            workCollection.setSubmitProcessedDatetime((new SimpleDateFormat()).parse(thriftWork
+                    .getCollection().getSubmittedProcessedDatetime().toString()));
+        } catch (ParseException e) {
+            // /TODO log exception here
         }
-        workCollection.setCreateByFileSubmittedPath(thriftWork.getCollection().getCreateByFileSubmittedPath());
-        workCollection.setCreateByFileOSFilePath((thriftWork.getCollection().getCreateByfileOsFilePath()));
+        workCollection.setCreateByFileSubmittedPath(thriftWork.getCollection()
+                .getCreateByFileSubmittedPath());
+        workCollection.setCreateByFileOSFilePath((thriftWork.getCollection()
+                .getCreateByfileOsFilePath()));
         workCollection.setImportFileType(thriftWork.getCollection().getImportFileType());
-        workCollection.setImportFileContentType(thriftWork.getCollection().getImportFileContentType());
+        workCollection.setImportFileContentType(thriftWork.getCollection()
+                .getImportFileContentType());
         work.setCollection(workCollection);
 
         IWorkLanguage workLanguage = new WorkLanguage();

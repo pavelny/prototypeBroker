@@ -1,8 +1,5 @@
 package com.copyright.rup.works.brocker.marshaler;
 
-import java.io.IOException;
-import java.util.List;
-
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.domain.api.IAffiliation;
 import com.copyright.rup.works.domain.api.IAuthor;
@@ -24,13 +21,17 @@ import com.copyright.rup.works.domain.impl.Title;
 import com.copyright.rup.works.domain.impl.Work;
 import com.copyright.rup.works.domain.impl.WorkCollection;
 import com.copyright.rup.works.domain.impl.WorkLanguage;
+
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
- * This class implements the {@link IMarshaler} interface.
- * It uses <a href="http://wiki.fasterxml.com/JacksonHome">Jackson</a> libraries for converting.
+ * This class implements the {@link IMarshaler} interface. It uses
+ * <a href="http://wiki.fasterxml.com/JacksonHome"> Jackson</a> libraries for converting.
  *
  * @author Andrei_Khadziukou
  */
@@ -39,9 +40,12 @@ public class JacksonMarshaler implements IMarshaler {
     /**
      * {@inheritDoc}
      */
-    public String toJson(Object obj) throws IOException {
-        ObjectMapper mapper = new  ObjectMapper();
-        return mapper.writeValueAsString(obj);
+    public List<IWork> toEntities(String json) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(generateModule());
+
+        return mapper.readValue(json, WorkWrapper.class).getWorks();
     }
 
     /**
@@ -57,13 +61,9 @@ public class JacksonMarshaler implements IMarshaler {
     /**
      * {@inheritDoc}
      */
-    public List<IWork> toEntities(String json) throws Exception {
-
-
+    public String toJson(Object obj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(generateModule());
-
-        return mapper.readValue(json, WorkWrapper.class).getWorks();
+        return mapper.writeValueAsString(obj);
     }
 
     // TODO Add javadoc

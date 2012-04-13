@@ -1,12 +1,12 @@
 package com.copyright.rup.works.brocker.impl;
 
-import java.util.List;
-
-import org.apache.camel.ConsumerTemplate;
-
 import com.copyright.rup.works.brocker.api.IConsumer;
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
+
+import org.apache.camel.ConsumerTemplate;
+
+import java.util.List;
 
 /**
  * Json implementation of consumer.
@@ -32,16 +32,17 @@ public class JsonConsumer implements IConsumer {
     public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection, IMarshaler marshaler) {
         List<IWork> works = null;
 
-//        for(int i = 0; i < expectedSizeOfCollection; i++) {
-            try {
-                works = marshaler.toEntities((String) consumer.receiveBody(nameOfQueue));
-//               IWork work = marshaler.toEntity((String) consumer.receiveBody(nameOfQueue), IWork.class);
-//               works.add(work);
-            } catch(Exception e) {
-                //TODO log exception
-            }
-//        }
+        // for(int i = 0; i < expectedSizeOfCollection; i++) {
+        try {
+            works = marshaler.toEntities((String) consumer.receiveBody(nameOfQueue));
+            // IWork work = marshaler.toEntity((String) consumer.receiveBody(nameOfQueue),
+            // IWork.class);
+            // works.add(work);
+        } catch (Exception e) {
+            // TODO log exception
+        }
+        // }
 
-//        works.size();
+        // works.size();
     }
 }

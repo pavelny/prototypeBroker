@@ -1,12 +1,5 @@
 package com.copyright.rup.works.brocker;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import org.apache.camel.ProducerTemplate;
-import org.perf4j.StopWatch;
-import org.perf4j.log4j.Log4JStopWatch;
-
 import com.copyright.rup.works.brocker.api.IProducer;
 import com.copyright.rup.works.brocker.impl.BrokerService;
 import com.copyright.rup.works.brocker.impl.JsonProducer;
@@ -17,12 +10,19 @@ import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
+import org.apache.camel.ProducerTemplate;
+import org.perf4j.StopWatch;
+import org.perf4j.log4j.Log4JStopWatch;
+
+import java.util.LinkedList;
+import java.util.List;
+
 public final class ClientProducer implements Runnable {
 
     private ProducerTemplate producerTemplate;
 
     public ClientProducer(ProducerTemplate producerTemplate) {
-        this.producerTemplate =  producerTemplate;
+        this.producerTemplate = producerTemplate;
     }
 
     public void run() {
@@ -61,7 +61,7 @@ public final class ClientProducer implements Runnable {
         try {
             producerTemplate.stop();
         } catch (Exception e) {
-           ///TODO use logger here
+            // /TODO use logger here
             e.printStackTrace();
         }
     }
