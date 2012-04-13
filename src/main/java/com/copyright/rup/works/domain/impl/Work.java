@@ -1,5 +1,18 @@
 package com.copyright.rup.works.domain.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.copyright.rup.works.domain.api.IAuthor;
 import com.copyright.rup.works.domain.api.IContributor;
 import com.copyright.rup.works.domain.api.IEditor;
@@ -9,13 +22,6 @@ import com.copyright.rup.works.domain.api.ITitle;
 import com.copyright.rup.works.domain.api.IWork;
 import com.copyright.rup.works.domain.api.IWorkCollection;
 import com.copyright.rup.works.domain.api.IWorkLanguage;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Implementation of IWork interface.
@@ -26,17 +32,27 @@ import java.util.Map;
  *
  * @author Nikita Levyankov
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Work implements IWork {
     private String id;
+    @XmlElement(type = Author.class)
     private List<IAuthor> authors;
+    @XmlElement(type = WorkCollection.class)
     private IWorkCollection workCollection;
+    @XmlElement(type = Contributor.class)
     private List<IContributor> contributors;
+    @XmlElement(type = Editor.class)
     private List<IEditor> editors;
+    @XmlElement(type = WorkLanguage.class)
     private IWorkLanguage language;
     private String publicationType;
     private String publicationCountry;
+    @XmlElement(type = Publisher.class)
     private IPublisher publisher;
+    @XmlElement(type = Subject.class)
     private ISubject subject;
+    @XmlElement(type = Title.class)
     private List<ITitle> titles;
     private List<String> audience;
     private Map<String, String> workItems;

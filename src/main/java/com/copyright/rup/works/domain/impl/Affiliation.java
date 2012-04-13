@@ -1,9 +1,10 @@
 package com.copyright.rup.works.domain.impl;
 
-import com.copyright.rup.works.domain.api.IAffiliation;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.copyright.rup.works.domain.api.IAffiliation;
 
 /**
  * Implementation of Affiliation interface.

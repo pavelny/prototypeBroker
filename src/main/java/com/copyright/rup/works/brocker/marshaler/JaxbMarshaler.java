@@ -8,17 +8,28 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.codehaus.jettison.json.JSONObject;
 import org.codehaus.jettison.mapped.Configuration;
 import org.codehaus.jettison.mapped.MappedNamespaceConvention;
+import org.codehaus.jettison.mapped.MappedXMLStreamReader;
 import org.codehaus.jettison.mapped.MappedXMLStreamWriter;
 
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
+/**
+ * @author Andrei_Khadziukou
+ *
+ */
 public class JaxbMarshaler implements IMarshaler {
 
+    /**
+     * {@inheritDoc}
+     */
     public String toJson(Object object) throws IOException, JAXBException {
         Object obj = object;
 
@@ -41,14 +52,37 @@ public class JaxbMarshaler implements IMarshaler {
         return writerString.toString();
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
     public <T> T toEntity(String json, Class<T> clazz) throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+        JAXBContext jc = JAXBContext.newInstance(clazz);
+
+        JSONObject obj = new JSONObject(json);
+        Configuration config = new Configuration();
+        MappedNamespaceConvention con = new MappedNamespaceConvention(config);
+        XMLStreamReader xmlStreamReader = new MappedXMLStreamReader(obj, con);
+
+        Unmarshaller unmarshaller = jc.createUnmarshaller();
+        return (T) unmarshaller.unmarshal(xmlStreamReader);
     }
 
-    @Override
-    public <T> List<T> toEntities(String json) throws Exception {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<IWork> toEntities(String json) throws Exception {
+        JAXBContext jc = JAXBContext.newInstance(WorkWrapper.class);
+
+        JSONObject obj = new JSONObject(json);
+        Configuration config = new Configuration();
+        MappedNamespaceConvention con = new MappedNamespaceConvention(config);
+        XMLStreamReader xmlStreamReader = new MappedXMLStreamReader(obj, con);
+
+        Unmarshaller unmarshaller = jc.createUnmarshaller();
+        WorkWrapper wrapper = (WorkWrapper) unmarshaller.unmarshal(xmlStreamReader);
+        return wrapper.getWorks();
     }
 }
