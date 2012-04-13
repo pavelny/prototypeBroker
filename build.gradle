@@ -1,9 +1,8 @@
 
 apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'idea'
 
-sourceCompatibility = 1.7
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
 
 repositories {
     mavenCentral()
@@ -132,6 +131,18 @@ task generateThrift << {
                 "${projectDir}\\${srcPath}",
                 thriftFiles.collect { relativePath(it) }.join(",")
         ]
+    }
+}
+
+jar {
+    manifest {
+        attributes("Main-Class":"com.copyright.rup.works.broker.Client",
+                "Implementation-Title": "Broker",
+                "Implementation-Version" : "${versionMajor}.${versionMinor}.${versionBuild}")
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
