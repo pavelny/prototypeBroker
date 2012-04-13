@@ -38,7 +38,7 @@ public abstract class UtilVarialble {
     /**
      * This variable is used for generating
      */
-    public static final int CHUNK_SIZE = 200;
+    public static final int CHUNK_SIZE = 1000;
 
     /**
      *
@@ -103,7 +103,7 @@ public abstract class UtilVarialble {
     /**
      *
      */
-    public static final int WORKS_COLLECTION_SIZE = 10_000;
+    public static final int WORKS_COLLECTION_SIZE = 1000000;
 
     /**
      *

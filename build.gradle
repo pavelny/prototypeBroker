@@ -38,10 +38,9 @@ dependencies {
 
                 "org.springframework:spring-core:${springVersion}",
                 "org.springframework:spring-context:${springVersion}",
-                "org.springframework:spring-web:${springVersion}",
                 "org.apache.xbean:xbean-spring:${xbeanVersion}",
 
-                "org.apache.cxf:cxf-rt-transports-http-jetty:${cxfVersion}",
+//                "org.apache.cxf:cxf-rt-transports-http-jetty:${cxfVersion}",
 
                 "org.apache.camel:camel-core:${camelVersion}",
                 "org.apache.camel:camel-spring:${camelVersion}",
