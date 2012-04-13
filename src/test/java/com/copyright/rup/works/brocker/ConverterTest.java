@@ -3,8 +3,12 @@
  */
 package com.copyright.rup.works.brocker;
 
-import java.util.Arrays;
-import java.util.List;
+import com.copyright.rup.works.brocker.api.IMarshaler;
+import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
+import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
+import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
+import com.copyright.rup.works.domain.api.IWork;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -12,12 +16,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.copyright.rup.works.brocker.api.IMarshaler;
-import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
-import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
-import com.copyright.rup.works.domain.api.IWork;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Andrei_Khadziukou
@@ -27,12 +27,13 @@ import com.copyright.rup.works.domain.api.IWork;
 @RunWith(Parameterized.class)
 public class ConverterTest {
 
-    private IMarshaler converter;
-
     @Parameters
     public static List<Object[]> paramitrize() {
-        return Arrays.asList(new Object[][] {{new GsonMarshaler()}, {new JaxbMarshaler()}, {new XStreamMarshaler()}, {new JacksonMarshaler()}});
+        return Arrays.asList(new Object[][] { { new GsonMarshaler() }, { new JaxbMarshaler() },
+                { new XStreamMarshaler() }, { new JacksonMarshaler() } });
     }
+
+    private IMarshaler converter;
 
     public ConverterTest(IMarshaler converter) {
         this.converter = converter;
@@ -40,7 +41,7 @@ public class ConverterTest {
 
     @Test
     public void testConverter() throws Exception {
-        for (IWork work: TestUtil.works) {
+        for (IWork work : TestUtil.works) {
             converter.toJson(work);
         }
     }

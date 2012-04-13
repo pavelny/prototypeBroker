@@ -10,8 +10,8 @@ public class WorksProcessor implements Processor {
 
     public void process(Exchange exchange) throws Exception {
 
-//        String work_message = (String) exchange.getIn().getBody();
-//        System.out.println(work_message);
+        // String work_message = (String) exchange.getIn().getBody();
+        // System.out.println(work_message);
         exchange.getOut();
     }
 

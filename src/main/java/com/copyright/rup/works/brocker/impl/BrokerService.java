@@ -3,15 +3,15 @@
  */
 package com.copyright.rup.works.brocker.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.copyright.rup.works.brocker.UtilVarialble;
 import com.copyright.rup.works.brocker.api.IBrokerService;
 import com.copyright.rup.works.brocker.api.IConsumer;
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.brocker.api.IProducer;
 import com.copyright.rup.works.domain.api.IWork;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Andrei_Khadziukou
@@ -22,11 +22,40 @@ import com.copyright.rup.works.domain.api.IWork;
 public class BrokerService implements IBrokerService {
 
     // Constant variable for consumer and producer
-    //private static final
+    // private static final
 
-    private IMarshaler marshaler;
     private IConsumer consumer;
+    private IMarshaler marshaler;
     private IProducer producer;
+
+    /**
+     * @return the consumer
+     */
+    public IConsumer getConsumer() {
+        return consumer;
+    }
+
+    /**
+     * @return the marshaler
+     */
+    public IMarshaler getMarshaler() {
+        return marshaler;
+    }
+
+    /**
+     * @return the producer
+     */
+    public IProducer getProducer() {
+        return producer;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<IWork> receive(String queueName) {
+        consumer.receiveWorks(queueName, UtilVarialble.CHUNK_SIZE, marshaler);
+        return null;
+    }
 
     /**
      * {@inheritDoc}
@@ -45,55 +74,29 @@ public class BrokerService implements IBrokerService {
             startIndex = endIndex;
             endIndex += UtilVarialble.CHUNK_SIZE;
             producer.sendWorks(queueName, chunkWorks, marshaler);
-        // TODO Check while (index <= works.size())
+            // TODO Check while (index <= works.size())
         } while (startIndex < works.size());
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public List<IWork> receive(String queueName) {
-        consumer.receiveWorks(queueName, UtilVarialble.CHUNK_SIZE, marshaler);
-        return null;
-    }
-
-    /**
-     * @return the marshaler
-     */
-    public IMarshaler getMarshaler() {
-        return marshaler;
-    }
-
-    /**
-     * @param marshaler the marshaler to set
-     */
-    public void setMarshaler(IMarshaler marshaler) {
-        this.marshaler = marshaler;
-    }
-
-    /**
-     * @return the consumer
-     */
-    public IConsumer getConsumer() {
-        return consumer;
-    }
-
-    /**
-     * @param consumer the consumer to set
+     * @param consumer
+     *            the consumer to set
      */
     public void setConsumer(IConsumer consumer) {
         this.consumer = consumer;
     }
 
     /**
-     * @return the producer
+     * @param marshaler
+     *            the marshaler to set
      */
-    public IProducer getProducer() {
-        return producer;
+    public void setMarshaler(IMarshaler marshaler) {
+        this.marshaler = marshaler;
     }
 
     /**
-     * @param producer the producer to set
+     * @param producer
+     *            the producer to set
      */
     public void setProducer(IProducer producer) {
         this.producer = producer;

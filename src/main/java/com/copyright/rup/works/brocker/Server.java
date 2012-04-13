@@ -1,11 +1,11 @@
 package com.copyright.rup.works.brocker;
 
-import javax.jms.ConnectionFactory;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
+
+import javax.jms.ConnectionFactory;
 
 /**
  * Server to run broker.
@@ -18,20 +18,14 @@ import org.apache.camel.impl.DefaultCamelContext;
  */
 public final class Server {
 
-    /**
-     *
-     */
-    // TODO Add javadoc
-    private Server() {
-    }
-
     public static void main(String... args) throws Exception {
         Broker broker = new Broker(UtilVarialble.BROKER_URL);
         broker.start();
 
         CamelContext context = new DefaultCamelContext();
 
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(UtilVarialble.BROKER_URL);
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
+                UtilVarialble.BROKER_URL);
         context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
 
         context.addRoutes(new BrokerRoute());
@@ -43,6 +37,13 @@ public final class Server {
         context.stop();
         Thread.sleep(UtilVarialble.BROKER_SLEEP);
         broker.stop();
+    }
+
+    /**
+     *
+     */
+    // TODO Add javadoc
+    private Server() {
     }
 
 }
