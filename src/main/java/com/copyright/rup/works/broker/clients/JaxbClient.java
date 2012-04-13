@@ -27,7 +27,7 @@ public class JaxbClient extends BaseClient {
 
         try {
             JaxbClient client = new JaxbClient();
-            client.start(UtilVarialble.PRODUCER_QUEUE_JAXB, UtilVarialble.CONSUMER_QUEUE_JAXB);
+            client.start(UtilVarialble.PRODUCER_QUEUE_JAXB);
             client.stop();
         } catch (Exception exc) {
             // TODO Add log

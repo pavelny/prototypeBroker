@@ -63,7 +63,15 @@ public class JacksonMarshaler implements IMarshaler {
      */
     public String toJson(Object obj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(obj);
+        Object object = obj;
+        if (obj instanceof List) {
+            WorkWrapper wrapper = new WorkWrapper();
+            @SuppressWarnings("unchecked")
+            List<IWork> list = (List<IWork>) obj;
+            wrapper.setWorks(list);
+            object = wrapper;
+        }
+        return mapper.writeValueAsString(object);
     }
 
     // TODO Add javadoc

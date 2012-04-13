@@ -53,9 +53,9 @@ public abstract class BaseClient {
         service = createBrokerService();
     }
 
-    public void start(String producerQueue, String consumerQueue) {
-        runProducer(producerQueue);
-        runConsummer(consumerQueue);
+    public void start(String queue) {
+        runProducer(queue);
+        runConsummer(queue);
     }
 
     protected abstract IBrokerService createBrokerService();
@@ -82,19 +82,19 @@ public abstract class BaseClient {
         context = new DefaultCamelContext();
         context.addComponent(CONTEXT_COMPANENT_NAME,
                 ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
-        context.addRoutes(new RouteBuilder() {
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void configure() throws Exception {
-                from(PRODUCER_QUEUE_XSTREM).to(CONSUMER_QUEUE_XSTREM).end();
-                from(PRODUCER_QUEUE_JAXB).to(CONSUMER_QUEUE_JAXB).end();
-                from(PRODUCER_QUEUE_JACKSON).to(CONSUMER_QUEUE_JACKSON).end();
-                from(PRODUCER_QUEUE_GSON).to(CONSUMER_QUEUE_GSON).end();
-                from(PRODUCER_QUEUE_THRIFT).to(CONSUMER_QUEUE_THRIFT).end();
-            }
-        });
+//        context.addRoutes(new RouteBuilder() {
+//            /**
+//             * {@inheritDoc}
+//             */
+//            @Override
+//            public void configure() throws Exception {
+//                from(PRODUCER_QUEUE_XSTREM).to(CONSUMER_QUEUE_XSTREM).end();
+//                from(PRODUCER_QUEUE_JAXB).to(CONSUMER_QUEUE_JAXB).end();
+//                from(PRODUCER_QUEUE_JACKSON).to(CONSUMER_QUEUE_JACKSON).end();
+//                from(PRODUCER_QUEUE_GSON).to(CONSUMER_QUEUE_GSON).end();
+//                from(PRODUCER_QUEUE_THRIFT).to(CONSUMER_QUEUE_THRIFT).end();
+//            }
+//        });
         context.start();
     }
 
@@ -111,8 +111,9 @@ public abstract class BaseClient {
      *
      */
     private void runProducer(String queue) {
+        List<IWork> works =  createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
         StopWatch stopWatchXStream = new Log4JStopWatch("produce: " + queue);
-        service.send(createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE), queue);
+        service.send(works, queue);
         stopWatchXStream.stop();
     }
 

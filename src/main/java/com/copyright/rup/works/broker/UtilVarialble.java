@@ -18,7 +18,7 @@ public abstract class UtilVarialble {
     /**
      * URL to local activeMq server
      */
-    public static final String BROKER_CLIENT_URL = "tcp://epbyvitw0013:61616";
+    public static final String BROKER_CLIENT_URL = "tcp://localhost:61616?jms.useAsyncSend=true";
 
     /**
      *
@@ -33,7 +33,7 @@ public abstract class UtilVarialble {
     /**
      *
      */
-    public static final String BROKER_URL = "tcp://epbyvitw0013t:61616";
+    public static final String BROKER_URL = "tcp://localhost:61616";
 
     /**
      * This variable is used for generating
