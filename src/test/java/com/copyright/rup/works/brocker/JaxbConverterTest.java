@@ -1,7 +1,7 @@
 package com.copyright.rup.works.brocker;
 
-import com.copyright.rup.works.brocker.api.IMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
+import com.copyright.rup.works.broker.api.IMarshaler;
+import com.copyright.rup.works.broker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
 import org.junit.Test;
