@@ -30,6 +30,6 @@ public interface IBrokerService {
      * @return
      */
     // TODO Add javadoc
-    List<IWork> recive(String queueName);
+    List<IWork> receive(String queueName);
 
 }

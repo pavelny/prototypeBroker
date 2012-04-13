@@ -18,18 +18,20 @@ import org.apache.camel.impl.DefaultCamelContext;
  */
 public final class Server {
 
-    private static final String BROKER_URL = "tcp://localhost:51616";
-
+    /**
+     *
+     */
+    // TODO Add javadoc
     private Server() {
     }
 
     public static void main(String... args) throws Exception {
-        Broker broker = new Broker(BROKER_URL);
+        Broker broker = new Broker(UtilVarialble.BROKER_URL);
         broker.start();
 
         CamelContext context = new DefaultCamelContext();
 
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(UtilVarialble.BROKER_URL);
         context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
 
         context.addRoutes(new BrokerRoute());
@@ -37,9 +39,9 @@ public final class Server {
         context.start();
         System.out.println("Server is started!");
 
-        Thread.sleep(5 * 60 * 10000);
+        Thread.sleep(UtilVarialble.BROKER_CAMEL_CONTEXT_SLEEP);
         context.stop();
-        Thread.sleep(1000);
+        Thread.sleep(UtilVarialble.BROKER_SLEEP);
         broker.stop();
     }
 
