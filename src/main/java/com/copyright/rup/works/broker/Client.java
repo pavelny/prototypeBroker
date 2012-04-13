@@ -7,8 +7,6 @@ import com.copyright.rup.works.broker.clients.JaxbClient;
 import com.copyright.rup.works.broker.clients.ThriftClient;
 import com.copyright.rup.works.broker.clients.XstreamClient;
 
-import org.apache.camel.CamelContext;
-
 // TODO Add javadoc
 public final class Client {
 
@@ -18,8 +16,8 @@ public final class Client {
     private static final String THRIFT = "thrift";
 
     public static void main(String args[]) throws Exception {
-        BaseClient client = null;
-        String queue = null;
+        BaseClient client = new JaxbClient();
+        String queue = UtilVarialble.PRODUCER_QUEUE_JAXB;
         if (args.length != 0) {
             switch (args[0].toLowerCase()) {
                 case JACKSON :
@@ -39,8 +37,6 @@ public final class Client {
                     queue = UtilVarialble.PRODUCER_QUEUE_THRIFT;
                     break;
                 default:
-                    queue = UtilVarialble.PRODUCER_QUEUE_JAXB;
-                    client = new JaxbClient();
                     break;
             }
         }
