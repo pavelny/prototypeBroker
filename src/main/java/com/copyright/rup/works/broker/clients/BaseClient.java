@@ -23,6 +23,8 @@ import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.perf4j.StopWatch;
+import org.perf4j.log4j.Log4JStopWatch;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,12 +38,30 @@ public abstract class BaseClient {
     private static CamelContext context;
     private IBrokerService service;
 
+    private List<IWork> works;
+
     public BaseClient() throws Exception {
         initContext();
         service = createBrokerService();
     }
 
-    private List<IWork> works;
+    /**
+     *
+     */
+    public void start(String producerQueue, String consumerQueue) {
+        runProducer(producerQueue);
+        runConsummer(consumerQueue);
+    }
+
+    protected abstract IBrokerService createBrokerService();
+
+    protected ConsumerTemplate getConsumerTemplate() {
+        return context.createConsumerTemplate();
+    }
+
+    protected ProducerTemplate getProduceTemplate() {
+        return context.createProducerTemplate();
+    }
 
     private List<IWork> createWorksCollection(int size) {
         if (works == null || works.size() != size) {
@@ -73,35 +93,21 @@ public abstract class BaseClient {
         context.start();
     }
 
-    protected ProducerTemplate getProduceTemplate() {
-        return context.createProducerTemplate();
-    }
-
-    protected ConsumerTemplate getConsumerTemplate() {
-        return context.createConsumerTemplate();
-    }
-
     /**
      *
      */
     private void runConsummer(String queue) {
+        StopWatch stopWatchXStream = new Log4JStopWatch("consummer" + queue);
         service.receive(queue);
+        stopWatchXStream.stop();
     }
 
     /**
      *
      */
     private void runProducer(String queue) {
+        StopWatch stopWatchXStream = new Log4JStopWatch("produce" + queue);
         service.send(createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE), queue);
-    }
-
-    protected abstract IBrokerService createBrokerService();
-
-    /**
-     *
-     */
-    public void start(String producerQueue, String consumerQueue) {
-        runProducer(producerQueue);
-        runConsummer(consumerQueue);
+        stopWatchXStream.stop();
     }
 }

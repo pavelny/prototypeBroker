@@ -103,7 +103,7 @@ public abstract class UtilVarialble {
     /**
      *
      */
-    public static final int WORKS_COLLECTION_SIZE = 100;
+    public static final int WORKS_COLLECTION_SIZE = 10_000;
 
     /**
      *

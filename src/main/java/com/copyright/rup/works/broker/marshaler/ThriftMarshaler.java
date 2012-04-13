@@ -32,6 +32,7 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+// TODO Add javadoc
 public class ThriftMarshaler implements IMarshaler {
 
     /**
