@@ -17,6 +17,7 @@ public class XStreamMarshaler implements IMarshaler {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     public String toJson(Object obj) throws IOException {
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         Object object = obj;
@@ -41,8 +42,9 @@ public class XStreamMarshaler implements IMarshaler {
         // TODO Check which mode is needed
         xStream.setMode(XStream.NO_REFERENCES);
         // TODO Check how it works
-        xStream.alias(object.getClass().getName().toLowerCase(), object.getClass());
-        return xStream.toXML(object);
+        xStream.alias(object.getClass().getName(), object.getClass());
+        String result = xStream.toXML(object);
+        return result;
     }
 
     /**
@@ -51,7 +53,7 @@ public class XStreamMarshaler implements IMarshaler {
     public <T> T toEntity(String json, Class<T> clazz) throws Exception {
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
 
-        xStream.alias(clazz.getName().toLowerCase(), clazz);
+        xStream.alias(clazz.getName(), clazz);
         @SuppressWarnings("unchecked")
         T result = (T) xStream.fromXML(json);
         return result;
@@ -60,10 +62,10 @@ public class XStreamMarshaler implements IMarshaler {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     public <T> List<T> toEntities(String json) throws Exception {
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
-        xStream.alias(WorkWrapper.class.getName().toLowerCase(), WorkWrapper.class);
-        @SuppressWarnings("unchecked")
+        xStream.alias(WorkWrapper.class.getName(), WorkWrapper.class);
         WorkWrapper result = (WorkWrapper) xStream.fromXML(json);
         return (List<T>) result.getWorks();  //To change body of implemented methods use File | Settings | File Templates.
     }

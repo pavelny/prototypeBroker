@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 
+import com.copyright.rup.works.brocker.UtilVarialble;
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.brocker.api.IProducer;
 import com.copyright.rup.works.domain.api.IWork;
@@ -18,25 +19,37 @@ import com.copyright.rup.works.domain.api.IWork;
  *
  * @author Pavel_Yakovlev
  */
+// TODO Add javadoc to field
 public class JsonProducer implements IProducer {
 
+    /**
+     *
+     */
     ProducerTemplate producer;
 
+    /**
+     * @param producer
+     */
     public JsonProducer(ProducerTemplate producer) {
         this.producer = producer;
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
     public void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler) {
-        for (IWork work: works) {
+
+//        for (IWork work: works) {
             try {
-                String jsonWork = marshaler.toJson(work);
+                String jsonWork = marshaler.toJson(works);
                 producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, jsonWork,
-                        "work_message", "inJson");
+                        UtilVarialble.MESSAGE_HEADER, UtilVarialble.MESSAGE_VARIABLE);
             } catch(Exception e) {
-                System.out.println("Exception e: " + e.getMessage());
+                // TODO Add logging
+                //System.out.println("Exception e: " + e.getMessage());
+                e.printStackTrace();
             }
-        }
+//        }
     }
 
 }

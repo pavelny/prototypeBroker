@@ -1,6 +1,5 @@
 package com.copyright.rup.works.brocker.impl;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.camel.ConsumerTemplate;
@@ -18,6 +17,7 @@ import com.copyright.rup.works.domain.api.IWork;
  *
  * @author Pavel_Yakovlev
  */
+// TODO Add javadoc
 public class JsonConsumer implements IConsumer {
 
     private ConsumerTemplate consumer;
@@ -26,17 +26,22 @@ public class JsonConsumer implements IConsumer {
         this.consumer = consumer;
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
     public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection, IMarshaler marshaler) {
-        List<IWork> works = new LinkedList<IWork>();
-        for(int i = 0; i < expectedSizeOfCollection; i++) {
+        List<IWork> works = null;
+
+//        for(int i = 0; i < expectedSizeOfCollection; i++) {
             try {
-               IWork work = marshaler.toEntity((String) consumer.receiveBody(nameOfQueue), IWork.class);
-               works.add(work);
+                works = marshaler.toEntities((String) consumer.receiveBody(nameOfQueue));
+//               IWork work = marshaler.toEntity((String) consumer.receiveBody(nameOfQueue), IWork.class);
+//               works.add(work);
             } catch(Exception e) {
                 //TODO log exception
             }
-        }
+//        }
+
 //        works.size();
     }
 }
