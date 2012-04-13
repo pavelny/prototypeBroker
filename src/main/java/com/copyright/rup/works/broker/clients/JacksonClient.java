@@ -28,6 +28,7 @@ public class JacksonClient extends BaseClient {
         try {
             JacksonClient client = new JacksonClient();
             client.start(UtilVarialble.PRODUCER_QUEUE_XSTREM, UtilVarialble.CONSUMER_QUEUE_XSTREM);
+            client.stop();
         } catch (Exception exc) {
             // TODO Add log
             exc.printStackTrace();
