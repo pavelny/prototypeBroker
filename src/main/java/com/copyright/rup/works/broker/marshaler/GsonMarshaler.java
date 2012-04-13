@@ -64,7 +64,15 @@ public class GsonMarshaler implements IMarshaler {
      */
     public String toJson(Object obj) throws Exception {
         Gson gson = new Gson();
-        return gson.toJson(obj);
+        Object object = obj;
+        if (obj instanceof List) {
+            WorkWrapper wrapper = new WorkWrapper();
+            @SuppressWarnings("unchecked")
+            List<IWork> list = (List<IWork>) obj;
+            wrapper.setWorks(list);
+            object = wrapper;
+        }
+        return gson.toJson(object);
     }
 
     private GsonBuilder generateGsonBuilder() {
