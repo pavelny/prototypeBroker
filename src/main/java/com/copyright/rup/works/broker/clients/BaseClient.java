@@ -30,9 +30,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author Andrei_Khadziukou
+ * It is base class for running clients.
+ *
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 4/13/12
+ *
+ * @author Andrei_Khadziukou.
  *
  */
+// TODO Add comments
 public abstract class BaseClient {
 
     private static CamelContext context;
@@ -45,9 +53,6 @@ public abstract class BaseClient {
         service = createBrokerService();
     }
 
-    /**
-     *
-     */
     public void start(String producerQueue, String consumerQueue) {
         runProducer(producerQueue);
         runConsummer(consumerQueue);
@@ -109,5 +114,9 @@ public abstract class BaseClient {
         StopWatch stopWatchXStream = new Log4JStopWatch("produce: " + queue);
         service.send(createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE), queue);
         stopWatchXStream.stop();
+    }
+
+    public void stop() throws Exception {
+        context.stop();
     }
 }
