@@ -18,13 +18,15 @@ import com.copyright.rup.works.domain.api.IWork;
 
 public final class ClientProducer implements Runnable {
 
-    private static final String PRODUCER_QUEUE_XSTREM = "jms:queue:worksxstream";
-    private static final String PRODUCER_QUEUE_JAXB = "jms:queue:worksjaxb";
-    private static final String PRODUCER_QUEUE_JACKSON = "jms:queue:worksjackson";
-    private static final String PRODUCER_QUEUE_GSON = "jms:queue:worksgson";
-    private static final String PRODUCER_QUEUE_THRIFT = "jms:queue:worksthrift";
+    private static final String PRODUCER_QUEUE_XSTREM = "activemq:queue:worksxtream";
+    private static final String PRODUCER_QUEUE_JAXB = "activemq:queue:worksjaxb";
+    private static final String PRODUCER_QUEUE_JACKSON = "activemq:queue:worksjackson";
+    private static final String PRODUCER_QUEUE_GSON = "activemq:queue:worksgson";
+    private static final String PRODUCER_QUEUE_THRIFT = "activemq:queue:worksthrift";
 
-    private static final int WORKS_COLLECTION_SIZE = 1000;
+    private static final int WORKS_COLLECTION_SIZE = 1;
+
+    private Thread currentThread;
 
     private ProducerTemplate producerTemplate;
 
@@ -32,9 +34,17 @@ public final class ClientProducer implements Runnable {
         this.producerTemplate =  producerTemplate;
     }
 
+    public void start() {
+        currentThread = new Thread(this);
+        currentThread.start();
+    }
+
+    public void stop() {
+        currentThread = null;
+    }
+
     public void run() {
         List<IWork> works = createWorksCollection(WORKS_COLLECTION_SIZE);
-
 
         IProducer producer = new JsonProducer(producerTemplate);
 
@@ -63,6 +73,13 @@ public final class ClientProducer implements Runnable {
             producerTemplate.stop();
         } catch (Exception e) {
            ///TODO use logger here
+        }
+        stop();
+        Thread thread = Thread.currentThread();
+        try {
+            thread.sleep(100);
+            thread.interrupt();
+        } catch (InterruptedException e){
         }
     }
 

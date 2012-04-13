@@ -1,8 +1,5 @@
 package com.copyright.rup.works.brocker.marshaler;
 
-import java.lang.reflect.Type;
-import java.util.List;
-
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.domain.api.IAffiliation;
 import com.copyright.rup.works.domain.api.IAuthor;
@@ -30,6 +27,9 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class ThriftMarshaler implements IMarshaler {
 

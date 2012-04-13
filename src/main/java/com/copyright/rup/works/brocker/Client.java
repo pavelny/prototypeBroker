@@ -8,6 +8,7 @@ import java.util.List;
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
@@ -30,7 +31,9 @@ public final class Client {
         initContext();
 
         ClientProducer clientProducer = new ClientProducer(context.createProducerTemplate());
+//        clientProducer.start();
         new Thread(clientProducer).start();
+//        ClientProducer.start();
 
         ClientConsumer clientConsumer = new ClientConsumer(context.createConsumerTemplate());
         new Thread(clientConsumer).start();
@@ -39,25 +42,26 @@ public final class Client {
 
     static private void initContext() throws Exception{
         context = new DefaultCamelContext();
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
-        context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+//        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
+//        context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+        context.addComponent("activemq", ActiveMQComponent.activeMQComponent(BROKER_URL));
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("jms:queue:worksxstream")
-                        .to("jms:queue:storagexstream")
+                from("activemq:queue:worksxstream")
+                        .to("activemq:queue:storagexstream")
                         .end();
-                from("jms:queue:worksjaxb")
-                        .to("jms:queue:storagejaxb")
+                from("activemq:queue:worksjaxb")
+                        .to("activemq:queue:storagejaxb")
                         .end();
-                from("jms:queue:worksjackson")
-                        .to("jms:queue:storagejackson")
+                from("activemq:queue:worksjackson")
+                        .to("activemq:queue:storagejackson")
                         .end();
-                from("jms:queue:worksgson")
-                        .to("jms:queue:storagegson")
+                from("activemq:queue:worksgson")
+                        .to("activemq:queue:storagegson")
                         .end();
-                from("jms:queue:worksthrift")
-                        .to("jms:queue:storagethrift")
+                from("activemq:queue:worksthrift")
+                        .to("activemq:queue:storagethrift")
                         .end();
             }
         });

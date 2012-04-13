@@ -7,6 +7,7 @@ import org.apache.camel.ConsumerTemplate;
 
 import com.copyright.rup.works.brocker.api.IConsumer;
 import com.copyright.rup.works.brocker.api.IMarshaler;
+import com.copyright.rup.works.brocker.marshaler.WorkWrapper;
 import com.copyright.rup.works.domain.api.IWork;
 
 /**
@@ -35,6 +36,7 @@ public class JsonConsumer implements IConsumer {
                works.add(work);
             } catch(Exception e) {
                 //TODO log exception
+                System.out.println(e.getMessage());
             }
         }
 //        works.size();

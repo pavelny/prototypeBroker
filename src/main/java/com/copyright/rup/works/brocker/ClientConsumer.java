@@ -14,13 +14,15 @@ import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 
 public final class ClientConsumer implements Runnable{
 
-    private static final String CONSUMER_QUEUE_XSTREM = "jms:queue:storagexstream";
-    private static final String CONSUMER_QUEUE_JAXB = "jms:queue:storagejaxb";
-    private static final String CONSUMER_QUEUE_JACKSON = "jms:queue:storagejackson";
-    private static final String CONSUMER_QUEUE_GSON = "jms:queue:storagegson";
-    private static final String CONSUMER_QUEUE_THRIFT = "jms:queue:storagethrift";
+    private static final String CONSUMER_QUEUE_XSTREM = "activemq:queue:storagexstream";
+    private static final String CONSUMER_QUEUE_JAXB = "activemq:queue:storagejaxb";
+    private static final String CONSUMER_QUEUE_JACKSON = "activemq:queue:storagejackson";
+    private static final String CONSUMER_QUEUE_GSON = "activemq:queue:storagegson";
+    private static final String CONSUMER_QUEUE_THRIFT = "activemq:queue:storagethrift";
 
-    private static final int WORKS_COLLECTION_SIZE = 1000;
+    private static final int WORKS_COLLECTION_SIZE = 1;
+
+    private Thread currentThread;
 
     private ConsumerTemplate consumerTemplate;
 
@@ -28,7 +30,17 @@ public final class ClientConsumer implements Runnable{
         this.consumerTemplate = consumerTemplate;
     }
 
+    public void start() {
+        currentThread = new Thread(this);
+    }
+
+    public void stop() {
+        currentThread = null;
+    }
+
     public void run() {
+
+        currentThread = new Thread(this);
 
         IConsumer consumer = new JsonConsumer(consumerTemplate);
 
@@ -58,5 +70,6 @@ public final class ClientConsumer implements Runnable{
         } catch (Exception e) {
            ///TODO use logger here
         }
+        stop();
     }
 }
