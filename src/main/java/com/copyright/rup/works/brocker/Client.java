@@ -1,11 +1,15 @@
 package com.copyright.rup.works.brocker;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.jms.ConnectionFactory;
+import static com.copyright.rup.works.brocker.UtilVarialble.CONSUMER_QUEUE_GSON;
+import static com.copyright.rup.works.brocker.UtilVarialble.CONSUMER_QUEUE_JACKSON;
+import static com.copyright.rup.works.brocker.UtilVarialble.CONSUMER_QUEUE_JAXB;
+import static com.copyright.rup.works.brocker.UtilVarialble.CONSUMER_QUEUE_THRIFT;
+import static com.copyright.rup.works.brocker.UtilVarialble.CONSUMER_QUEUE_XSTREM;
+import static com.copyright.rup.works.brocker.UtilVarialble.PRODUCER_QUEUE_GSON;
+import static com.copyright.rup.works.brocker.UtilVarialble.PRODUCER_QUEUE_JACKSON;
+import static com.copyright.rup.works.brocker.UtilVarialble.PRODUCER_QUEUE_JAXB;
+import static com.copyright.rup.works.brocker.UtilVarialble.PRODUCER_QUEUE_THRIFT;
+import static com.copyright.rup.works.brocker.UtilVarialble.PRODUCER_QUEUE_XSTREM;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
@@ -14,18 +18,13 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
+import javax.jms.ConnectionFactory;
+
+// TODO Add javadoc
 public final class Client {
 
-    private static final String BROKER_URL = "tcp://EPBYVITW0014:61616";
-    private static final String PRODUCER_QUEUE = "jms:queue:works";
-    private static final String CONSUMER_QUEUE = "jms:queue:storage";
-
-    private static final int WORKS_COLLECTION_SIZE = 1000;
-
     private static CamelContext context;
-
-    private Client() {
-    }
+    private static final String CONTEXT_COMPANENT_NAME = "jms";
 
     public static void main(String args[]) throws Exception {
         initContext();
@@ -40,33 +39,27 @@ public final class Client {
 
     }
 
-    static private void initContext() throws Exception{
+    static private void initContext() throws Exception {
         context = new DefaultCamelContext();
-//        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
-//        context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-        context.addComponent("activemq", ActiveMQComponent.activeMQComponent(BROKER_URL));
+//        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
+//                UtilVarialble.BROKER_CLIENT_URL);
+//        context.addComponentjj(CONTEXT_COMPANENT_NAME,
+        context.addComponent(CONTEXT_COMPANENT_NAME, ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("activemq:queue:worksxstream")
-                        .to("activemq:queue:storagexstream")
-                        .end();
-                from("activemq:queue:worksjaxb")
-                        .to("activemq:queue:storagejaxb")
-                        .end();
-                from("activemq:queue:worksjackson")
-                        .to("activemq:queue:storagejackson")
-                        .end();
-                from("activemq:queue:worksgson")
-                        .to("activemq:queue:storagegson")
-                        .end();
-                from("activemq:queue:worksthrift")
-                        .to("activemq:queue:storagethrift")
-                        .end();
+                from(PRODUCER_QUEUE_XSTREM).to(CONSUMER_QUEUE_XSTREM).end();
+                from(PRODUCER_QUEUE_JAXB).to(CONSUMER_QUEUE_JAXB).end();
+                from(PRODUCER_QUEUE_JACKSON).to(CONSUMER_QUEUE_JACKSON).end();
+                from(PRODUCER_QUEUE_GSON).to(CONSUMER_QUEUE_GSON).end();
+                from(PRODUCER_QUEUE_THRIFT).to(CONSUMER_QUEUE_THRIFT).end();
             }
         });
         context.start();
 
+    }
+
+    private Client() {
     }
 
 }

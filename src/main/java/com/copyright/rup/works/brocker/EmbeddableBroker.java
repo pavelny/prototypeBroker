@@ -1,9 +1,9 @@
 package com.copyright.rup.works.brocker;
 
-import java.io.File;
-
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.store.memory.MemoryPersistenceAdapter;
+
+import java.io.File;
 
 /**
  * Simple embeddable broker.
@@ -16,26 +16,12 @@ import org.apache.activemq.store.memory.MemoryPersistenceAdapter;
  */
 public class EmbeddableBroker extends Thread {
 
-    boolean shutdown;
     final String brokerUrl;
     Exception exception;
+    boolean shutdown;
 
     public EmbeddableBroker(String url) {
         brokerUrl = url;
-    }
-
-    public void startBroker() throws Exception {
-        synchronized (this) {
-            super.start();
-            try {
-                wait();
-                if (exception != null) {
-                    throw exception;
-                }
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        }
     }
 
     public void run() {
@@ -43,7 +29,7 @@ public class EmbeddableBroker extends Thread {
             BrokerService broker = new BrokerService();
             synchronized (this) {
                 broker.setPersistenceAdapter(new MemoryPersistenceAdapter());
-                broker.setTmpDataDirectory(new File("./target"));
+                broker.setTmpDataDirectory(new File(UtilVarialble.BROKER_TMP_DATA_DIRECTORY));
                 broker.addConnector(brokerUrl);
                 broker.start();
                 Thread.sleep(200);
@@ -58,6 +44,20 @@ public class EmbeddableBroker extends Thread {
         } catch (Exception e) {
             exception = e;
             e.printStackTrace();
+        }
+    }
+
+    public void startBroker() throws Exception {
+        synchronized (this) {
+            super.start();
+            try {
+                wait();
+                if (exception != null) {
+                    throw exception;
+                }
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

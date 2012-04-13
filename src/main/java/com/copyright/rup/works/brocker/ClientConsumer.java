@@ -1,10 +1,7 @@
 package com.copyright.rup.works.brocker;
 
-import org.apache.camel.ConsumerTemplate;
-import org.perf4j.StopWatch;
-import org.perf4j.log4j.Log4JStopWatch;
-
 import com.copyright.rup.works.brocker.api.IConsumer;
+import com.copyright.rup.works.brocker.impl.BrokerService;
 import com.copyright.rup.works.brocker.impl.JsonConsumer;
 import com.copyright.rup.works.brocker.impl.ThriftConsumer;
 import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
@@ -12,15 +9,12 @@ import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
 import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 
-public final class ClientConsumer implements Runnable{
+import org.apache.camel.ConsumerTemplate;
+import org.perf4j.StopWatch;
+import org.perf4j.log4j.Log4JStopWatch;
 
-    private static final String CONSUMER_QUEUE_XSTREM = "activemq:queue:storagexstream";
-    private static final String CONSUMER_QUEUE_JAXB = "activemq:queue:storagejaxb";
-    private static final String CONSUMER_QUEUE_JACKSON = "activemq:queue:storagejackson";
-    private static final String CONSUMER_QUEUE_GSON = "activemq:queue:storagegson";
-    private static final String CONSUMER_QUEUE_THRIFT = "activemq:queue:storagethrift";
-
-    private static final int WORKS_COLLECTION_SIZE = 1;
+// TODO Add javadoc everywhere
+public final class ClientConsumer implements Runnable {
 
     private Thread currentThread;
 
@@ -43,32 +37,41 @@ public final class ClientConsumer implements Runnable{
         currentThread = new Thread(this);
 
         IConsumer consumer = new JsonConsumer(consumerTemplate);
+        BrokerService service = new BrokerService();
+        service.setConsumer(consumer);
 
+        // TODO move string literal into constant (remove from code)
         StopWatch stopWatchXStream = new Log4JStopWatch("consume.xstream");
-        consumer.receiveWorks(CONSUMER_QUEUE_XSTREM, WORKS_COLLECTION_SIZE, new XStreamMarshaler());
+        service.setMarshaler(new XStreamMarshaler());
+        service.receive(UtilVarialble.CONSUMER_QUEUE_XSTREM);
         stopWatchXStream.stop();
 
         StopWatch stopWatchJaxb = new Log4JStopWatch("consume.jaxb");
-        consumer.receiveWorks(CONSUMER_QUEUE_JAXB, WORKS_COLLECTION_SIZE, new JaxbMarshaler());
+        service.setMarshaler(new JaxbMarshaler());
+        service.receive(UtilVarialble.CONSUMER_QUEUE_JAXB);
         stopWatchJaxb.stop();
 
         StopWatch stopWatchJackson = new Log4JStopWatch("consume.jackson");
-        consumer.receiveWorks(CONSUMER_QUEUE_JACKSON, WORKS_COLLECTION_SIZE, new JacksonMarshaler());
+        service.setMarshaler(new JacksonMarshaler());
+        service.receive(UtilVarialble.CONSUMER_QUEUE_JACKSON);
         stopWatchJackson.stop();
 
         StopWatch stopWatchGson = new Log4JStopWatch("consume.gson");
-        consumer.receiveWorks(CONSUMER_QUEUE_GSON, WORKS_COLLECTION_SIZE, new GsonMarshaler());
+        service.setMarshaler(new GsonMarshaler());
+        service.receive(UtilVarialble.CONSUMER_QUEUE_GSON);
         stopWatchGson.stop();
 
         StopWatch stopWatchThrift = new Log4JStopWatch("consume.thrift");
-        ThriftConsumer thriftConsumer = new ThriftConsumer(consumerTemplate);
-        thriftConsumer.receiveWorks(CONSUMER_QUEUE_THRIFT, WORKS_COLLECTION_SIZE, null);
+        service.setConsumer(new ThriftConsumer(consumerTemplate));
+        service.setMarshaler(null);
+        service.receive(UtilVarialble.CONSUMER_QUEUE_THRIFT);
         stopWatchThrift.stop();
 
         try {
             consumerTemplate.stop();
         } catch (Exception e) {
-           ///TODO use logger here
+            // /TODO use logger here
+            e.printStackTrace();
         }
         stop();
     }

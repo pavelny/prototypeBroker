@@ -1,6 +1,5 @@
 package com.copyright.rup.works.brocker.api;
 
-
 /**
  * Common interface to work with consumer.
  * <p/>
@@ -13,8 +12,11 @@ package com.copyright.rup.works.brocker.api;
 public interface IConsumer {
     /**
      * Receives works from broker.
-     * @param nameOfQueue name of broker queue.
-     * @param expectedSizeOfCollection expected size of collection works in queue.
+     *
+     * @param nameOfQueue
+     *            name of broker queue.
+     * @param expectedSizeOfCollection
+     *            expected size of collection works in queue.
      */
     void receiveWorks(String nameOfQueue, int expectedSizeOfCollection, IMarshaler marshaler);
 }
