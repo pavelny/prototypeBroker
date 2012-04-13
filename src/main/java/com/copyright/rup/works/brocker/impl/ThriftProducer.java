@@ -1,17 +1,16 @@
 package com.copyright.rup.works.brocker.impl;
 
-import java.util.List;
-
+import com.copyright.rup.works.brocker.api.IMarshaler;
+import com.copyright.rup.works.brocker.api.IProducer;
+import com.copyright.rup.works.brocker.thrift.gen.ThriftWork;
+import com.copyright.rup.works.domain.api.IWork;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
 
-import com.copyright.rup.works.brocker.api.IMarshaler;
-import com.copyright.rup.works.brocker.api.IProducer;
-import com.copyright.rup.works.brocker.thrift.gen.WorkDto;
-import com.copyright.rup.works.domain.api.IWork;
+import java.util.List;
 
 /**
  * Thrift implementation of producer.
@@ -34,14 +33,7 @@ public class ThriftProducer implements IProducer {
     public void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler) {
         TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());
         for (IWork work: works) {
-            WorkDto thriftWork = new WorkDto();
-            thriftWork.setId(work.getId());
-            thriftWork.setLanguage(work.getLanguage().getLanguage());
-            thriftWork.setPublicationCountry(work.getPublicationCountry());
-            thriftWork.setPublicationType(work.getPublicationType());
-            if (work.getSubject() != null) {
-                thriftWork.setSubject(work.getSubject().getSubject());
-            }
+            ThriftWork thriftWork = new ThriftBuilder().buildFrom(work);
             try {
                 byte[] result = serializer.serialize(thriftWork);
                 producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, result, "work_message", "inJson");
