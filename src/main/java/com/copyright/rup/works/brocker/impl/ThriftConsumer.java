@@ -8,6 +8,8 @@ import com.copyright.rup.works.domain.api.IWork;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.thrift.TDeserializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 
@@ -21,6 +23,11 @@ import java.util.LinkedList;
  * @author Pavel_Yakovlev
  */
 public class ThriftConsumer implements IConsumer {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThriftConsumer.class);
 
     private ConsumerTemplate consumer;
 
@@ -39,7 +46,7 @@ public class ThriftConsumer implements IConsumer {
                 IWork work = new ThriftBuilder().buildTo(thriftWork);
                 works.add(work);
             } catch (Exception e) {
-                // /TODO log exception
+                LOGGER.info(e.getMessage());
             }
 
         }

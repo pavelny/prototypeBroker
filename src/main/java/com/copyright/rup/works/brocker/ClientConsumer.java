@@ -12,9 +12,16 @@ import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
 import org.apache.camel.ConsumerTemplate;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // TODO Add javadoc everywhere
 public final class ClientConsumer implements Runnable {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientConsumer.class);
 
     private Thread currentThread;
 
@@ -70,8 +77,7 @@ public final class ClientConsumer implements Runnable {
         try {
             consumerTemplate.stop();
         } catch (Exception e) {
-            // /TODO use logger here
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
         stop();
     }

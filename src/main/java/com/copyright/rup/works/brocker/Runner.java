@@ -26,12 +26,20 @@ import com.copyright.rup.works.domain.impl.Work;
 import com.copyright.rup.works.domain.impl.WorkCollection;
 import com.copyright.rup.works.domain.impl.WorkLanguage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class Runner {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(Runner.class);
 
     public static IWork generateWork() {
         IWork work = new Work();
@@ -179,22 +187,21 @@ public class Runner {
 
     private static void printResult(IMarshaler converter, IWork work, List<IWork> works)
             throws Exception {
-        System.out.println(converter.getClass().getName() + ":");
+        LOGGER.info(converter.getClass().getName() + ":");
 
         String jsonRepresentationOfInstance = converter.toJson(work);
-        System.out.println(jsonRepresentationOfInstance);
+        LOGGER.info(jsonRepresentationOfInstance);
         IWork deserializedInstance = converter.toEntity(jsonRepresentationOfInstance,
                 work.getClass());
-        System.out.println("Compare serialized and deserialized objects: "
+        LOGGER.info("Compare serialized and deserialized objects: "
                 + work.equals(deserializedInstance));
 
         WorkWrapper wrapper = new WorkWrapper();
         wrapper.setWorks(works);
         String jsonRepresentationOfList = converter.toJson(wrapper);
-        System.out.println(jsonRepresentationOfList);
+        LOGGER.info(jsonRepresentationOfList);
         List<IWork> deserializedWorks = converter.toEntities(jsonRepresentationOfList);
-        System.out.println("Compare serialized and deserialized lists: "
-                + works.equals(deserializedWorks));
-        System.out.println();
+        LOGGER.info("Compare serialized and deserialized lists: " + works.equals(deserializedWorks)
+                + "\n");
     }
 }

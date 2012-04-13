@@ -2,10 +2,11 @@ package com.copyright.rup.works.brocker.impl;
 
 import com.copyright.rup.works.brocker.api.IConsumer;
 import com.copyright.rup.works.brocker.api.IMarshaler;
-import com.copyright.rup.works.brocker.marshaler.WorkWrapper;
 import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ConsumerTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,11 @@ import java.util.List;
  */
 // TODO Add javadoc
 public class JsonConsumer implements IConsumer {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonConsumer.class);
 
     private ConsumerTemplate consumer;
 
@@ -41,7 +47,7 @@ public class JsonConsumer implements IConsumer {
                 works.addAll(chunkWorks);
             }
         } catch (Exception e) {
-            // TODO log exception
+            LOGGER.info(e.getMessage());
         }
     }
 }

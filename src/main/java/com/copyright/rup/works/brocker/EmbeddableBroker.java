@@ -3,6 +3,8 @@ package com.copyright.rup.works.brocker;
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.store.memory.MemoryPersistenceAdapter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.File;
 
 /**
@@ -15,6 +17,11 @@ import java.io.File;
  * @author Pavel_Yakovlev
  */
 public class EmbeddableBroker extends Thread {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmbeddableBroker.class);
 
     final String brokerUrl;
     Exception exception;
@@ -43,7 +50,7 @@ public class EmbeddableBroker extends Thread {
             broker.stop();
         } catch (Exception e) {
             exception = e;
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 
@@ -56,7 +63,7 @@ public class EmbeddableBroker extends Thread {
                     throw exception;
                 }
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                LOGGER.info(ex.getMessage());
             }
         }
     }

@@ -3,7 +3,6 @@ package com.copyright.rup.works.brocker;
 import com.copyright.rup.works.brocker.api.IProducer;
 import com.copyright.rup.works.brocker.impl.BrokerService;
 import com.copyright.rup.works.brocker.impl.JsonProducer;
-import com.copyright.rup.works.brocker.impl.ThriftProducer;
 import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
 import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
 import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
@@ -13,11 +12,18 @@ import com.copyright.rup.works.domain.api.IWork;
 import org.apache.camel.ProducerTemplate;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public final class ClientProducer implements Runnable {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientProducer.class);
 
     private Thread currentThread;
 
@@ -72,8 +78,7 @@ public final class ClientProducer implements Runnable {
         try {
             producerTemplate.stop();
         } catch (Exception e) {
-            // /TODO use logger here
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
         stop();
         Thread thread = Thread.currentThread();
