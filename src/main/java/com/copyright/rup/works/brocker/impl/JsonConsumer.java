@@ -7,6 +7,7 @@ import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ConsumerTemplate;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -31,19 +32,16 @@ public class JsonConsumer implements IConsumer {
      * {@inheritDoc}
      */
     public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection, IMarshaler marshaler) {
-        List<IWork> works = null;
+        List<IWork> works = new LinkedList<IWork>();
+        List<IWork> chunkWorks = new LinkedList<IWork>();
 
-        // for(int i = 0; i < expectedSizeOfCollection; i++) {
         try {
-            works = marshaler.toEntities((String) consumer.receiveBody(nameOfQueue));
-            // IWork work = marshaler.toEntity((String) consumer.receiveBody(nameOfQueue),
-            // IWork.class);
-            // works.add(work);
+            while(chunkWorks != null) {
+                chunkWorks = marshaler.toEntities((String) consumer.receiveBodyNoWait(nameOfQueue));
+                works.addAll(chunkWorks);
+            }
         } catch (Exception e) {
             // TODO log exception
         }
-        // }
-
-        // works.size();
     }
 }

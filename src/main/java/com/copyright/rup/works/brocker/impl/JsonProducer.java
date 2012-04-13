@@ -46,7 +46,6 @@ public class JsonProducer implements IProducer {
                     UtilVarialble.MESSAGE_HEADER, UtilVarialble.MESSAGE_VARIABLE);
         } catch (Exception e) {
             // TODO Add logging
-            // System.out.println("Exception e: " + e.getMessage());
             e.printStackTrace();
         }
         // }

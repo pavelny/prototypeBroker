@@ -63,11 +63,11 @@ public final class ClientProducer implements Runnable {
         service.send(works, UtilVarialble.PRODUCER_QUEUE_GSON);
         stopWatchGson.stop();
 
-        StopWatch stopWatchThrift = new Log4JStopWatch("produce.thrift");
-        service.setProducer(new ThriftProducer(producerTemplate));
-        service.setMarshaler(null);
-        service.send(works, UtilVarialble.PRODUCER_QUEUE_THRIFT);
-        stopWatchThrift.stop();
+//        StopWatch stopWatchThrift = new Log4JStopWatch("produce.thrift");
+//        service.setProducer(new ThriftProducer(producerTemplate));
+//        service.setMarshaler(null);
+//        service.send(works, UtilVarialble.PRODUCER_QUEUE_THRIFT);
+//        stopWatchThrift.stop();
 
         try {
             producerTemplate.stop();

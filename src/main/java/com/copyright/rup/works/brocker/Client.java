@@ -30,20 +30,16 @@ public final class Client {
         initContext();
 
         ClientProducer clientProducer = new ClientProducer(context.createProducerTemplate());
-//        clientProducer.start();
         new Thread(clientProducer).start();
-//        ClientProducer.start();
+//        clientProducer.start();
 
-        ClientConsumer clientConsumer = new ClientConsumer(context.createConsumerTemplate());
-        new Thread(clientConsumer).start();
+//        ClientConsumer clientConsumer = new ClientConsumer(context.createConsumerTemplate());
+//        new Thread(clientConsumer).start();
 
     }
 
     static private void initContext() throws Exception {
         context = new DefaultCamelContext();
-//        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
-//                UtilVarialble.BROKER_CLIENT_URL);
-//        context.addComponentjj(CONTEXT_COMPANENT_NAME,
         context.addComponent(CONTEXT_COMPANENT_NAME, ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
         context.addRoutes(new RouteBuilder() {
             @Override
