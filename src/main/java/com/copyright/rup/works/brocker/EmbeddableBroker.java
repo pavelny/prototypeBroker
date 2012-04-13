@@ -43,7 +43,7 @@ public class EmbeddableBroker extends Thread {
             BrokerService broker = new BrokerService();
             synchronized (this) {
                 broker.setPersistenceAdapter(new MemoryPersistenceAdapter());
-                broker.setTmpDataDirectory(new File("./target"));
+                broker.setTmpDataDirectory(new File(UtilVarialble.BROKER_TMP_DATA_DIRECTORY));
                 broker.addConnector(brokerUrl);
                 broker.start();
                 Thread.sleep(200);

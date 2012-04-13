@@ -1,13 +1,12 @@
 package com.copyright.rup.works.brocker;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.copyright.rup.works.brocker.api.IMarshaler;
 import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
-@Ignore("Was deleted, this test was moved into ConverterTest class")
+//@Ignore("Was deleted, this test was moved into ConverterTest class")
 public class JaxbConverterTest {
 
     public IMarshaler converter = new JaxbMarshaler();

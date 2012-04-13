@@ -17,5 +17,6 @@ public interface IProducer {
     /**
      * Sends works to broker.
      */
+    // TODO Add more details into java doc
     void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler);
 }
