@@ -1,11 +1,5 @@
 package com.copyright.rup.works.broker;
 
-import com.copyright.rup.works.broker.api.IMarshaler;
-import com.copyright.rup.works.broker.marshaler.GsonMarshaler;
-import com.copyright.rup.works.broker.marshaler.JacksonMarshaler;
-import com.copyright.rup.works.broker.marshaler.JaxbMarshaler;
-import com.copyright.rup.works.broker.marshaler.WorkWrapper;
-import com.copyright.rup.works.broker.marshaler.XStreamMarshaler;
 import com.copyright.rup.works.domain.api.IAffiliation;
 import com.copyright.rup.works.domain.api.IAuthor;
 import com.copyright.rup.works.domain.api.IContributor;
@@ -35,9 +29,20 @@ import java.util.Date;
 import java.util.List;
 
 
-public class Runner {
+/**
+ * The temp class for generating work instance.
+ *
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 04/16/12
+ *
+ * @author Andrei_Khadziukou
+ *
+ */
+public class Generator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Runner.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Generator.class);
 
     public static IWork generateWork() {
         IWork work = new Work();
@@ -76,18 +81,6 @@ public class Runner {
         work.setTitles(generateTitleList());
 
         return work;
-    }
-
-    public static void main(String[] args) throws Exception {
-
-        IWork work = generateWork();
-        List<IWork> works = new ArrayList<>();
-        works.add(work);
-
-        printResult(new GsonMarshaler(), work, works);
-        printResult(new JacksonMarshaler(), work, works);
-        printResult(new JaxbMarshaler(), work, works);
-        printResult(new XStreamMarshaler(), work, works);
     }
 
     static List<IAuthor> generateAuthorList() {
@@ -183,23 +176,4 @@ public class Runner {
         return contributors;
     }
 
-    private static void printResult(IMarshaler converter, IWork work, List<IWork> works)
-            throws Exception {
-        System.out.println(converter.getClass().getName() + ":");
-
-        String jsonRepresentationOfInstance = converter.toJson(work);
-        System.out.println(jsonRepresentationOfInstance);
-        IWork deserializedInstance = converter.toEntity(jsonRepresentationOfInstance,
-                work.getClass());
-        System.out.println("Compare serialized and deserialized objects: "
-                + work.equals(deserializedInstance));
-
-        WorkWrapper wrapper = new WorkWrapper();
-        wrapper.setWorks(works);
-        String jsonRepresentationOfList = converter.toJson(wrapper);
-        System.out.println(jsonRepresentationOfList);
-        List<IWork> deserializedWorks = converter.toEntities(jsonRepresentationOfList);
-        LOGGER.info("Compare serialized and deserialized lists: "
-                + works.equals(deserializedWorks));
-    }
 }
