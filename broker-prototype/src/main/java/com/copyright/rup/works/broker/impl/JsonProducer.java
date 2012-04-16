@@ -7,8 +7,6 @@ import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -23,11 +21,6 @@ import java.util.List;
  */
 // TODO Add javadoc to field
 public class JsonProducer implements IProducer {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonProducer.class);
 
     /**
      *
@@ -52,7 +45,8 @@ public class JsonProducer implements IProducer {
             producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, jsonWork,
                     UtilVarialble.MESSAGE_HEADER, UtilVarialble.MESSAGE_VARIABLE);
         } catch (Exception e) {
-            LOGGER.info(e.getMessage());
+            // TODO Add logging
+            e.printStackTrace();
         }
         // }
     }

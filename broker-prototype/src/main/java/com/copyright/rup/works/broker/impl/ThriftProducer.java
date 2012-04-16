@@ -10,8 +10,6 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,11 +24,6 @@ import java.util.List;
  * @author Pavel_Yakovlev
  */
 public class ThriftProducer implements IProducer {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ThriftProducer.class);
 
     private ProducerTemplate producer;
 
@@ -52,7 +45,7 @@ public class ThriftProducer implements IProducer {
                 producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, results,
                         "work_message", "inJson");
             } catch (TException e) {
-                LOGGER.info(e.getMessage());
+                e.printStackTrace();
             }
     }
 

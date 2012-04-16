@@ -1,18 +1,11 @@
 package com.copyright.rup.works.broker.impl;
 
-<<<<<<< HEAD:src/main/java/com/copyright/rup/works/brocker/impl/JsonConsumer.java
-import com.copyright.rup.works.brocker.api.IConsumer;
-import com.copyright.rup.works.brocker.api.IMarshaler;
-=======
 import com.copyright.rup.works.broker.UtilVarialble;
 import com.copyright.rup.works.broker.api.IConsumer;
 import com.copyright.rup.works.broker.api.IMarshaler;
->>>>>>> 2f054807a815ed8a61117676e1ffbd0930864d91:broker-prototype/src/main/java/com/copyright/rup/works/broker/impl/JsonConsumer.java
 import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ConsumerTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,11 +21,6 @@ import java.util.List;
  */
 // TODO Add javadoc
 public class JsonConsumer implements IConsumer {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonConsumer.class);
 
     private ConsumerTemplate consumer;
 
@@ -54,11 +42,7 @@ public class JsonConsumer implements IConsumer {
                 works.addAll(chunkWorks);
             }
         } catch (Exception e) {
-<<<<<<< HEAD:src/main/java/com/copyright/rup/works/brocker/impl/JsonConsumer.java
-            LOGGER.info(e.getMessage());
-=======
             e.printStackTrace();
->>>>>>> 2f054807a815ed8a61117676e1ffbd0930864d91:broker-prototype/src/main/java/com/copyright/rup/works/broker/impl/JsonConsumer.java
         }
     }
 }

@@ -4,8 +4,6 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.jms.ConnectionFactory;
 
@@ -20,11 +18,6 @@ import javax.jms.ConnectionFactory;
  */
 public final class Server {
 
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
-
     public static void main(String... args) throws Exception {
         Broker broker = new Broker(UtilVarialble.BROKER_URL);
         broker.start();
@@ -38,7 +31,7 @@ public final class Server {
         context.addRoutes(new BrokerRoute());
 
         context.start();
-        LOGGER.info("Server is started!");
+        System.out.println("Server is started!");
 
         Thread.sleep(UtilVarialble.BROKER_CAMEL_CONTEXT_SLEEP);
         context.stop();

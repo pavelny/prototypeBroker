@@ -1,14 +1,3 @@
-<<<<<<< HEAD:src/main/java/com/copyright/rup/works/brocker/ClientProducer.java
-package com.copyright.rup.works.brocker;
-
-import com.copyright.rup.works.brocker.api.IProducer;
-import com.copyright.rup.works.brocker.impl.BrokerService;
-import com.copyright.rup.works.brocker.impl.JsonProducer;
-import com.copyright.rup.works.brocker.marshaler.GsonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JacksonMarshaler;
-import com.copyright.rup.works.brocker.marshaler.JaxbMarshaler;
-import com.copyright.rup.works.brocker.marshaler.XStreamMarshaler;
-=======
 package com.copyright.rup.works.broker;
 
 import com.copyright.rup.works.broker.api.IProducer;
@@ -19,25 +8,17 @@ import com.copyright.rup.works.broker.marshaler.GsonMarshaler;
 import com.copyright.rup.works.broker.marshaler.JacksonMarshaler;
 import com.copyright.rup.works.broker.marshaler.JaxbMarshaler;
 import com.copyright.rup.works.broker.marshaler.XStreamMarshaler;
->>>>>>> 2f054807a815ed8a61117676e1ffbd0930864d91:broker-prototype/src/main/java/com/copyright/rup/works/broker/ClientProducer.java
 import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ProducerTemplate;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
 
 // TODO Specify javadoc
 public final class ClientProducer implements Runnable {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClientProducer.class);
 
     private Thread currentThread;
 
@@ -83,7 +64,8 @@ public final class ClientProducer implements Runnable {
         try {
             producerTemplate.stop();
         } catch (Exception e) {
-            LOGGER.info(e.getMessage());
+            // /TODO use logger here
+            e.printStackTrace();
         }
         stop();
         Thread thread = Thread.currentThread();
