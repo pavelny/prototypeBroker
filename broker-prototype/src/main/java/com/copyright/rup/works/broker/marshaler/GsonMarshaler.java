@@ -41,7 +41,7 @@ public class GsonMarshaler implements IMarshaler {
     /**
      * {@inheritDoc}
      */
-    public List<IWork> toEntities(String json) throws Exception {
+    public List<IWork> toEntities(String json) {
 
         Gson gson = generateGsonBuilder().create();
 
@@ -52,7 +52,7 @@ public class GsonMarshaler implements IMarshaler {
     /**
      * {@inheritDoc}
      */
-    public <T> T toEntity(String json, Class<T> clazz) throws Exception {
+    public <T> T toEntity(String json, Class<T> clazz) {
         Gson gson = generateGsonBuilder().create();
 
         // TODO Problem with deserialisation of list, when it was created by way Arrays.asList()
@@ -62,7 +62,7 @@ public class GsonMarshaler implements IMarshaler {
     /**
      * {@inheritDoc}
      */
-    public String toJson(Object obj) throws Exception {
+    public String toJson(Object obj) {
         Gson gson = new Gson();
         Object object = obj;
         if (obj instanceof List) {
@@ -75,6 +75,11 @@ public class GsonMarshaler implements IMarshaler {
         return gson.toJson(object);
     }
 
+    /**
+     * It generates {@link GsonBuilder} for configuration unmarshaling process.
+     *
+     * @return The builder.
+     */
     private GsonBuilder generateGsonBuilder() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(IWork.class, new WorkAdapter())

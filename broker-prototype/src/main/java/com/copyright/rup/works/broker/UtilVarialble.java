@@ -2,16 +2,22 @@ package com.copyright.rup.works.broker;
 
 
 /**
- * Util class for common variable.
+ * Utility type for common variable.
  * <p/>
  * Copyright (C) 2012 copyright.com
  * <p/>
- * Date: 04/14/12
+ * Date: 04/11/12.
  *
- * @author Andrei_Khadziukou
+ * @author Andrei_Khadziukou.
  *
  */
-public abstract class UtilVarialble {
+public final class UtilVarialble {
+
+    /**
+     * The private constructor
+     */
+    private UtilVarialble() {
+    }
 
     /**
      * Broker context sleep
@@ -28,11 +34,6 @@ public abstract class UtilVarialble {
      * Broker sleep
      */
     public static final int BROKER_SLEEP = 1000;
-
-    /**
-     *
-     */
-    public static final String BROKER_TMP_DATA_DIRECTORY2 = "./target";
 
     /**
      * The count of message

@@ -108,8 +108,7 @@ public abstract class BaseClient {
             context.start();
         } catch (Error | Exception e) {
             logger.info("The default cammel context is not started.");
-            Error err = new Error();
-            throw new RuntimeErrorException(err, "The context is not started. See logger information.");
+            throw new RuntimeErrorException(new Error(), "The context is not started. See logger information.");
         }
     }
 
