@@ -1,6 +1,6 @@
 package com.copyright.rup.works.brocker;
 
-import com.copyright.rup.works.broker.Runner;
+import com.copyright.rup.works.broker.Generator;
 import com.copyright.rup.works.domain.api.IWork;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class TestUtil {
     static {
         works = new ArrayList<>();
         for (int i = 0; i < COUNT_WORK_OBJECT; i++) {
-            works.add(Runner.generateWork());
+            works.add(Generator.generateWork());
         }
     }
 
