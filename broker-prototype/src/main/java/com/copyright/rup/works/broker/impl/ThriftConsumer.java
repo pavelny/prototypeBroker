@@ -41,7 +41,7 @@ public class ThriftConsumer implements IConsumer {
                 for (byte[] byteWork: bytes) {
                     ThriftWork thriftWork = new ThriftWork();
                     deserializer.deserialize(thriftWork, byteWork);
-                    works.add(ThriftBuilder.buildTo(thriftWork));
+                    works.add(ThriftConverter.convertTo(thriftWork));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

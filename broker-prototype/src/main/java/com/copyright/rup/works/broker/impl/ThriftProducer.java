@@ -38,7 +38,7 @@ public class ThriftProducer implements IProducer {
             List<byte[]> results = new LinkedList<byte[]>();
             try {
                 for (IWork work : works) {
-                    ThriftWork thriftWork = ThriftBuilder.buildFrom(work);
+                    ThriftWork thriftWork = ThriftConverter.convertFrom(work);
                     byte[] result = serializer.serialize(thriftWork);
                     results.add(result);
                 }

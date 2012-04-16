@@ -21,7 +21,7 @@ public abstract class UtilVarialble {
     /**
      * URL to local activeMq server
      */
-    public static final String BROKER_CLIENT_URL = "tcp://epbyvitw0013:61616?jms.useAsyncSend=true" +
+    public static final String BROKER_CLIENT_URL = "tcp://localhost:61616?jms.useAsyncSend=true" +
             "&wireFormat.maxInactivityDurationInitalDelay=20000";
 
     /**

@@ -20,7 +20,6 @@ import com.copyright.rup.works.domain.api.IWork;
 import com.copyright.rup.works.domain.api.IWorkLanguage;
 import com.copyright.rup.works.domain.impl.Affiliation;
 import com.copyright.rup.works.domain.impl.Author;
-import com.copyright.rup.works.domain.impl.BasePerson;
 import com.copyright.rup.works.domain.impl.Contributor;
 import com.copyright.rup.works.domain.impl.Editor;
 import com.copyright.rup.works.domain.impl.Publisher;
@@ -33,8 +32,6 @@ import com.copyright.rup.works.domain.impl.WorkLanguage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,11 +44,11 @@ import java.util.List;
  *
  * @author Pavel_Yakovlev
  */
-public class ThriftBuilder {
+public final class ThriftConverter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ThriftBuilder.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThriftConverter.class);
 
-    static public ThriftWork buildFrom(IWork work) {
+    public static ThriftWork convertFrom(IWork work) {
 
         ThriftWork thriftWork = new ThriftWork();
         thriftWork.setId(work.getId());
@@ -144,7 +141,7 @@ public class ThriftBuilder {
         return thriftWork;
     }
 
-    static public IWork buildTo(ThriftWork thriftWork) {
+    public static IWork convertTo(ThriftWork thriftWork) {
 
         IWork work = new Work();
         work.setId(thriftWork.getId());
@@ -168,7 +165,7 @@ public class ThriftBuilder {
 //            workCollection.setSubmitProcessedDatetime((new SimpleDateFormat()).parse(thriftWork
 //                    .getCollection().getSubmittedProcessedDatetime().toString()));
 //        } catch (ParseException e) {
-//            LOGGER.info("Parse exception in ThriftBuilder class: " + e.getMessage());
+//            LOGGER.info("Parse exception in ThriftConverter class: " + e.getMessage());
 //        }
         workCollection.setCreateByFileSubmittedPath(thriftWork.getCollection()
                 .getCreateByFileSubmittedPath());
