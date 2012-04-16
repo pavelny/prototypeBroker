@@ -119,3 +119,7 @@ jar {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+checkstyleMain {
+    exclude(['**/copyright/rup/works/broker/thrift/**/*', '**/copyright/rup/works/domain/**/*'])
+}
