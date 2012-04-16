@@ -34,7 +34,16 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
   private static final org.apache.thrift.protocol.TField ID_FIELD_DESC = new org.apache.thrift.protocol.TField("id", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField AUTHORS_FIELD_DESC = new org.apache.thrift.protocol.TField("authors", org.apache.thrift.protocol.TType.LIST, (short)2);
   private static final org.apache.thrift.protocol.TField COLLECTION_FIELD_DESC = new org.apache.thrift.protocol.TField("collection", org.apache.thrift.protocol.TType.STRUCT, (short)3);
-  private static final org.apache.thrift.protocol.TField WORK_LANGUAGE_FIELD_DESC = new org.apache.thrift.protocol.TField("workLanguage", org.apache.thrift.protocol.TType.STRUCT, (short)4);
+  private static final org.apache.thrift.protocol.TField CONTRIBUTORS_FIELD_DESC = new org.apache.thrift.protocol.TField("contributors", org.apache.thrift.protocol.TType.LIST, (short)4);
+  private static final org.apache.thrift.protocol.TField EDITORS_FIELD_DESC = new org.apache.thrift.protocol.TField("editors", org.apache.thrift.protocol.TType.LIST, (short)5);
+  private static final org.apache.thrift.protocol.TField WORK_LANGUAGE_FIELD_DESC = new org.apache.thrift.protocol.TField("workLanguage", org.apache.thrift.protocol.TType.STRUCT, (short)6);
+  private static final org.apache.thrift.protocol.TField PUBLICATION_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("publicationType", org.apache.thrift.protocol.TType.STRING, (short)7);
+  private static final org.apache.thrift.protocol.TField PUCLICATION_COUNTRY_FIELD_DESC = new org.apache.thrift.protocol.TField("puclicationCountry", org.apache.thrift.protocol.TType.STRING, (short)8);
+  private static final org.apache.thrift.protocol.TField PUBLISHER_FIELD_DESC = new org.apache.thrift.protocol.TField("publisher", org.apache.thrift.protocol.TType.STRUCT, (short)9);
+  private static final org.apache.thrift.protocol.TField SUBJECT_FIELD_DESC = new org.apache.thrift.protocol.TField("subject", org.apache.thrift.protocol.TType.STRUCT, (short)10);
+  private static final org.apache.thrift.protocol.TField TITLES_FIELD_DESC = new org.apache.thrift.protocol.TField("titles", org.apache.thrift.protocol.TType.LIST, (short)11);
+  private static final org.apache.thrift.protocol.TField AUDIENCE_FIELD_DESC = new org.apache.thrift.protocol.TField("audience", org.apache.thrift.protocol.TType.LIST, (short)12);
+  private static final org.apache.thrift.protocol.TField WORK_ITEM_FIELD_DESC = new org.apache.thrift.protocol.TField("workItem", org.apache.thrift.protocol.TType.STRING, (short)13);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -45,14 +54,32 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
   public String id; // required
   public List<ThriftAuthor> authors; // required
   public ThriftWorkCollection collection; // required
+  public List<ThriftPerson> contributors; // required
+  public List<ThriftPerson> editors; // required
   public ThriftWorkLanguage workLanguage; // required
+  public String publicationType; // required
+  public String puclicationCountry; // required
+  public ThriftPublisher publisher; // required
+  public ThriftSubject subject; // required
+  public List<ThriftTitle> titles; // required
+  public List<String> audience; // required
+  public String workItem; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     ID((short)1, "id"),
     AUTHORS((short)2, "authors"),
     COLLECTION((short)3, "collection"),
-    WORK_LANGUAGE((short)4, "workLanguage");
+    CONTRIBUTORS((short)4, "contributors"),
+    EDITORS((short)5, "editors"),
+    WORK_LANGUAGE((short)6, "workLanguage"),
+    PUBLICATION_TYPE((short)7, "publicationType"),
+    PUCLICATION_COUNTRY((short)8, "puclicationCountry"),
+    PUBLISHER((short)9, "publisher"),
+    SUBJECT((short)10, "subject"),
+    TITLES((short)11, "titles"),
+    AUDIENCE((short)12, "audience"),
+    WORK_ITEM((short)13, "workItem");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -73,8 +100,26 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
           return AUTHORS;
         case 3: // COLLECTION
           return COLLECTION;
-        case 4: // WORK_LANGUAGE
+        case 4: // CONTRIBUTORS
+          return CONTRIBUTORS;
+        case 5: // EDITORS
+          return EDITORS;
+        case 6: // WORK_LANGUAGE
           return WORK_LANGUAGE;
+        case 7: // PUBLICATION_TYPE
+          return PUBLICATION_TYPE;
+        case 8: // PUCLICATION_COUNTRY
+          return PUCLICATION_COUNTRY;
+        case 9: // PUBLISHER
+          return PUBLISHER;
+        case 10: // SUBJECT
+          return SUBJECT;
+        case 11: // TITLES
+          return TITLES;
+        case 12: // AUDIENCE
+          return AUDIENCE;
+        case 13: // WORK_ITEM
+          return WORK_ITEM;
         default:
           return null;
       }
@@ -125,8 +170,30 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftAuthor.class))));
     tmpMap.put(_Fields.COLLECTION, new org.apache.thrift.meta_data.FieldMetaData("collection", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftWorkCollection.class)));
+    tmpMap.put(_Fields.CONTRIBUTORS, new org.apache.thrift.meta_data.FieldMetaData("contributors", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftPerson.class))));
+    tmpMap.put(_Fields.EDITORS, new org.apache.thrift.meta_data.FieldMetaData("editors", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftPerson.class))));
     tmpMap.put(_Fields.WORK_LANGUAGE, new org.apache.thrift.meta_data.FieldMetaData("workLanguage", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftWorkLanguage.class)));
+    tmpMap.put(_Fields.PUBLICATION_TYPE, new org.apache.thrift.meta_data.FieldMetaData("publicationType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.PUCLICATION_COUNTRY, new org.apache.thrift.meta_data.FieldMetaData("puclicationCountry", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.PUBLISHER, new org.apache.thrift.meta_data.FieldMetaData("publisher", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftPublisher.class)));
+    tmpMap.put(_Fields.SUBJECT, new org.apache.thrift.meta_data.FieldMetaData("subject", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftSubject.class)));
+    tmpMap.put(_Fields.TITLES, new org.apache.thrift.meta_data.FieldMetaData("titles", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftTitle.class))));
+    tmpMap.put(_Fields.AUDIENCE, new org.apache.thrift.meta_data.FieldMetaData("audience", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+    tmpMap.put(_Fields.WORK_ITEM, new org.apache.thrift.meta_data.FieldMetaData("workItem", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ThriftWork.class, metaDataMap);
   }
@@ -138,13 +205,31 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
     String id,
     List<ThriftAuthor> authors,
     ThriftWorkCollection collection,
-    ThriftWorkLanguage workLanguage)
+    List<ThriftPerson> contributors,
+    List<ThriftPerson> editors,
+    ThriftWorkLanguage workLanguage,
+    String publicationType,
+    String puclicationCountry,
+    ThriftPublisher publisher,
+    ThriftSubject subject,
+    List<ThriftTitle> titles,
+    List<String> audience,
+    String workItem)
   {
     this();
     this.id = id;
     this.authors = authors;
     this.collection = collection;
+    this.contributors = contributors;
+    this.editors = editors;
     this.workLanguage = workLanguage;
+    this.publicationType = publicationType;
+    this.puclicationCountry = puclicationCountry;
+    this.publisher = publisher;
+    this.subject = subject;
+    this.titles = titles;
+    this.audience = audience;
+    this.workItem = workItem;
   }
 
   /**
@@ -164,8 +249,51 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
     if (other.isSetCollection()) {
       this.collection = new ThriftWorkCollection(other.collection);
     }
+    if (other.isSetContributors()) {
+      List<ThriftPerson> __this__contributors = new ArrayList<ThriftPerson>();
+      for (ThriftPerson other_element : other.contributors) {
+        __this__contributors.add(new ThriftPerson(other_element));
+      }
+      this.contributors = __this__contributors;
+    }
+    if (other.isSetEditors()) {
+      List<ThriftPerson> __this__editors = new ArrayList<ThriftPerson>();
+      for (ThriftPerson other_element : other.editors) {
+        __this__editors.add(new ThriftPerson(other_element));
+      }
+      this.editors = __this__editors;
+    }
     if (other.isSetWorkLanguage()) {
       this.workLanguage = new ThriftWorkLanguage(other.workLanguage);
+    }
+    if (other.isSetPublicationType()) {
+      this.publicationType = other.publicationType;
+    }
+    if (other.isSetPuclicationCountry()) {
+      this.puclicationCountry = other.puclicationCountry;
+    }
+    if (other.isSetPublisher()) {
+      this.publisher = new ThriftPublisher(other.publisher);
+    }
+    if (other.isSetSubject()) {
+      this.subject = new ThriftSubject(other.subject);
+    }
+    if (other.isSetTitles()) {
+      List<ThriftTitle> __this__titles = new ArrayList<ThriftTitle>();
+      for (ThriftTitle other_element : other.titles) {
+        __this__titles.add(new ThriftTitle(other_element));
+      }
+      this.titles = __this__titles;
+    }
+    if (other.isSetAudience()) {
+      List<String> __this__audience = new ArrayList<String>();
+      for (String other_element : other.audience) {
+        __this__audience.add(other_element);
+      }
+      this.audience = __this__audience;
+    }
+    if (other.isSetWorkItem()) {
+      this.workItem = other.workItem;
     }
   }
 
@@ -178,7 +306,16 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
     this.id = null;
     this.authors = null;
     this.collection = null;
+    this.contributors = null;
+    this.editors = null;
     this.workLanguage = null;
+    this.publicationType = null;
+    this.puclicationCountry = null;
+    this.publisher = null;
+    this.subject = null;
+    this.titles = null;
+    this.audience = null;
+    this.workItem = null;
   }
 
   public String getId() {
@@ -268,6 +405,84 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
     }
   }
 
+  public int getContributorsSize() {
+    return (this.contributors == null) ? 0 : this.contributors.size();
+  }
+
+  public java.util.Iterator<ThriftPerson> getContributorsIterator() {
+    return (this.contributors == null) ? null : this.contributors.iterator();
+  }
+
+  public void addToContributors(ThriftPerson elem) {
+    if (this.contributors == null) {
+      this.contributors = new ArrayList<ThriftPerson>();
+    }
+    this.contributors.add(elem);
+  }
+
+  public List<ThriftPerson> getContributors() {
+    return this.contributors;
+  }
+
+  public ThriftWork setContributors(List<ThriftPerson> contributors) {
+    this.contributors = contributors;
+    return this;
+  }
+
+  public void unsetContributors() {
+    this.contributors = null;
+  }
+
+  /** Returns true if field contributors is set (has been assigned a value) and false otherwise */
+  public boolean isSetContributors() {
+    return this.contributors != null;
+  }
+
+  public void setContributorsIsSet(boolean value) {
+    if (!value) {
+      this.contributors = null;
+    }
+  }
+
+  public int getEditorsSize() {
+    return (this.editors == null) ? 0 : this.editors.size();
+  }
+
+  public java.util.Iterator<ThriftPerson> getEditorsIterator() {
+    return (this.editors == null) ? null : this.editors.iterator();
+  }
+
+  public void addToEditors(ThriftPerson elem) {
+    if (this.editors == null) {
+      this.editors = new ArrayList<ThriftPerson>();
+    }
+    this.editors.add(elem);
+  }
+
+  public List<ThriftPerson> getEditors() {
+    return this.editors;
+  }
+
+  public ThriftWork setEditors(List<ThriftPerson> editors) {
+    this.editors = editors;
+    return this;
+  }
+
+  public void unsetEditors() {
+    this.editors = null;
+  }
+
+  /** Returns true if field editors is set (has been assigned a value) and false otherwise */
+  public boolean isSetEditors() {
+    return this.editors != null;
+  }
+
+  public void setEditorsIsSet(boolean value) {
+    if (!value) {
+      this.editors = null;
+    }
+  }
+
   public ThriftWorkLanguage getWorkLanguage() {
     return this.workLanguage;
   }
@@ -289,6 +504,204 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
   public void setWorkLanguageIsSet(boolean value) {
     if (!value) {
       this.workLanguage = null;
+    }
+  }
+
+  public String getPublicationType() {
+    return this.publicationType;
+  }
+
+  public ThriftWork setPublicationType(String publicationType) {
+    this.publicationType = publicationType;
+    return this;
+  }
+
+  public void unsetPublicationType() {
+    this.publicationType = null;
+  }
+
+  /** Returns true if field publicationType is set (has been assigned a value) and false otherwise */
+  public boolean isSetPublicationType() {
+    return this.publicationType != null;
+  }
+
+  public void setPublicationTypeIsSet(boolean value) {
+    if (!value) {
+      this.publicationType = null;
+    }
+  }
+
+  public String getPuclicationCountry() {
+    return this.puclicationCountry;
+  }
+
+  public ThriftWork setPuclicationCountry(String puclicationCountry) {
+    this.puclicationCountry = puclicationCountry;
+    return this;
+  }
+
+  public void unsetPuclicationCountry() {
+    this.puclicationCountry = null;
+  }
+
+  /** Returns true if field puclicationCountry is set (has been assigned a value) and false otherwise */
+  public boolean isSetPuclicationCountry() {
+    return this.puclicationCountry != null;
+  }
+
+  public void setPuclicationCountryIsSet(boolean value) {
+    if (!value) {
+      this.puclicationCountry = null;
+    }
+  }
+
+  public ThriftPublisher getPublisher() {
+    return this.publisher;
+  }
+
+  public ThriftWork setPublisher(ThriftPublisher publisher) {
+    this.publisher = publisher;
+    return this;
+  }
+
+  public void unsetPublisher() {
+    this.publisher = null;
+  }
+
+  /** Returns true if field publisher is set (has been assigned a value) and false otherwise */
+  public boolean isSetPublisher() {
+    return this.publisher != null;
+  }
+
+  public void setPublisherIsSet(boolean value) {
+    if (!value) {
+      this.publisher = null;
+    }
+  }
+
+  public ThriftSubject getSubject() {
+    return this.subject;
+  }
+
+  public ThriftWork setSubject(ThriftSubject subject) {
+    this.subject = subject;
+    return this;
+  }
+
+  public void unsetSubject() {
+    this.subject = null;
+  }
+
+  /** Returns true if field subject is set (has been assigned a value) and false otherwise */
+  public boolean isSetSubject() {
+    return this.subject != null;
+  }
+
+  public void setSubjectIsSet(boolean value) {
+    if (!value) {
+      this.subject = null;
+    }
+  }
+
+  public int getTitlesSize() {
+    return (this.titles == null) ? 0 : this.titles.size();
+  }
+
+  public java.util.Iterator<ThriftTitle> getTitlesIterator() {
+    return (this.titles == null) ? null : this.titles.iterator();
+  }
+
+  public void addToTitles(ThriftTitle elem) {
+    if (this.titles == null) {
+      this.titles = new ArrayList<ThriftTitle>();
+    }
+    this.titles.add(elem);
+  }
+
+  public List<ThriftTitle> getTitles() {
+    return this.titles;
+  }
+
+  public ThriftWork setTitles(List<ThriftTitle> titles) {
+    this.titles = titles;
+    return this;
+  }
+
+  public void unsetTitles() {
+    this.titles = null;
+  }
+
+  /** Returns true if field titles is set (has been assigned a value) and false otherwise */
+  public boolean isSetTitles() {
+    return this.titles != null;
+  }
+
+  public void setTitlesIsSet(boolean value) {
+    if (!value) {
+      this.titles = null;
+    }
+  }
+
+  public int getAudienceSize() {
+    return (this.audience == null) ? 0 : this.audience.size();
+  }
+
+  public java.util.Iterator<String> getAudienceIterator() {
+    return (this.audience == null) ? null : this.audience.iterator();
+  }
+
+  public void addToAudience(String elem) {
+    if (this.audience == null) {
+      this.audience = new ArrayList<String>();
+    }
+    this.audience.add(elem);
+  }
+
+  public List<String> getAudience() {
+    return this.audience;
+  }
+
+  public ThriftWork setAudience(List<String> audience) {
+    this.audience = audience;
+    return this;
+  }
+
+  public void unsetAudience() {
+    this.audience = null;
+  }
+
+  /** Returns true if field audience is set (has been assigned a value) and false otherwise */
+  public boolean isSetAudience() {
+    return this.audience != null;
+  }
+
+  public void setAudienceIsSet(boolean value) {
+    if (!value) {
+      this.audience = null;
+    }
+  }
+
+  public String getWorkItem() {
+    return this.workItem;
+  }
+
+  public ThriftWork setWorkItem(String workItem) {
+    this.workItem = workItem;
+    return this;
+  }
+
+  public void unsetWorkItem() {
+    this.workItem = null;
+  }
+
+  /** Returns true if field workItem is set (has been assigned a value) and false otherwise */
+  public boolean isSetWorkItem() {
+    return this.workItem != null;
+  }
+
+  public void setWorkItemIsSet(boolean value) {
+    if (!value) {
+      this.workItem = null;
     }
   }
 
@@ -318,11 +731,83 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
       }
       break;
 
+    case CONTRIBUTORS:
+      if (value == null) {
+        unsetContributors();
+      } else {
+        setContributors((List<ThriftPerson>)value);
+      }
+      break;
+
+    case EDITORS:
+      if (value == null) {
+        unsetEditors();
+      } else {
+        setEditors((List<ThriftPerson>)value);
+      }
+      break;
+
     case WORK_LANGUAGE:
       if (value == null) {
         unsetWorkLanguage();
       } else {
         setWorkLanguage((ThriftWorkLanguage)value);
+      }
+      break;
+
+    case PUBLICATION_TYPE:
+      if (value == null) {
+        unsetPublicationType();
+      } else {
+        setPublicationType((String)value);
+      }
+      break;
+
+    case PUCLICATION_COUNTRY:
+      if (value == null) {
+        unsetPuclicationCountry();
+      } else {
+        setPuclicationCountry((String)value);
+      }
+      break;
+
+    case PUBLISHER:
+      if (value == null) {
+        unsetPublisher();
+      } else {
+        setPublisher((ThriftPublisher)value);
+      }
+      break;
+
+    case SUBJECT:
+      if (value == null) {
+        unsetSubject();
+      } else {
+        setSubject((ThriftSubject)value);
+      }
+      break;
+
+    case TITLES:
+      if (value == null) {
+        unsetTitles();
+      } else {
+        setTitles((List<ThriftTitle>)value);
+      }
+      break;
+
+    case AUDIENCE:
+      if (value == null) {
+        unsetAudience();
+      } else {
+        setAudience((List<String>)value);
+      }
+      break;
+
+    case WORK_ITEM:
+      if (value == null) {
+        unsetWorkItem();
+      } else {
+        setWorkItem((String)value);
       }
       break;
 
@@ -340,8 +825,35 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
     case COLLECTION:
       return getCollection();
 
+    case CONTRIBUTORS:
+      return getContributors();
+
+    case EDITORS:
+      return getEditors();
+
     case WORK_LANGUAGE:
       return getWorkLanguage();
+
+    case PUBLICATION_TYPE:
+      return getPublicationType();
+
+    case PUCLICATION_COUNTRY:
+      return getPuclicationCountry();
+
+    case PUBLISHER:
+      return getPublisher();
+
+    case SUBJECT:
+      return getSubject();
+
+    case TITLES:
+      return getTitles();
+
+    case AUDIENCE:
+      return getAudience();
+
+    case WORK_ITEM:
+      return getWorkItem();
 
     }
     throw new IllegalStateException();
@@ -360,8 +872,26 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
       return isSetAuthors();
     case COLLECTION:
       return isSetCollection();
+    case CONTRIBUTORS:
+      return isSetContributors();
+    case EDITORS:
+      return isSetEditors();
     case WORK_LANGUAGE:
       return isSetWorkLanguage();
+    case PUBLICATION_TYPE:
+      return isSetPublicationType();
+    case PUCLICATION_COUNTRY:
+      return isSetPuclicationCountry();
+    case PUBLISHER:
+      return isSetPublisher();
+    case SUBJECT:
+      return isSetSubject();
+    case TITLES:
+      return isSetTitles();
+    case AUDIENCE:
+      return isSetAudience();
+    case WORK_ITEM:
+      return isSetWorkItem();
     }
     throw new IllegalStateException();
   }
@@ -406,12 +936,93 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
         return false;
     }
 
+    boolean this_present_contributors = true && this.isSetContributors();
+    boolean that_present_contributors = true && that.isSetContributors();
+    if (this_present_contributors || that_present_contributors) {
+      if (!(this_present_contributors && that_present_contributors))
+        return false;
+      if (!this.contributors.equals(that.contributors))
+        return false;
+    }
+
+    boolean this_present_editors = true && this.isSetEditors();
+    boolean that_present_editors = true && that.isSetEditors();
+    if (this_present_editors || that_present_editors) {
+      if (!(this_present_editors && that_present_editors))
+        return false;
+      if (!this.editors.equals(that.editors))
+        return false;
+    }
+
     boolean this_present_workLanguage = true && this.isSetWorkLanguage();
     boolean that_present_workLanguage = true && that.isSetWorkLanguage();
     if (this_present_workLanguage || that_present_workLanguage) {
       if (!(this_present_workLanguage && that_present_workLanguage))
         return false;
       if (!this.workLanguage.equals(that.workLanguage))
+        return false;
+    }
+
+    boolean this_present_publicationType = true && this.isSetPublicationType();
+    boolean that_present_publicationType = true && that.isSetPublicationType();
+    if (this_present_publicationType || that_present_publicationType) {
+      if (!(this_present_publicationType && that_present_publicationType))
+        return false;
+      if (!this.publicationType.equals(that.publicationType))
+        return false;
+    }
+
+    boolean this_present_puclicationCountry = true && this.isSetPuclicationCountry();
+    boolean that_present_puclicationCountry = true && that.isSetPuclicationCountry();
+    if (this_present_puclicationCountry || that_present_puclicationCountry) {
+      if (!(this_present_puclicationCountry && that_present_puclicationCountry))
+        return false;
+      if (!this.puclicationCountry.equals(that.puclicationCountry))
+        return false;
+    }
+
+    boolean this_present_publisher = true && this.isSetPublisher();
+    boolean that_present_publisher = true && that.isSetPublisher();
+    if (this_present_publisher || that_present_publisher) {
+      if (!(this_present_publisher && that_present_publisher))
+        return false;
+      if (!this.publisher.equals(that.publisher))
+        return false;
+    }
+
+    boolean this_present_subject = true && this.isSetSubject();
+    boolean that_present_subject = true && that.isSetSubject();
+    if (this_present_subject || that_present_subject) {
+      if (!(this_present_subject && that_present_subject))
+        return false;
+      if (!this.subject.equals(that.subject))
+        return false;
+    }
+
+    boolean this_present_titles = true && this.isSetTitles();
+    boolean that_present_titles = true && that.isSetTitles();
+    if (this_present_titles || that_present_titles) {
+      if (!(this_present_titles && that_present_titles))
+        return false;
+      if (!this.titles.equals(that.titles))
+        return false;
+    }
+
+    boolean this_present_audience = true && this.isSetAudience();
+    boolean that_present_audience = true && that.isSetAudience();
+    if (this_present_audience || that_present_audience) {
+      if (!(this_present_audience && that_present_audience))
+        return false;
+      if (!this.audience.equals(that.audience))
+        return false;
+    }
+
+    boolean this_present_workItem = true && this.isSetWorkItem();
+    boolean that_present_workItem = true && that.isSetWorkItem();
+    if (this_present_workItem || that_present_workItem) {
+      if (!(this_present_workItem && that_present_workItem))
+        return false;
+      if (!this.workItem.equals(that.workItem))
         return false;
     }
 
@@ -437,10 +1048,55 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
     if (present_collection)
       builder.append(collection);
 
+    boolean present_contributors = true && (isSetContributors());
+    builder.append(present_contributors);
+    if (present_contributors)
+      builder.append(contributors);
+
+    boolean present_editors = true && (isSetEditors());
+    builder.append(present_editors);
+    if (present_editors)
+      builder.append(editors);
+
     boolean present_workLanguage = true && (isSetWorkLanguage());
     builder.append(present_workLanguage);
     if (present_workLanguage)
       builder.append(workLanguage);
+
+    boolean present_publicationType = true && (isSetPublicationType());
+    builder.append(present_publicationType);
+    if (present_publicationType)
+      builder.append(publicationType);
+
+    boolean present_puclicationCountry = true && (isSetPuclicationCountry());
+    builder.append(present_puclicationCountry);
+    if (present_puclicationCountry)
+      builder.append(puclicationCountry);
+
+    boolean present_publisher = true && (isSetPublisher());
+    builder.append(present_publisher);
+    if (present_publisher)
+      builder.append(publisher);
+
+    boolean present_subject = true && (isSetSubject());
+    builder.append(present_subject);
+    if (present_subject)
+      builder.append(subject);
+
+    boolean present_titles = true && (isSetTitles());
+    builder.append(present_titles);
+    if (present_titles)
+      builder.append(titles);
+
+    boolean present_audience = true && (isSetAudience());
+    builder.append(present_audience);
+    if (present_audience)
+      builder.append(audience);
+
+    boolean present_workItem = true && (isSetWorkItem());
+    builder.append(present_workItem);
+    if (present_workItem)
+      builder.append(workItem);
 
     return builder.toHashCode();
   }
@@ -483,12 +1139,102 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetContributors()).compareTo(typedOther.isSetContributors());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetContributors()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.contributors, typedOther.contributors);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetEditors()).compareTo(typedOther.isSetEditors());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetEditors()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.editors, typedOther.editors);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetWorkLanguage()).compareTo(typedOther.isSetWorkLanguage());
     if (lastComparison != 0) {
       return lastComparison;
     }
     if (isSetWorkLanguage()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.workLanguage, typedOther.workLanguage);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetPublicationType()).compareTo(typedOther.isSetPublicationType());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetPublicationType()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.publicationType, typedOther.publicationType);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetPuclicationCountry()).compareTo(typedOther.isSetPuclicationCountry());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetPuclicationCountry()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.puclicationCountry, typedOther.puclicationCountry);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetPublisher()).compareTo(typedOther.isSetPublisher());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetPublisher()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.publisher, typedOther.publisher);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetSubject()).compareTo(typedOther.isSetSubject());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSubject()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.subject, typedOther.subject);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetTitles()).compareTo(typedOther.isSetTitles());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetTitles()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.titles, typedOther.titles);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetAudience()).compareTo(typedOther.isSetAudience());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetAudience()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.audience, typedOther.audience);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetWorkItem()).compareTo(typedOther.isSetWorkItem());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetWorkItem()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.workItem, typedOther.workItem);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -537,11 +1283,83 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
     }
     first = false;
     if (!first) sb.append(", ");
+    sb.append("contributors:");
+    if (this.contributors == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.contributors);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("editors:");
+    if (this.editors == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.editors);
+    }
+    first = false;
+    if (!first) sb.append(", ");
     sb.append("workLanguage:");
     if (this.workLanguage == null) {
       sb.append("null");
     } else {
       sb.append(this.workLanguage);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("publicationType:");
+    if (this.publicationType == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.publicationType);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("puclicationCountry:");
+    if (this.puclicationCountry == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.puclicationCountry);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("publisher:");
+    if (this.publisher == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.publisher);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("subject:");
+    if (this.subject == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.subject);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("titles:");
+    if (this.titles == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.titles);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("audience:");
+    if (this.audience == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.audience);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("workItem:");
+    if (this.workItem == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.workItem);
     }
     first = false;
     sb.append(")");
@@ -622,11 +1440,128 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 4: // WORK_LANGUAGE
+          case 4: // CONTRIBUTORS
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list3 = iprot.readListBegin();
+                struct.contributors = new ArrayList<ThriftPerson>(_list3.size);
+                for (int _i4 = 0; _i4 < _list3.size; ++_i4)
+                {
+                  ThriftPerson _elem5; // required
+                  _elem5 = new ThriftPerson();
+                  _elem5.read(iprot);
+                  struct.contributors.add(_elem5);
+                }
+                iprot.readListEnd();
+              }
+              struct.setContributorsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 5: // EDITORS
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list6 = iprot.readListBegin();
+                struct.editors = new ArrayList<ThriftPerson>(_list6.size);
+                for (int _i7 = 0; _i7 < _list6.size; ++_i7)
+                {
+                  ThriftPerson _elem8; // required
+                  _elem8 = new ThriftPerson();
+                  _elem8.read(iprot);
+                  struct.editors.add(_elem8);
+                }
+                iprot.readListEnd();
+              }
+              struct.setEditorsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 6: // WORK_LANGUAGE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
               struct.workLanguage = new ThriftWorkLanguage();
               struct.workLanguage.read(iprot);
               struct.setWorkLanguageIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 7: // PUBLICATION_TYPE
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.publicationType = iprot.readString();
+              struct.setPublicationTypeIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 8: // PUCLICATION_COUNTRY
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.puclicationCountry = iprot.readString();
+              struct.setPuclicationCountryIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 9: // PUBLISHER
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.publisher = new ThriftPublisher();
+              struct.publisher.read(iprot);
+              struct.setPublisherIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 10: // SUBJECT
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.subject = new ThriftSubject();
+              struct.subject.read(iprot);
+              struct.setSubjectIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 11: // TITLES
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list9 = iprot.readListBegin();
+                struct.titles = new ArrayList<ThriftTitle>(_list9.size);
+                for (int _i10 = 0; _i10 < _list9.size; ++_i10)
+                {
+                  ThriftTitle _elem11; // required
+                  _elem11 = new ThriftTitle();
+                  _elem11.read(iprot);
+                  struct.titles.add(_elem11);
+                }
+                iprot.readListEnd();
+              }
+              struct.setTitlesIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 12: // AUDIENCE
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list12 = iprot.readListBegin();
+                struct.audience = new ArrayList<String>(_list12.size);
+                for (int _i13 = 0; _i13 < _list12.size; ++_i13)
+                {
+                  String _elem14; // required
+                  _elem14 = iprot.readString();
+                  struct.audience.add(_elem14);
+                }
+                iprot.readListEnd();
+              }
+              struct.setAudienceIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 13: // WORK_ITEM
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.workItem = iprot.readString();
+              struct.setWorkItemIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -655,9 +1590,9 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
         oprot.writeFieldBegin(AUTHORS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.authors.size()));
-          for (ThriftAuthor _iter3 : struct.authors)
+          for (ThriftAuthor _iter15 : struct.authors)
           {
-            _iter3.write(oprot);
+            _iter15.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -668,9 +1603,82 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
         struct.collection.write(oprot);
         oprot.writeFieldEnd();
       }
+      if (struct.contributors != null) {
+        oprot.writeFieldBegin(CONTRIBUTORS_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.contributors.size()));
+          for (ThriftPerson _iter16 : struct.contributors)
+          {
+            _iter16.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (struct.editors != null) {
+        oprot.writeFieldBegin(EDITORS_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.editors.size()));
+          for (ThriftPerson _iter17 : struct.editors)
+          {
+            _iter17.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
       if (struct.workLanguage != null) {
         oprot.writeFieldBegin(WORK_LANGUAGE_FIELD_DESC);
         struct.workLanguage.write(oprot);
+        oprot.writeFieldEnd();
+      }
+      if (struct.publicationType != null) {
+        oprot.writeFieldBegin(PUBLICATION_TYPE_FIELD_DESC);
+        oprot.writeString(struct.publicationType);
+        oprot.writeFieldEnd();
+      }
+      if (struct.puclicationCountry != null) {
+        oprot.writeFieldBegin(PUCLICATION_COUNTRY_FIELD_DESC);
+        oprot.writeString(struct.puclicationCountry);
+        oprot.writeFieldEnd();
+      }
+      if (struct.publisher != null) {
+        oprot.writeFieldBegin(PUBLISHER_FIELD_DESC);
+        struct.publisher.write(oprot);
+        oprot.writeFieldEnd();
+      }
+      if (struct.subject != null) {
+        oprot.writeFieldBegin(SUBJECT_FIELD_DESC);
+        struct.subject.write(oprot);
+        oprot.writeFieldEnd();
+      }
+      if (struct.titles != null) {
+        oprot.writeFieldBegin(TITLES_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.titles.size()));
+          for (ThriftTitle _iter18 : struct.titles)
+          {
+            _iter18.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (struct.audience != null) {
+        oprot.writeFieldBegin(AUDIENCE_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.audience.size()));
+          for (String _iter19 : struct.audience)
+          {
+            oprot.writeString(_iter19);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (struct.workItem != null) {
+        oprot.writeFieldBegin(WORK_ITEM_FIELD_DESC);
+        oprot.writeString(struct.workItem);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -700,48 +1708,126 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
       if (struct.isSetCollection()) {
         optionals.set(2);
       }
-      if (struct.isSetWorkLanguage()) {
+      if (struct.isSetContributors()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetEditors()) {
+        optionals.set(4);
+      }
+      if (struct.isSetWorkLanguage()) {
+        optionals.set(5);
+      }
+      if (struct.isSetPublicationType()) {
+        optionals.set(6);
+      }
+      if (struct.isSetPuclicationCountry()) {
+        optionals.set(7);
+      }
+      if (struct.isSetPublisher()) {
+        optionals.set(8);
+      }
+      if (struct.isSetSubject()) {
+        optionals.set(9);
+      }
+      if (struct.isSetTitles()) {
+        optionals.set(10);
+      }
+      if (struct.isSetAudience()) {
+        optionals.set(11);
+      }
+      if (struct.isSetWorkItem()) {
+        optionals.set(12);
+      }
+      oprot.writeBitSet(optionals, 13);
       if (struct.isSetId()) {
         oprot.writeString(struct.id);
       }
       if (struct.isSetAuthors()) {
         {
           oprot.writeI32(struct.authors.size());
-          for (ThriftAuthor _iter4 : struct.authors)
+          for (ThriftAuthor _iter20 : struct.authors)
           {
-            _iter4.write(oprot);
+            _iter20.write(oprot);
           }
         }
       }
       if (struct.isSetCollection()) {
         struct.collection.write(oprot);
       }
+      if (struct.isSetContributors()) {
+        {
+          oprot.writeI32(struct.contributors.size());
+          for (ThriftPerson _iter21 : struct.contributors)
+          {
+            _iter21.write(oprot);
+          }
+        }
+      }
+      if (struct.isSetEditors()) {
+        {
+          oprot.writeI32(struct.editors.size());
+          for (ThriftPerson _iter22 : struct.editors)
+          {
+            _iter22.write(oprot);
+          }
+        }
+      }
       if (struct.isSetWorkLanguage()) {
         struct.workLanguage.write(oprot);
+      }
+      if (struct.isSetPublicationType()) {
+        oprot.writeString(struct.publicationType);
+      }
+      if (struct.isSetPuclicationCountry()) {
+        oprot.writeString(struct.puclicationCountry);
+      }
+      if (struct.isSetPublisher()) {
+        struct.publisher.write(oprot);
+      }
+      if (struct.isSetSubject()) {
+        struct.subject.write(oprot);
+      }
+      if (struct.isSetTitles()) {
+        {
+          oprot.writeI32(struct.titles.size());
+          for (ThriftTitle _iter23 : struct.titles)
+          {
+            _iter23.write(oprot);
+          }
+        }
+      }
+      if (struct.isSetAudience()) {
+        {
+          oprot.writeI32(struct.audience.size());
+          for (String _iter24 : struct.audience)
+          {
+            oprot.writeString(_iter24);
+          }
+        }
+      }
+      if (struct.isSetWorkItem()) {
+        oprot.writeString(struct.workItem);
       }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, ThriftWork struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(4);
+      BitSet incoming = iprot.readBitSet(13);
       if (incoming.get(0)) {
         struct.id = iprot.readString();
         struct.setIdIsSet(true);
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.authors = new ArrayList<ThriftAuthor>(_list5.size);
-          for (int _i6 = 0; _i6 < _list5.size; ++_i6)
+          org.apache.thrift.protocol.TList _list25 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.authors = new ArrayList<ThriftAuthor>(_list25.size);
+          for (int _i26 = 0; _i26 < _list25.size; ++_i26)
           {
-            ThriftAuthor _elem7; // required
-            _elem7 = new ThriftAuthor();
-            _elem7.read(iprot);
-            struct.authors.add(_elem7);
+            ThriftAuthor _elem27; // required
+            _elem27 = new ThriftAuthor();
+            _elem27.read(iprot);
+            struct.authors.add(_elem27);
           }
         }
         struct.setAuthorsIsSet(true);
@@ -752,9 +1838,86 @@ public class ThriftWork implements org.apache.thrift.TBase<ThriftWork, ThriftWor
         struct.setCollectionIsSet(true);
       }
       if (incoming.get(3)) {
+        {
+          org.apache.thrift.protocol.TList _list28 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.contributors = new ArrayList<ThriftPerson>(_list28.size);
+          for (int _i29 = 0; _i29 < _list28.size; ++_i29)
+          {
+            ThriftPerson _elem30; // required
+            _elem30 = new ThriftPerson();
+            _elem30.read(iprot);
+            struct.contributors.add(_elem30);
+          }
+        }
+        struct.setContributorsIsSet(true);
+      }
+      if (incoming.get(4)) {
+        {
+          org.apache.thrift.protocol.TList _list31 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.editors = new ArrayList<ThriftPerson>(_list31.size);
+          for (int _i32 = 0; _i32 < _list31.size; ++_i32)
+          {
+            ThriftPerson _elem33; // required
+            _elem33 = new ThriftPerson();
+            _elem33.read(iprot);
+            struct.editors.add(_elem33);
+          }
+        }
+        struct.setEditorsIsSet(true);
+      }
+      if (incoming.get(5)) {
         struct.workLanguage = new ThriftWorkLanguage();
         struct.workLanguage.read(iprot);
         struct.setWorkLanguageIsSet(true);
+      }
+      if (incoming.get(6)) {
+        struct.publicationType = iprot.readString();
+        struct.setPublicationTypeIsSet(true);
+      }
+      if (incoming.get(7)) {
+        struct.puclicationCountry = iprot.readString();
+        struct.setPuclicationCountryIsSet(true);
+      }
+      if (incoming.get(8)) {
+        struct.publisher = new ThriftPublisher();
+        struct.publisher.read(iprot);
+        struct.setPublisherIsSet(true);
+      }
+      if (incoming.get(9)) {
+        struct.subject = new ThriftSubject();
+        struct.subject.read(iprot);
+        struct.setSubjectIsSet(true);
+      }
+      if (incoming.get(10)) {
+        {
+          org.apache.thrift.protocol.TList _list34 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.titles = new ArrayList<ThriftTitle>(_list34.size);
+          for (int _i35 = 0; _i35 < _list34.size; ++_i35)
+          {
+            ThriftTitle _elem36; // required
+            _elem36 = new ThriftTitle();
+            _elem36.read(iprot);
+            struct.titles.add(_elem36);
+          }
+        }
+        struct.setTitlesIsSet(true);
+      }
+      if (incoming.get(11)) {
+        {
+          org.apache.thrift.protocol.TList _list37 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.audience = new ArrayList<String>(_list37.size);
+          for (int _i38 = 0; _i38 < _list37.size; ++_i38)
+          {
+            String _elem39; // required
+            _elem39 = iprot.readString();
+            struct.audience.add(_elem39);
+          }
+        }
+        struct.setAudienceIsSet(true);
+      }
+      if (incoming.get(12)) {
+        struct.workItem = iprot.readString();
+        struct.setWorkItemIsSet(true);
       }
     }
   }
