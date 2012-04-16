@@ -44,7 +44,7 @@ public class ThriftConsumer implements IConsumer {
                     works.add(ThriftBuilder.buildTo(thriftWork));
                 }
             } catch (Exception e) {
-                // /TODO log exception
+                e.printStackTrace();
             }
 
         }

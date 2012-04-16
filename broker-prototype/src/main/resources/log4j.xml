@@ -30,7 +30,7 @@
           GroupedTimingStatistics log. Here we set it to 10 seconds, overriding
           the default of 30000 ms
         -->
-        <param name="TimeSlice" value="10000"/>
+        <param name="TimeSlice" value="40000"/>
         <appender-ref ref="ASYNC"/>
     </appender>
 
