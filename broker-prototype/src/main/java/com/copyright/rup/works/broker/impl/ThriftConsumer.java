@@ -9,6 +9,8 @@ import com.copyright.rup.works.domain.api.IWork;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.thrift.TDeserializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,18 +26,27 @@ import java.util.List;
  */
 public class ThriftConsumer implements IConsumer {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThriftConsumer.class);
     private ConsumerTemplate consumer;
 
+    /**
+     * Constructor of thrift consumer.
+     * @param consumer ConsumerTemplate camel consumer template.
+     */
     public ThriftConsumer(ConsumerTemplate consumer) {
         this.consumer = consumer;
     }
 
-    public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection, IMarshaler marshaler) {
+    @Override
+    public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection,
+                             IMarshaler marshaler) {
         LinkedList<IWork> works = new LinkedList<IWork>();
 
-        TDeserializer deserializer = new TDeserializer(new TBinaryProtocol.Factory());
+        TDeserializer deserializer = new TDeserializer(
+                new TBinaryProtocol.Factory());
         List<byte[]> bytes = new LinkedList<byte[]>();
-        for (int i = 0; i <= UtilVarialble.WORKS_COLLECTION_SIZE/expectedSizeOfCollection - 1; i++) {
+        for (int i = 0; i <= UtilVarialble.WORKS_COLLECTION_SIZE
+                /expectedSizeOfCollection - 1; i++) {
             try {
                 bytes = (List<byte[]>) consumer.receiveBody(nameOfQueue);
                 for (byte[] byteWork: bytes) {
@@ -44,7 +55,8 @@ public class ThriftConsumer implements IConsumer {
                     works.add(ThriftConverter.convertTo(thriftWork));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.info("During deserialization thrift message error " +
+                        "has occured: " + e.getMessage());
             }
 
         }

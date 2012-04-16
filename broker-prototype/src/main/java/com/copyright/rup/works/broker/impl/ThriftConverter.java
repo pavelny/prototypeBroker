@@ -48,6 +48,11 @@ public final class ThriftConverter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ThriftConverter.class);
 
+    /**
+     * Converts IWork domain to ThriftWork thrift structure.
+     * @param work work domain object.
+     * @return thrifrWork thrift structure.
+     */
     public static ThriftWork convertFrom(IWork work) {
 
         ThriftWork thriftWork = new ThriftWork();
@@ -141,6 +146,11 @@ public final class ThriftConverter {
         return thriftWork;
     }
 
+    /**
+     * Converts ThriftWork thrift structure to Work domain.
+     * @param thriftWork ThriftWork thrift class.
+     * @return work Work domain.
+     */
     public static IWork convertTo(ThriftWork thriftWork) {
 
         IWork work = new Work();
