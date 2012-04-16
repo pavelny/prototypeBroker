@@ -15,10 +15,6 @@ import com.copyright.rup.works.broker.impl.ThriftProducer;
  */
 public class ThriftClient extends BaseClient {
 
-    public ThriftClient() throws Exception {
-        super();
-    }
-
     /**
      * @param args
      */

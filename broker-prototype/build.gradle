@@ -21,15 +21,15 @@ dependencies {
             "org.apache.activemq:activemq-camel:${activemqVersion}",
             "org.apache.thrift:libthrift:${thriftVersion}",
 
-            "org.apache.xbean:xbean-spring:${xbeanVersion}",
+            //"org.apache.xbean:xbean-spring:${xbeanVersion}",
 
-            "org.apache.cxf:cxf-rt-transports-http-jetty:${cxfVersion}",
+            //"org.apache.cxf:cxf-rt-transports-http-jetty:${cxfVersion}",
 
-            "org.apache.camel:camel-core:${camelVersion}",
-            "org.apache.camel:camel-spring:${camelVersion}",
-            "org.apache.camel:camel-cxf:${camelVersion}",
-            "org.apache.camel:camel-jms:${camelVersion}",
-            "org.apache.camel:camel-xstream:${camelVersion}",
+            //"org.apache.camel:camel-core:${camelVersion}",
+            //"org.apache.camel:camel-spring:${camelVersion}",
+            //"org.apache.camel:camel-cxf:${camelVersion}",
+            //"org.apache.camel:camel-jms:${camelVersion}",
+            //"org.apache.camel:camel-xstream:${camelVersion}",
 
             //Library for marshaling
             'com.fasterxml.jackson.core:jackson-databind:2.0.0',
