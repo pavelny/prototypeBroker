@@ -67,12 +67,19 @@ public abstract class BaseClient {
      */
     protected abstract IBrokerService createBrokerService();
 
+    /**
+     * The method for getting template consumer.
+     *
+     * @return {@link ConsumerTemplate} object.
+     */
     protected ConsumerTemplate getConsumerTemplate() {
         return context.createConsumerTemplate();
     }
 
     /**
-     * @return
+     * The method for getting template producer.
+     *
+     * @return {@link ProducerTemplate} object.
      */
     protected ProducerTemplate getProduceTemplate() {
         return context.createProducerTemplate();
@@ -114,18 +121,12 @@ public abstract class BaseClient {
         }
     }
 
-    /**
-     *
-     */
     private void runConsummer(String queue) {
         StopWatch stopWatchXStream = new Log4JStopWatch("consumer: " + queue);
         service.receive(queue);
         stopWatchXStream.stop();
     }
 
-    /**
-     *
-     */
     private void runProducer(String queue) {
         StopWatch stopWatchXStream = new Log4JStopWatch("produce: " + queue);
         service.send(works, queue);
