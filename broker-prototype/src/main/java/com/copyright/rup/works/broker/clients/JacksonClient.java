@@ -27,7 +27,7 @@ public class JacksonClient extends BaseClient {
 
         try {
             JacksonClient client = new JacksonClient();
-            client.start(UtilVarialble.PRODUCER_QUEUE_JACKSON);
+            client.start(UtilVarialble.QUEUE_JACKSON);
             client.stop();
         } catch (Exception exc) {
             // TODO Add log

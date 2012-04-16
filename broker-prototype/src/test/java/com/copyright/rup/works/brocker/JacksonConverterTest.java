@@ -4,9 +4,10 @@ import com.copyright.rup.works.broker.api.IMarshaler;
 import com.copyright.rup.works.broker.marshaler.JacksonMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
-//@Ignore("Was deleted, this test was moved into ConverterTest class")
+@Ignore("Was deleted, this test was moved into ConverterTest class")
 public class JacksonConverterTest {
 
     private IMarshaler converter = new JacksonMarshaler();
