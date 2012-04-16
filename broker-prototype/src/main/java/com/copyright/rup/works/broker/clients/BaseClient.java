@@ -1,18 +1,8 @@
 package com.copyright.rup.works.broker.clients;
 
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_GSON;
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_JACKSON;
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_JAXB;
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_THRIFT;
-import static com.copyright.rup.works.broker.UtilVarialble.CONSUMER_QUEUE_XSTREM;
 import static com.copyright.rup.works.broker.UtilVarialble.CONTEXT_COMPANENT_NAME;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_GSON;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_JACKSON;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_JAXB;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_THRIFT;
-import static com.copyright.rup.works.broker.UtilVarialble.PRODUCER_QUEUE_XSTREM;
 
-import com.copyright.rup.works.broker.Runner;
+import com.copyright.rup.works.broker.Generator;
 import com.copyright.rup.works.broker.UtilVarialble;
 import com.copyright.rup.works.broker.api.IBrokerService;
 import com.copyright.rup.works.domain.api.IWork;
@@ -21,7 +11,6 @@ import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
@@ -72,7 +61,7 @@ public abstract class BaseClient {
         if (works == null || works.size() != size) {
             works = new LinkedList<IWork>();
             for (int i = 0; i < size; i++) {
-                works.add(Runner.generateWork());
+                works.add(Generator.generateWork());
             }
         }
         return works;
