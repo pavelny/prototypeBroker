@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %-5p [%c{1}] %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- Buffer events and log them asynchronously. Steve Mays, 3/5/2010, smays@edmunds.com -->
+    <appender name="ProducerLog" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="./perf4j.log" />
+        <param name="datePattern" value="'.'yyyy-MM-dd"/>
+        <param name="append" value="true"/>
+        <param name="maxBackupIndex" value="14"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p %C{6} (%F:%L) - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="CoalescingStatistics"
+              class="org.perf4j.log4j.AsyncCoalescingStatisticsAppender">
+        <!--
+          The TimeSlice option is used to determine the time window for which
+          all received StopWatch logs are aggregated to create a single
+          GroupedTimingStatistics log. Here we set it to 10 seconds, overriding
+          the default of 30000 ms
+        -->
+        <param name="TimeSlice" value="40000"/>
+        <appender-ref ref="ASYNC"/>
+    </appender>
+
+    <logger name="org.perf4j.TimingLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="CoalescingStatistics"/>
+    </logger>
+
+    <!-- Buffer events and log them asynchronously. Steve Mays, 3/5/2010, smays@edmunds.com -->
+    <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ProducerLog"/>
+    </appender>
+
+    <root>
+        <priority value="error"/>
+        <appender-ref ref="ASYNC"/>
+    </root>
+
+
+</log4j:configuration>

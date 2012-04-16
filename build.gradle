@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
-sourceCompatibility = 1.7
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
 
 repositories {
     //mavenCentral()
@@ -29,6 +30,7 @@ junitVersion = '4.4'
 thriftVersion = '0.8.0'
 
 dependencies {
+<<<<<<< HEAD
     compile 'org.apache.commons:commons-lang3:3.1',
 
             "org.apache.activemq:activemq-core:${activemqVersion}",
@@ -62,12 +64,90 @@ dependencies {
 
     testCompile "junit:junit:${junitVersion}",
             "org.apache.camel:camel-test:${camelVersion}"
+=======
+    compile     'org.apache.commons:commons-lang3:3.1',
+                "org.apache.activemq:activemq-core:${activemqVersion}",
+                "org.apache.activemq:activemq-camel:${activemqVersion}",
+                "org.apache.thrift:libthrift:${thriftVersion}",
+
+                "org.springframework:spring-core:${springVersion}",
+                "org.springframework:spring-context:${springVersion}",
+                "org.apache.xbean:xbean-spring:${xbeanVersion}",
+
+//                "org.apache.cxf:cxf-rt-transports-http-jetty:${cxfVersion}",
+
+                "org.apache.camel:camel-core:${camelVersion}",
+                "org.apache.camel:camel-spring:${camelVersion}",
+                "org.apache.camel:camel-cxf:${camelVersion}",
+                "org.apache.camel:camel-jms:${camelVersion}",
+                "org.apache.camel:camel-xstream:${camelVersion}",
+
+        //Library for marshaling
+                'com.fasterxml.jackson.core:jackson-databind:2.0.0',
+                'com.thoughtworks.xstream:xstream:1.4.2',
+                'org.apache.commons:commons-lang3:3.1',
+                'com.google.code.gson:gson:2.1',
+                'org.codehaus.jettison:jettison:1.3.1',
+
+                'log4j:log4j:1.2.16',
+                'org.perf4j:perf4j:0.9.16',
+                'org.slf4j:slf4j-log4j12:1.6.4'
+
+    testCompile "junit:junit:${junitVersion}",
+                "org.apache.camel:camel-test:${camelVersion}"
+>>>>>>> 2f054807a815ed8a61117676e1ffbd0930864d91
+}
+
+task runXStream(type: JavaExec, dependsOn: classes) {
+    description = 'Runs xstream client'
+    main = 'com.copyright.rup.works.broker.clients.XstreamClient'
+    classpath sourceSets.main.classesDir
+    classpath sourceSets.main.resources.srcDirs
+    classpath configurations.runtime
+}
+
+task runGson(type: JavaExec, dependsOn: classes) {
+    description = 'Runs gson client'
+    main = 'com.copyright.rup.works.broker.clients.GsonClient'
+    classpath sourceSets.main.classesDir
+    classpath sourceSets.main.resources.srcDirs
+    classpath configurations.runtime
+}
+
+task runJackson(type: JavaExec, dependsOn: classes) {
+    description = 'Runs jackson client'
+    main = 'com.copyright.rup.works.broker.clients.JacksonClient'
+    classpath sourceSets.main.classesDir
+    classpath sourceSets.main.resources.srcDirs
+    classpath configurations.runtime
+}
+
+task runJaxb(type: JavaExec, dependsOn: classes) {
+    description = 'Runs Jaxb clien'
+    main = 'com.copyright.rup.works.broker.clients.JaxbClient'
+    classpath sourceSets.main.classesDir
+    classpath sourceSets.main.resources.srcDirs
+    classpath configurations.runtime
+}
+
+task runThrift(type: JavaExec, dependsOn: classes) {
+    description = 'Runs trift client'
+    main = 'com.copyright.rup.works.broker.clients.ThriftClient'
+    classpath sourceSets.main.classesDir
+    classpath sourceSets.main.resources.srcDirs
+    classpath configurations.runtime
 }
 
 task runServer(type: JavaExec, dependsOn: classes) {
     description = 'Runs server'
+<<<<<<< HEAD
     main = 'com.copyright.rup.works.brocker.Server'
     classpath sourceSets.main.classesDir
+=======
+    main = 'com.copyright.prototype.Server'
+    classpath sourceSets.main.classesDir
+    classpath sourceSets.main.resources.srcDirs
+>>>>>>> 2f054807a815ed8a61117676e1ffbd0930864d91
     classpath configurations.runtime
 }
 
@@ -84,6 +164,7 @@ task generateThrift << {
     exec {
         executable = 'thrift'
         args = [
+<<<<<<< HEAD
             '--gen',
             'java:hashcode',
             '-out',
@@ -99,6 +180,35 @@ jar {
                 "Implementation-Title": "Broker",
                 "Implementation-Version" : "${versionMajor}.${versionMinor}.${versionBuild}")
     }
+=======
+                '--gen',
+                'java:hashcode',
+                '-out',
+                "${projectDir}\\${srcPath}",
+                thriftFiles.collect { relativePath(it) }.join(",")
+        ]
+    }
+}
+
+jar {
+    manifest {
+        attributes("Main-Class":"com.copyright.rup.works.broker.Client",
+                "Implementation-Title": "Broker",
+                "Implementation-Version" : "${versionMajor}.${versionMinor}.${versionBuild}")
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+jar {
+    manifest {
+        attributes("Main-Class":"com.copyright.rup.works.broker.Client",
+                "Implementation-Title": "Broker",
+                "Implementation-Version" : "${versionMajor}.${versionMinor}.${versionBuild}")
+    }
+>>>>>>> 2f054807a815ed8a61117676e1ffbd0930864d91
 
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
