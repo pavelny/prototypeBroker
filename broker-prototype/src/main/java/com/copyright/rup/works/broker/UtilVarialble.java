@@ -21,8 +21,8 @@ public abstract class UtilVarialble {
     /**
      * URL to local activeMq server
      */
-    public static final String BROKER_CLIENT_URL = "tcp://localhost:61616?jms.useAsyncSend=true" +
-            "&wireFormat.maxInactivityDurationInitalDelay=30000";
+    public static final String BROKER_CLIENT_URL = "tcp://epbyvitw0013:61616?jms.useAsyncSend=true" +
+            "&wireFormat.maxInactivityDurationInitalDelay=20000";
 
     /**
      * Broker sleep
@@ -37,12 +37,12 @@ public abstract class UtilVarialble {
     /**
      * The count of message
      */
-    public static final int WORKS_COLLECTION_SIZE = 100;
+    public static final int WORKS_COLLECTION_SIZE = 1000000;
 
     /**
      * This variable is used for generating
      */
-    public static final int CHUNK_SIZE = 10;
+    public static final int CHUNK_SIZE = 1000;
 
     /**
      * The queue name for gson

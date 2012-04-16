@@ -35,7 +35,7 @@ public class ThriftConsumer implements IConsumer {
 
         TDeserializer deserializer = new TDeserializer(new TBinaryProtocol.Factory());
         List<byte[]> bytes = new LinkedList<byte[]>();
-        for (int i = 0; i < UtilVarialble.WORKS_COLLECTION_SIZE/expectedSizeOfCollection; i++) {
+        for (int i = 0; i <= UtilVarialble.WORKS_COLLECTION_SIZE/expectedSizeOfCollection - 1; i++) {
             try {
                 bytes = (List<byte[]>) consumer.receiveBody(nameOfQueue);
                 for (byte[] byteWork: bytes) {

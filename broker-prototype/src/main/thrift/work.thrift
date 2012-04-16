@@ -23,16 +23,56 @@ struct ThriftWorkCollection {
 10: string importFileContentType
 }
 
+struct ThriftAffiliation {
+1: string address,
+2: string country
+}
+
+struct ThriftPerson {
+1: string name,
+2: string role,
+3: ThriftAffiliation affiliation
+}
+
 struct ThriftWorkLanguage {
 1: string language,
 2: string languageRole
 }
 
+struct ThriftPublisher {
+1: string name,
+2: string role,
+3: string publicationPlace,
+4: string status,
+5: i32 sortOrder
+}
+
+struct ThriftSubject {
+1: string subject,
+2: string subjectType
+}
+
+struct ThriftTitle {
+1: string title,
+2: string volume,
+3: string type,
+4: string edition
+}
+
 struct ThriftWork {
 1: string id,
 2: list<ThriftAuthor> authors,
-3: ThriftWorkCollection collection
-4: ThriftWorkLanguage workLanguage
+3: ThriftWorkCollection collection,
+4: list<ThriftPerson> contributors,
+5: list<ThriftPerson> editors,
+6: ThriftWorkLanguage workLanguage,
+7: string publicationType,
+8: string puclicationCountry,
+9: ThriftPublisher publisher,
+10: ThriftSubject subject,
+11: list<ThriftTitle> titles,
+12: list<string> audience,
+13: string workItem
 }
 
 service ThriftWorkData {
