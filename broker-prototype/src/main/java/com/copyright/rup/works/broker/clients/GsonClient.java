@@ -1,9 +1,5 @@
-/**
- *
- */
 package com.copyright.rup.works.broker.clients;
 
-import com.copyright.rup.works.broker.Generator;
 import com.copyright.rup.works.broker.UtilVarialble;
 import com.copyright.rup.works.broker.api.IBrokerService;
 import com.copyright.rup.works.broker.impl.BrokerService;
@@ -11,29 +7,29 @@ import com.copyright.rup.works.broker.impl.JsonConsumer;
 import com.copyright.rup.works.broker.impl.JsonProducer;
 import com.copyright.rup.works.broker.marshaler.GsonMarshaler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
+ * The client for Gson.
+ *
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 04/12/12
+ *
  * @author Andrei_Khadziukou
  *
  */
 public class GsonClient extends BaseClient {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Generator.class);
     /**
+     * The entry point for running app.
+     *
      * @param args
+     *            The command line arguments.
      */
     public static void main(String[] args) {
-
-        try {
-            GsonClient client = new GsonClient();
-            client.start(UtilVarialble.QUEUE_GSON);
-            client.stop();
-        } catch (Exception exc) {
-            LOGGER.info("Exception: " + exc.getMessage());
-        }
-
+        GsonClient client = new GsonClient();
+        client.start(UtilVarialble.QUEUE_GSON);
+        client.stop();
     }
 
     /**

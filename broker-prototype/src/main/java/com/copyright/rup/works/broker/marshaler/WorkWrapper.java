@@ -11,7 +11,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Andrei_Khadziukou
+ * It is a wrapper class for {@link IWork} object list.
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 04/13/12.
+ *
+ * @author Andrei_Khadziukou.
  *
  */
 @XmlRootElement
@@ -22,13 +28,17 @@ public class WorkWrapper {
     private List<IWork> works;
 
     /**
-     * @return the works
+     * It gets {@link IWork} object list.
+     *
+     * @return The {@link IWork} list.
      */
     public List<IWork> getWorks() {
         return works;
     }
 
     /**
+     * It sets list of {@link IWork} objects.
+     *
      * @param works
      *            the works to set
      */

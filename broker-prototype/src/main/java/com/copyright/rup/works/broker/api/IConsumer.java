@@ -10,6 +10,7 @@ package com.copyright.rup.works.broker.api;
  * @author Pavel_Yakovlev
  */
 public interface IConsumer {
+
     /**
      * Receives works from broker.
      *
