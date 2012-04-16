@@ -7,6 +7,7 @@ import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
+import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -25,28 +26,41 @@ import java.util.List;
  */
 public class ThriftProducer implements IProducer {
 
+    /**
+     * The logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(ThriftProducer.class);
+
     private ProducerTemplate producer;
 
+    /**
+     * The constructor.
+     *
+     * @param producer
+     *            the template producer.
+     */
     public ThriftProducer(ProducerTemplate producer) {
         this.producer = producer;
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
     public void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler) {
 
         TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());
-            List<byte[]> results = new LinkedList<byte[]>();
-            try {
-                for (IWork work : works) {
-                    ThriftWork thriftWork = ThriftBuilder.buildFrom(work);
-                    byte[] result = serializer.serialize(thriftWork);
-                    results.add(result);
-                }
-                producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, results,
-                        "work_message", "inJson");
-            } catch (TException e) {
-                e.printStackTrace();
+        List<byte[]> results = new LinkedList<byte[]>();
+        try {
+            for (IWork work : works) {
+                ThriftWork thriftWork = ThriftBuilder.buildFrom(work);
+                byte[] result = serializer.serialize(thriftWork);
+                results.add(result);
             }
+            producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, results,
+                    "work_message", "inJson");
+        } catch (TException e) {
+            LOGGER.info("Problem with thrift producing. Message: " + e.getMessage());
+        }
     }
 
 }

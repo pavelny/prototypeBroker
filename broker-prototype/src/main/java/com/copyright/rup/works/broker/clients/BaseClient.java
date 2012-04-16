@@ -1,6 +1,6 @@
 package com.copyright.rup.works.broker.clients;
 
-import static com.copyright.rup.works.broker.UtilVarialble.CONTEXT_COMPANENT_NAME;
+import static com.copyright.rup.works.broker.UtilVarialble.CONTEXT_COMPONENT_NAME;
 
 import com.copyright.rup.works.broker.Generator;
 import com.copyright.rup.works.broker.UtilVarialble;
@@ -42,11 +42,12 @@ public abstract class BaseClient {
     private List<IWork> works;
 
     /**
-     * The default constructor
+     * The default constructor.
      */
     public BaseClient() {
         initContext();
         service = createBrokerService();
+        works =  createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
     }
 
     /**
@@ -60,18 +61,25 @@ public abstract class BaseClient {
     }
 
     /**
-     * The method for creating specific broker service for client
+     * The method for creating specific broker service for client.
      *
      * @return The specific broker service.
      */
     protected abstract IBrokerService createBrokerService();
 
+    /**
+     * The method for getting template consumer.
+     *
+     * @return {@link ConsumerTemplate} object.
+     */
     protected ConsumerTemplate getConsumerTemplate() {
         return context.createConsumerTemplate();
     }
 
     /**
-     * @return
+     * The method for getting template producer.
+     *
+     * @return {@link ProducerTemplate} object.
      */
     protected ProducerTemplate getProduceTemplate() {
         return context.createProducerTemplate();
@@ -89,7 +97,7 @@ public abstract class BaseClient {
 
     private void initContext() {
         context = new DefaultCamelContext();
-        context.addComponent(CONTEXT_COMPANENT_NAME,
+        context.addComponent(CONTEXT_COMPONENT_NAME,
                 ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
 //        context.addRoutes(new RouteBuilder() {
 //            /**
@@ -108,24 +116,18 @@ public abstract class BaseClient {
             context.start();
         } catch (Error | Exception e) {
             logger.info("The default cammel context is not started.");
-            throw new RuntimeErrorException(new Error(), "The context is not started. See logger information.");
+            throw new RuntimeErrorException(new Error(),
+                    "The context is not started. See logger information.");
         }
     }
 
-    /**
-     *
-     */
     private void runConsummer(String queue) {
         StopWatch stopWatchXStream = new Log4JStopWatch("consumer: " + queue);
         service.receive(queue);
         stopWatchXStream.stop();
     }
 
-    /**
-     *
-     */
     private void runProducer(String queue) {
-        List<IWork> works =  createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
         StopWatch stopWatchXStream = new Log4JStopWatch("produce: " + queue);
         service.send(works, queue);
         stopWatchXStream.stop();

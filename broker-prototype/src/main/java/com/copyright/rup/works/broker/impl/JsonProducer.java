@@ -19,16 +19,18 @@ import java.util.List;
  *
  * @author Pavel_Yakovlev
  */
-// TODO Add javadoc to field
 public class JsonProducer implements IProducer {
 
     /**
-     *
+     * The template producer.
      */
-    ProducerTemplate producer;
+    private ProducerTemplate producer;
 
     /**
+     * The constructor.
+     *
      * @param producer
+     *            the template prosucer
      */
     public JsonProducer(ProducerTemplate producer) {
         this.producer = producer;
@@ -38,17 +40,9 @@ public class JsonProducer implements IProducer {
      * {@inheritDoc}
      */
     public void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler) {
-
-        // for (IWork work: works) {
-        try {
-            String jsonWork = marshaler.toJson(works);
-            producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, jsonWork,
-                    UtilVarialble.MESSAGE_HEADER, UtilVarialble.MESSAGE_VARIABLE);
-        } catch (Exception e) {
-            // TODO Add logging
-            e.printStackTrace();
-        }
-        // }
+        String jsonWork = marshaler.toJson(works);
+        producer.sendBodyAndHeader(nameOfQueue, ExchangePattern.InOnly, jsonWork,
+                UtilVarialble.MESSAGE_HEADER, UtilVarialble.MESSAGE_VARIABLE);
     }
 
 }

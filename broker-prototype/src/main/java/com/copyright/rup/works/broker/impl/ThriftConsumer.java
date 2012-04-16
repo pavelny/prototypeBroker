@@ -7,6 +7,7 @@ import com.copyright.rup.works.broker.thrift.gen.ThriftWork;
 import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ConsumerTemplate;
+import org.apache.log4j.Logger;
 import org.apache.thrift.TDeserializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
 
@@ -24,13 +25,29 @@ import java.util.List;
  */
 public class ThriftConsumer implements IConsumer {
 
+    /**
+     * The logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(ThriftConsumer.class);
+
     private ConsumerTemplate consumer;
 
+    /**
+     * The constructor.
+     *
+     * @param consumer
+     *            the template consumer.
+     */
     public ThriftConsumer(ConsumerTemplate consumer) {
         this.consumer = consumer;
     }
 
-    public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection, IMarshaler marshaler) {
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection,
+            IMarshaler marshaler) {
         LinkedList<IWork> works = new LinkedList<IWork>();
 
         TDeserializer deserializer = new TDeserializer(new TBinaryProtocol.Factory());
@@ -44,7 +61,7 @@ public class ThriftConsumer implements IConsumer {
                     works.add(ThriftBuilder.buildTo(thriftWork));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.info("Problem with thrift consumming. Message: " + e.getMessage());
             }
 
         }
