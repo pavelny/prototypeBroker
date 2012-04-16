@@ -36,10 +36,6 @@ public class GsonClient extends BaseClient {
 
     }
 
-    public GsonClient() throws Exception {
-        super();
-    }
-
     /**
      * {@inheritDoc}
      */
