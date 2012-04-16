@@ -81,7 +81,7 @@ public final class UtilVarialble {
 
 
     /**
-     * The context compament name.
+     * The context component name.
      */
-    public static final String CONTEXT_COMPANENT_NAME = "jms";
+    public static final String CONTEXT_COMPONENT_NAME = "jms";
 }

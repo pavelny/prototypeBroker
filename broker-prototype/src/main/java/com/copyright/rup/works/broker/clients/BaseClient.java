@@ -1,6 +1,6 @@
 package com.copyright.rup.works.broker.clients;
 
-import static com.copyright.rup.works.broker.UtilVarialble.CONTEXT_COMPANENT_NAME;
+import static com.copyright.rup.works.broker.UtilVarialble.CONTEXT_COMPONENT_NAME;
 
 import com.copyright.rup.works.broker.Generator;
 import com.copyright.rup.works.broker.UtilVarialble;
@@ -97,7 +97,7 @@ public abstract class BaseClient {
 
     private void initContext() {
         context = new DefaultCamelContext();
-        context.addComponent(CONTEXT_COMPANENT_NAME,
+        context.addComponent(CONTEXT_COMPONENT_NAME,
                 ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
 //        context.addRoutes(new RouteBuilder() {
 //            /**
