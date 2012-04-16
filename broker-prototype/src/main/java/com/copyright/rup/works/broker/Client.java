@@ -17,24 +17,24 @@ public final class Client {
 
     public static void main(String args[]) throws Exception {
         BaseClient client = new JaxbClient();
-        String queue = UtilVarialble.PRODUCER_QUEUE_JAXB;
+        String queue = UtilVarialble.QUEUE_JAXB;
         if (args.length != 0) {
             switch (args[0].toLowerCase()) {
                 case JACKSON :
                     client = new JacksonClient();
-                    queue = UtilVarialble.PRODUCER_QUEUE_JACKSON;
+                    queue = UtilVarialble.QUEUE_JACKSON;
                     break;
                 case GSON:
                     client = new GsonClient();
-                    queue = UtilVarialble.PRODUCER_QUEUE_GSON;
+                    queue = UtilVarialble.QUEUE_GSON;
                     break;
                 case XSTREAM:
                     client = new XstreamClient();
-                    queue = UtilVarialble.PRODUCER_QUEUE_XSTREM;
+                    queue = UtilVarialble.QUEUE_XSTREM;
                     break;
                 case THRIFT:
                     client = new ThriftClient();
-                    queue = UtilVarialble.PRODUCER_QUEUE_THRIFT;
+                    queue = UtilVarialble.QUEUE_THRIFT;
                     break;
                 default:
                     break;

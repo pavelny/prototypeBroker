@@ -28,7 +28,7 @@ public class GsonClient extends BaseClient {
 
         try {
             GsonClient client = new GsonClient();
-            client.start(UtilVarialble.PRODUCER_QUEUE_GSON);
+            client.start(UtilVarialble.QUEUE_GSON);
             client.stop();
         } catch (Exception exc) {
             LOGGER.info("Exception: " + exc.getMessage());

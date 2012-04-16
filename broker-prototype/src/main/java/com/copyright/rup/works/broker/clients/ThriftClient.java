@@ -26,7 +26,7 @@ public class ThriftClient extends BaseClient {
 
         try {
             ThriftClient client = new ThriftClient();
-            client.start(UtilVarialble.PRODUCER_QUEUE_THRIFT);
+            client.start(UtilVarialble.QUEUE_THRIFT);
             client.stop();
         } catch (Exception exc) {
             // TODO Add log

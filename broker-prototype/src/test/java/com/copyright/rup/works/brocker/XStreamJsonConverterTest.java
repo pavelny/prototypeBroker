@@ -4,6 +4,7 @@ import com.copyright.rup.works.broker.api.IMarshaler;
 import com.copyright.rup.works.broker.marshaler.XStreamMarshaler;
 import com.copyright.rup.works.domain.api.IWork;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -11,7 +12,7 @@ import org.junit.Test;
  *
  */
 // TODO Add javadoc
-// @Ignore("Was deleted, this test was moved into ConverterTest class")
+@Ignore("Was deleted, this test was moved into ConverterTest class")
 public class XStreamJsonConverterTest {
 
     private IMarshaler converter = new XStreamMarshaler();
