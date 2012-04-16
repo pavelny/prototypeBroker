@@ -3,15 +3,22 @@
  */
 package com.copyright.rup.works.broker;
 
+
+// TODO Add javadoc to type, variable and file
 /**
+ * Util class for common variable.
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 04/14/12
+ *
  * @author Andrei_Khadziukou
  *
  */
-// TODO Add javadoc to type, variable and file
 public abstract class UtilVarialble {
 
     /**
-     *
+     * Broker context sleep
      */
     public static final int BROKER_CAMEL_CONTEXT_SLEEP = 5 * 60 * 10000;
 
@@ -22,7 +29,7 @@ public abstract class UtilVarialble {
             "&wireFormat.maxInactivityDurationInitalDelay=30000";
 
     /**
-     *
+     * Broker sleep
      */
     public static final int BROKER_SLEEP = 1000;
 
@@ -32,22 +39,17 @@ public abstract class UtilVarialble {
     public static final String BROKER_TMP_DATA_DIRECTORY = "./target";
 
     /**
-     *
-     */
-    public static final String BROKER_URL = "tcp://localhost:61616";
-
-    /**
      * This variable is used for generating
      */
-    public static final int CHUNK_SIZE = 1000;
+    public static final int CHUNK_SIZE = 10;
 
     /**
-     *
+     * The queue name for gson
      */
     public static final String CONSUMER_QUEUE_GSON = "jms:queue:storagegson";
 
     /**
-     *
+     * The queue name for jackson
      */
     public static final String CONSUMER_QUEUE_JACKSON = "jms:queue:storagejackson";
 
@@ -104,7 +106,7 @@ public abstract class UtilVarialble {
     /**
      *
      */
-    public static final int WORKS_COLLECTION_SIZE = 1000000;
+    public static final int WORKS_COLLECTION_SIZE = 100;
 
     /**
      *

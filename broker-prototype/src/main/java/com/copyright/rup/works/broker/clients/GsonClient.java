@@ -3,13 +3,14 @@
  */
 package com.copyright.rup.works.broker.clients;
 
-import com.copyright.rup.works.broker.Runner;
+import com.copyright.rup.works.broker.Generator;
 import com.copyright.rup.works.broker.UtilVarialble;
 import com.copyright.rup.works.broker.api.IBrokerService;
 import com.copyright.rup.works.broker.impl.BrokerService;
 import com.copyright.rup.works.broker.impl.JsonConsumer;
 import com.copyright.rup.works.broker.impl.JsonProducer;
 import com.copyright.rup.works.broker.marshaler.GsonMarshaler;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GsonClient extends BaseClient {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Runner.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Generator.class);
     /**
      * @param args
      */
