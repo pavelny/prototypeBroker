@@ -87,4 +87,10 @@ public final class Client {
         LOGGER.info("Client was started....");
     }
 
+    /**
+     * The private constructor.
+     */
+    private Client() {
+    }
+
 }

@@ -32,6 +32,10 @@ import java.util.List;
 /**
  * This class implements the {@link IMarshaler} interface. It uses
  * <a href="http://wiki.fasterxml.com/JacksonHome"> Jackson</a> libraries for converting.
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 04/13/12.
  *
  * @author Andrei_Khadziukou
  */
@@ -40,28 +44,40 @@ public class JacksonMarshaler implements IMarshaler {
     /**
      * {@inheritDoc}
      */
-    public List<IWork> toEntities(String json) throws Exception {
+    @SuppressWarnings("unchecked")
+    public List<IWork> toEntities(String json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(generateModule());
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(generateModule());
-
-        return mapper.readValue(json, WorkWrapper.class).getWorks();
+            return mapper.readValue(json, WorkWrapper.class).getWorks();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
      * {@inheritDoc}
      */
-    public <T> T toEntity(String json, Class<T> clazz) throws Exception {
+    public <T> T toEntity(String json, Class<T> clazz) {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(generateModule());
-        return mapper.readValue(json, clazz);
+        try {
+            return mapper.readValue(json, clazz);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
      * {@inheritDoc}
      */
-    public String toJson(Object obj) throws IOException {
+    public String toJson(Object obj){
         ObjectMapper mapper = new ObjectMapper();
         Object object = obj;
         if (obj instanceof List) {
@@ -71,12 +87,19 @@ public class JacksonMarshaler implements IMarshaler {
             wrapper.setWorks(list);
             object = wrapper;
         }
-        return mapper.writeValueAsString(object);
+        try {
+            return mapper.writeValueAsString(object);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    // TODO Add javadoc
     /**
-     * @return
+     * It generates module to help converting JSON to POJO.
+     *
+     * @return The {@link Module}.
      */
     private Module generateModule() {
         SimpleModule simpleModule = new SimpleModule();

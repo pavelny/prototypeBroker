@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.copyright.rup.works.broker.clients;
 
 import com.copyright.rup.works.broker.UtilVarialble;
@@ -10,25 +7,27 @@ import com.copyright.rup.works.broker.impl.ThriftConsumer;
 import com.copyright.rup.works.broker.impl.ThriftProducer;
 
 /**
+ * It is a client for thrift.
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 04/14/12.
+ *
  * @author Andrei_Khadziukou
  *
  */
 public class ThriftClient extends BaseClient {
 
     /**
+     * The entry point for app.
+     *
      * @param args
+     *            the command line argument.
      */
     public static void main(String[] args) {
-
-        try {
-            ThriftClient client = new ThriftClient();
-            client.start(UtilVarialble.QUEUE_THRIFT);
-            client.stop();
-        } catch (Exception exc) {
-            // TODO Add log
-            exc.printStackTrace();
-        }
-
+        ThriftClient client = new ThriftClient();
+        client.start(UtilVarialble.QUEUE_THRIFT);
+        client.stop();
     }
 
     /**
