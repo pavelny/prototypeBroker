@@ -16,10 +16,6 @@ import com.copyright.rup.works.broker.marshaler.XStreamMarshaler;
  */
 public class XstreamClient extends BaseClient {
 
-    public XstreamClient() throws Exception {
-        super();
-    }
-
     /**
      * @param args
      */

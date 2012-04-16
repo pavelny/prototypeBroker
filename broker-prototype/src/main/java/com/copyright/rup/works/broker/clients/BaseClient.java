@@ -12,14 +12,17 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.log4j.Logger;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 /**
- * It is base class for running clients.
+ * It is base class for clients.
  *
  * <p/>
  * Copyright (C) 2012 copyright.com
@@ -29,30 +32,47 @@ import java.util.List;
  * @author Andrei_Khadziukou.
  *
  */
-// TODO Add comments
 public abstract class BaseClient {
+
+    private final Logger logger = Logger.getLogger(BaseClient.class);
 
     private static CamelContext context;
     private IBrokerService service;
 
     private List<IWork> works;
 
-    public BaseClient() throws Exception {
+    /**
+     * The default constructor
+     */
+    public BaseClient() {
         initContext();
         service = createBrokerService();
     }
 
+    /**
+     * The method for running producing and consumming.
+     *
+     * @param queue The name of queue, where messages will be stored and retrieved.
+     */
     public void start(String queue) {
         runProducer(queue);
         runConsummer(queue);
     }
 
+    /**
+     * The method for creating specific broker service for client
+     *
+     * @return The specific broker service.
+     */
     protected abstract IBrokerService createBrokerService();
 
     protected ConsumerTemplate getConsumerTemplate() {
         return context.createConsumerTemplate();
     }
 
+    /**
+     * @return
+     */
     protected ProducerTemplate getProduceTemplate() {
         return context.createProducerTemplate();
     }
@@ -67,7 +87,7 @@ public abstract class BaseClient {
         return works;
     }
 
-    private void initContext() throws Exception {
+    private void initContext() {
         context = new DefaultCamelContext();
         context.addComponent(CONTEXT_COMPANENT_NAME,
                 ActiveMQComponent.activeMQComponent(UtilVarialble.BROKER_CLIENT_URL));
@@ -84,7 +104,13 @@ public abstract class BaseClient {
 //                from(PRODUCER_QUEUE_THRIFT).to(CONSUMER_QUEUE_THRIFT).end();
 //            }
 //        });
-        context.start();
+        try {
+            context.start();
+        } catch (Error | Exception e) {
+            logger.info("The default cammel context is not started.");
+            Error err = new Error();
+            throw new RuntimeErrorException(err, "The context is not started. See logger information.");
+        }
     }
 
     /**
@@ -106,7 +132,14 @@ public abstract class BaseClient {
         stopWatchXStream.stop();
     }
 
-    public void stop() throws Exception {
-        context.stop();
+    /**
+     * The method for stopping context.
+     */
+    public void stop() {
+        try {
+            context.stop();
+        } catch (Exception e) {
+            logger.info("The default camel context cannot be stoped!" + e.getMessage());
+        }
     }
 }

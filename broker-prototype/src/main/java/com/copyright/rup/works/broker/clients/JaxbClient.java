@@ -16,10 +16,6 @@ import com.copyright.rup.works.broker.marshaler.JaxbMarshaler;
  */
 public class JaxbClient extends BaseClient {
 
-    public JaxbClient() throws Exception {
-        super();
-    }
-
     /**
      * @param args
      */

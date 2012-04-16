@@ -16,10 +16,6 @@ import com.copyright.rup.works.broker.marshaler.JacksonMarshaler;
  */
 public class JacksonClient extends BaseClient {
 
-    public JacksonClient() throws Exception {
-        super();
-    }
-
     /**
      * @param args
      */
