@@ -7,10 +7,9 @@ import com.copyright.rup.works.broker.thrift.gen.ThriftWork;
 import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ConsumerTemplate;
+import org.apache.log4j.Logger;
 import org.apache.thrift.TDeserializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,20 +25,29 @@ import java.util.List;
  */
 public class ThriftConsumer implements IConsumer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ThriftConsumer.class);
+    /**
+     * The logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(ThriftConsumer.class);
+
     private ConsumerTemplate consumer;
 
     /**
-     * Constructor of thrift consumer.
-     * @param consumer ConsumerTemplate camel consumer template.
+     * The constructor.
+     *
+     * @param consumer
+     *            the template consumer.
      */
     public ThriftConsumer(ConsumerTemplate consumer) {
         this.consumer = consumer;
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
     public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection,
-                             IMarshaler marshaler) {
+            IMarshaler marshaler) {
         LinkedList<IWork> works = new LinkedList<IWork>();
 
         TDeserializer deserializer = new TDeserializer(

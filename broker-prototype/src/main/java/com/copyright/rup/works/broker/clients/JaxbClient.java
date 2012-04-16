@@ -8,7 +8,7 @@ import com.copyright.rup.works.broker.impl.JsonProducer;
 import com.copyright.rup.works.broker.marshaler.JaxbMarshaler;
 
 /**
- * It is a client for JAXB
+ * It is a client for JAXB.
  * <p/>
  * Copyright (C) 2012 copyright.com
  * <p/>

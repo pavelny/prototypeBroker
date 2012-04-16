@@ -18,6 +18,8 @@ public interface IConsumer {
      *            name of broker queue.
      * @param expectedSizeOfCollection
      *            expected size of collection works in queue.
+     * @param marshaler
+     *            the marshaler.
      */
     void receiveWorks(String nameOfQueue, int expectedSizeOfCollection, IMarshaler marshaler);
 }

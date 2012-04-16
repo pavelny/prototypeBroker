@@ -7,11 +7,10 @@ import com.copyright.rup.works.domain.api.IWork;
 
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
+import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,18 +26,26 @@ import java.util.List;
  */
 public class ThriftProducer implements IProducer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ThriftConsumer.class);
+    /**
+     * The logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(ThriftProducer.class);
+
     private ProducerTemplate producer;
 
     /**
-     * Constructor of thrift producer.
-     * @param producer ProducerTemplate camel producer template.
+     * The constructor.
+     *
+     * @param producer
+     *            the template producer.
      */
     public ThriftProducer(ProducerTemplate producer) {
         this.producer = producer;
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
     public void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler) {
 
         TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());

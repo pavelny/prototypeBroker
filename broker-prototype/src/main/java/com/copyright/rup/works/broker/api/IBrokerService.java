@@ -19,7 +19,7 @@ import java.util.List;
 public interface IBrokerService {
 
     /**
-     * It receives message from broker queue and converts them into list of {@link IWork} objects
+     * It receives message from broker queue and converts them into list of {@link IWork} objects.
      *
      * @param queueName the name of queue.
      *

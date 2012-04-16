@@ -169,14 +169,6 @@ public final class ThriftConverter {
         workCollection.setCollectionType(thriftWork.getCollection().getCollectionType());
         workCollection.setDataProvider(thriftWork.getCollection().getDataProvider());
         workCollection.setSubmittedByUser(thriftWork.getCollection().getSubmittedByUser());
-//        try {
-//            workCollection.setSubmittedDatetime((new SimpleDateFormat()).parse(thriftWork
-//                    .getCollection().getSubmittedDatetime()));
-//            workCollection.setSubmitProcessedDatetime((new SimpleDateFormat()).parse(thriftWork
-//                    .getCollection().getSubmittedProcessedDatetime().toString()));
-//        } catch (ParseException e) {
-//            LOGGER.info("Parse exception in ThriftConverter class: " + e.getMessage());
-//        }
         workCollection.setCreateByFileSubmittedPath(thriftWork.getCollection()
                 .getCreateByFileSubmittedPath());
         workCollection.setCreateByFileOSFilePath((thriftWork.getCollection()
