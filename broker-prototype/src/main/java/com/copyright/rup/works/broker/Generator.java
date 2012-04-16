@@ -28,7 +28,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The temp class for generating work instance.
  *
@@ -44,6 +43,11 @@ public class Generator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Generator.class);
 
+    /**
+     * It generates a {@link IWork} object.
+     *
+     * @return {@link IWork} object
+     */
     public static IWork generateWork() {
         IWork work = new Work();
 
@@ -112,16 +116,19 @@ public class Generator {
     static final List<IEditor> generateEditorList() {
         List<IEditor> editors = new ArrayList<>();
 
+        IEditor editor = new Editor();
+
         IAffiliation affiliation = new Affiliation();
         affiliation.setAddress("TestEditorAffiliationAddress");
         affiliation.setCountry("TestEditorAffiliationCountry");
-        IEditor editor = new Editor();
+
         editor.setAffiliation(affiliation);
         editor.setName("TestEditorName");
         editor.setRole("TestEditorRole");
         editors.add(editor);
 
-        return editors;// Arrays.asList((IEditor)null)
+        // Arrays.asList((IEditor)null)
+        return editors;
     }
 
     static List<ITitle> generateTitleList() {

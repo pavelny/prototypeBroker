@@ -42,11 +42,12 @@ public abstract class BaseClient {
     private List<IWork> works;
 
     /**
-     * The default constructor
+     * The default constructor.
      */
     public BaseClient() {
         initContext();
         service = createBrokerService();
+        works =  createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
     }
 
     /**
@@ -60,7 +61,7 @@ public abstract class BaseClient {
     }
 
     /**
-     * The method for creating specific broker service for client
+     * The method for creating specific broker service for client.
      *
      * @return The specific broker service.
      */
@@ -108,7 +109,8 @@ public abstract class BaseClient {
             context.start();
         } catch (Error | Exception e) {
             logger.info("The default cammel context is not started.");
-            throw new RuntimeErrorException(new Error(), "The context is not started. See logger information.");
+            throw new RuntimeErrorException(new Error(),
+                    "The context is not started. See logger information.");
         }
     }
 
@@ -125,7 +127,6 @@ public abstract class BaseClient {
      *
      */
     private void runProducer(String queue) {
-        List<IWork> works =  createWorksCollection(UtilVarialble.WORKS_COLLECTION_SIZE);
         StopWatch stopWatchXStream = new Log4JStopWatch("produce: " + queue);
         service.send(works, queue);
         stopWatchXStream.stop();

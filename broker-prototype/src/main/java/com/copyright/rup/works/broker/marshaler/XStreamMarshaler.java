@@ -9,6 +9,12 @@ import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 import java.util.List;
 
 /**
+ * It is a marshaler for Xstream.
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 04/11/12.
+ *
  * @author Andrei_Khadziukou
  *
  */
@@ -31,7 +37,6 @@ public class XStreamMarshaler implements IMarshaler {
     @SuppressWarnings("unchecked")
     public <T> T toEntity(String json, Class<T> clazz) {
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
-
         xStream.alias(clazz.getName(), clazz);
         return (T) xStream.fromXML(json);
     }

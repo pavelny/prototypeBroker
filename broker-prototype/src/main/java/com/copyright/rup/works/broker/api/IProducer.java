@@ -14,9 +14,16 @@ import java.util.List;
  * @author Pavel_Yakovlev
  */
 public interface IProducer {
+
     /**
      * Sends works to broker.
+     *
+     * @param nameOfQueue
+     *            the name of queue.
+     * @param works
+     *            The POJO list to send.
+     * @param marshaler
+     *            the marshaler.
      */
-    // TODO Add more details into java doc
     void sendWorks(String nameOfQueue, List<IWork> works, IMarshaler marshaler);
 }

@@ -33,6 +33,12 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
+ * It is a Gson marshaler.
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: Apr 17, 2012
+ *
  * @author Andrei_Khadziukou
  *
  */
@@ -95,7 +101,17 @@ public class GsonMarshaler implements IMarshaler {
         return builder;
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link IAffiliation} object.
+     *
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: 04/13/12.
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class AffiliationAdapter implements JsonDeserializer<IAffiliation> {
 
         /**
@@ -108,7 +124,16 @@ public class GsonMarshaler implements IMarshaler {
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link IAuthor} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class AuthorAdapter implements JsonDeserializer<IAuthor> {
 
         public IAuthor deserialize(JsonElement json, Type typeOfT,
@@ -118,7 +143,16 @@ public class GsonMarshaler implements IMarshaler {
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link IContributor} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class ContributorAdapter implements JsonDeserializer<IContributor> {
 
         /**
@@ -131,7 +165,16 @@ public class GsonMarshaler implements IMarshaler {
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link IEditor} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class EditorAdapter implements JsonDeserializer<IEditor> {
 
         /**
@@ -144,7 +187,16 @@ public class GsonMarshaler implements IMarshaler {
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link IPublisher} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class PublisherAdapter implements JsonDeserializer<IPublisher> {
 
         /**
@@ -157,7 +209,16 @@ public class GsonMarshaler implements IMarshaler {
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link ISubject} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class SubjectAdapter implements JsonDeserializer<ISubject> {
 
         /**
@@ -170,33 +231,60 @@ public class GsonMarshaler implements IMarshaler {
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link ITitle} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class TitleAdapter implements JsonDeserializer<ITitle> {
 
         /**
          * {@inheritDoc}
          */
-        public ITitle deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-                throws JsonParseException {
+        public ITitle deserialize(JsonElement json, Type typeOfT,
+                JsonDeserializationContext context) throws JsonParseException {
             return context.deserialize(json, Title.class);
         }
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link IWork} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class WorkAdapter implements JsonDeserializer<IWork> {
 
         /**
          * {@inheritDoc}
          */
-        public IWork deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-                throws JsonParseException {
+        public IWork deserialize(JsonElement json, Type typeOfT,
+                JsonDeserializationContext context) throws JsonParseException {
             return context.deserialize(json, Work.class);
         }
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link IWorkCollection} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class WorkCollectionAdapter implements JsonDeserializer<IWorkCollection> {
 
         public IWorkCollection deserialize(JsonElement json, Type typeOfT,
@@ -206,7 +294,16 @@ public class GsonMarshaler implements IMarshaler {
 
     }
 
-    // TODO Add javadoc
+    /**
+     * It is a adapter for deserialization {@link IWorkLanguage} object.
+     * <p/>
+     * Copyright (C) 2012 copyright.com
+     * <p/>
+     * Date: Apr 17, 2012
+     *
+     * @author Andrei_Khadziukou
+     *
+     */
     private class WorkLanguageAdapter implements JsonDeserializer<IWorkLanguage> {
 
         /**

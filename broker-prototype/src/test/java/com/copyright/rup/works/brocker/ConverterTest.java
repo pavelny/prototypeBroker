@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.copyright.rup.works.brocker;
 
 import com.copyright.rup.works.broker.api.IMarshaler;
@@ -20,6 +17,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * It is a parameterized common test for marshaling and unmarshaling.
+ * <p/>
+ * Copyright (C) 2012 copyright.com
+ * <p/>
+ * Date: 04/12/12
+ *
  * @author Andrei_Khadziukou
  *
  */
@@ -30,7 +33,8 @@ public class ConverterTest {
     @Parameters
     public static List<Object[]> paramitrize() {
         return Arrays.asList(new Object[][] { { new GsonMarshaler() }, { new JaxbMarshaler() },
-                { new XStreamMarshaler() }, { new JacksonMarshaler() } });
+                                              { new XStreamMarshaler() },
+                                              { new JacksonMarshaler() } });
     }
 
     private IMarshaler converter;
@@ -41,14 +45,14 @@ public class ConverterTest {
 
     @Test
     public void testConverter() throws Exception {
-        for (IWork work : TestUtil.works) {
+        for (IWork work : TestUtil.getWorks()) {
             converter.toJson(work);
         }
     }
 
     @Test
     public void testConverterFullCollectionAsASingleObject() throws Exception {
-        converter.toJson(TestUtil.works);
+        converter.toJson(TestUtil.getWorks());
     }
 
 }

@@ -24,6 +24,12 @@ public class JsonConsumer implements IConsumer {
 
     private ConsumerTemplate consumer;
 
+    /**
+     * The constructor.
+     *
+     * @param consumer
+     *            the template consummer.
+     */
     public JsonConsumer(ConsumerTemplate consumer) {
         this.consumer = consumer;
     }
@@ -31,18 +37,14 @@ public class JsonConsumer implements IConsumer {
     /**
      * {@inheritDoc}
      */
-    public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection, IMarshaler marshaler) {
+    public void receiveWorks(String nameOfQueue, int expectedSizeOfCollection,
+            IMarshaler marshaler) {
         List<IWork> works = new LinkedList<IWork>();
         List<IWork> chunkWorks = new LinkedList<IWork>();
 
-        try {
-            ///TODO realize another method of retrieving messages
-            for (int i = 0; i < UtilVarialble.WORKS_COLLECTION_SIZE/expectedSizeOfCollection; i++) {
-                chunkWorks = marshaler.toEntities(consumer.receiveBody(nameOfQueue).toString());
-                works.addAll(chunkWorks);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (int i = 0; i < UtilVarialble.WORKS_COLLECTION_SIZE / expectedSizeOfCollection; i++) {
+            chunkWorks = marshaler.toEntities(consumer.receiveBody(nameOfQueue).toString());
+            works.addAll(chunkWorks);
         }
     }
 }

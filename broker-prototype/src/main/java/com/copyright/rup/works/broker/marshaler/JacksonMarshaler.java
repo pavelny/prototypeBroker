@@ -26,6 +26,8 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -42,6 +44,11 @@ import java.util.List;
 public class JacksonMarshaler implements IMarshaler {
 
     /**
+     * The logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(JacksonMarshaler.class);
+
+    /**
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
@@ -52,8 +59,7 @@ public class JacksonMarshaler implements IMarshaler {
 
             return mapper.readValue(json, WorkWrapper.class).getWorks();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.info("Problem with converting in POJO. Message: " + e.getMessage());
         }
         return null;
     }
@@ -68,8 +74,7 @@ public class JacksonMarshaler implements IMarshaler {
         try {
             return mapper.readValue(json, clazz);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.info("Problem with converting in POJO. Message: " + e.getMessage());
         }
         return null;
     }
@@ -90,8 +95,7 @@ public class JacksonMarshaler implements IMarshaler {
         try {
             return mapper.writeValueAsString(object);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.info("Problem with converting in POJO. Message: " + e.getMessage());
         }
         return null;
     }

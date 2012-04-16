@@ -1,6 +1,5 @@
 package com.copyright.rup.works.broker.api;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,8 +14,10 @@ import java.util.List;
 public interface IMarshaler {
 
     /**
-     * The method converts JSON to POJOs
+     * The method converts JSON to POJOs.
      *
+     * @param <T>
+     *            The type, in which JSON spring will be converted.
      * @param json
      *            the JSON representation of POJOs.
      * @return the POJO list.
@@ -24,21 +25,22 @@ public interface IMarshaler {
     <T> List<T> toEntities(String json);
 
     /**
-     * The method converts JSON to POJO
+     * The method converts JSON to POJO.
      *
-     * @param json
-     * @param clazz
-     * @return
+     * @param <T>
+     *            The type, in which JSON spring will be converted.
+     * @param json The JSON representation of object.
+     * @param clazz The class in which we convert JSON string.
+     * @return The POJO.
      */
     <T> T toEntity(String json, Class<T> clazz);
 
     /**
-     * The method converts POJO to JSON
+     * The method converts POJO to JSON.
      *
      * @param obj
      *            The POJO object.
      * @return The string representation of JSON.
-     * @throws IOException
      */
     String toJson(Object obj);
 }

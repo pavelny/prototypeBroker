@@ -19,22 +19,16 @@ import com.copyright.rup.works.broker.marshaler.XStreamMarshaler;
  */
 public class XstreamClient extends BaseClient {
 
+
     /**
      * The entry point for app.
      *
      * @param args the command linr argument
      */
     public static void main(String[] args) {
-
-        try {
-            XstreamClient client = new XstreamClient();
-            client.start(UtilVarialble.QUEUE_XSTREM);
-            client.stop();
-        } catch (Exception exc) {
-            // TODO Add log
-            exc.printStackTrace();
-        }
-
+        XstreamClient client = new XstreamClient();
+        client.start(UtilVarialble.QUEUE_XSTREM);
+        client.stop();
     }
 
     /**
